@@ -1,0 +1,67 @@
+[
+    {
+        "rowid": 1,
+        "latitude": 47.15653169,
+        "longitude": -113.66413492,
+        "noise30btw50": 0,
+        "noise50btw75": 5,
+        "noise75Above": 65,
+        "temperature110btw135": 0,
+        "temperature135btw158": 4,
+        "temperature158Above": 68,
+        "status": "Due in 10 days",
+        "statusVal": 10
+    },
+    {
+        "rowid": 2,
+        "latitude": 45.14227722,
+        "longitude": -97.48178067,
+        "noise30btw50": 0,
+        "noise50btw75": 66,
+        "noise75Above": 5,
+        "temperature110btw135": 0,
+        "temperature135btw158": 52,
+        "temperature158Above": 20,
+        "status": "Due in 30 days",
+        "statusVal": 30
+    },
+    {
+        "rowid": 3,
+        "latitude": 40.66874878,
+        "longitude": -105.17696455,
+        "noise30btw50": 1,
+        "noise50btw75": 41,
+        "noise75Above": 31,
+        "temperature110btw135": 0,
+        "temperature135btw158": 62,
+        "temperature158Above": 18,
+        "status": "Due in 10 days",
+        "statusVal": 10
+    },
+    {
+        "rowid": 4,
+        "latitude": 41.20448548,
+        "longitude": -100.56549668,
+        "noise30btw50": 0,
+        "noise50btw75": 41,
+        "noise75Above": 30,
+        "temperature110btw135": 0,
+        "temperature135btw158": 52,
+        "temperature158Above": 22,
+        "status": "Due in 10 days",
+        "statusVal": 10
+    },
+    {
+        "rowid": 5,
+        "latitude": 31.82927941,
+        "longitude": -91.78003639,
+        "noise30btw50": 0,
+        "noise50btw75": 41,
+        "noise75Above": 31,
+        "temperature110btw135": 0,
+        "temperature135btw158": 51,
+        "temperature158Above": 23,
+        "status": "Due in 10 days",
+        "statusVal": 10
+    }
+]

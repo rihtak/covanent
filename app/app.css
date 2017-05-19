@@ -1,0 +1,670 @@
+/* app css stylesheet */
+
+::-moz-scrollbar {
+    width: 12px;
+}
+
+::-moz-scrollbar-track {
+    -moz-box-shadow: 6px #fff;
+    background: #000;
+}
+
+::-moz-scrollbar-thumb {
+    border-radius: 10px;
+    -moz-box-shadow: inset 0 0 6px #fff;
+    background: rgba(66, 66, 66, 0.78);
+}
+
+* ::-webkit-scrollbar, ::-webkit-scrollbar:vertical {
+    width: 6px !important;
+    background: none !important;
+}
+
+::-webkit-scrollbar-thumb:vertical, ::-webkit-scrollbar-thumb:horizontal {
+    background: rgba(66, 66, 66, 0.78) !important;
+    border-radius: 0px !important;
+}
+
+md-nav-bar .md-nav-bar {
+    color: white;
+}
+
+.Nav_Panel {
+    background-color: #484c4e !important;
+}
+/* Rules for sizing the icon. */
+.material-icons.md-18 {
+    font-size: 18px;
+}
+
+.material-icons.md-24 {
+    font-size: 24px;
+}
+
+.material-icons.md-20 {
+    font-size: 20px;
+}
+
+.material-icons.md-30 {
+    font-size: 30px;
+}
+
+.material-icons.md-36 {
+    font-size: 36px;
+}
+
+.material-icons.md-48 {
+    font-size: 48px;
+}
+
+/* Rules for using icons as black on a light background. */
+.material-icons.md-dark {
+    color: rgba(0, 0, 0, 0.71) !important;
+}
+
+    .material-icons.md-dark.md-inactive {
+        color: rgba(0, 0, 0, 0.26);
+    }
+
+/* Rules for using icons as white on a dark background. */
+.material-icons.md-light {
+    color: rgba(255, 255, 255, 1);
+}
+
+    .material-icons.md-light.md-inactive {
+        color: rgba(255, 255, 255, 0.3);
+    }
+
+.md-user-avatar {
+    border-radius: 50%;
+    height: 35px;
+    width: 35px;
+}
+
+.md-profile-avatar {
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+    position:absolute;
+    margin-top:-50px;
+}
+
+.User_Button {
+    margin: 0px 10px;
+}
+
+#Notification_icon, #User_Profile_icon {
+    margin: 0px 10px;
+    cursor: pointer;
+}
+
+#User_Profile md-list {
+    animation-name: example;
+    animation-duration: .5s;
+}
+
+
+#Notification md-list {
+    animation-name: example;
+    animation-duration: .5s;
+}
+
+
+#User_Profile, #Notification {
+    z-index: 9999;
+    position: absolute;
+    right: 4px;
+}
+
+    #Notification::before {
+    }
+
+.md-list-item-text {
+    margin: 0px 10px;
+    font-size: 80%;
+    line-height: 1.6;
+    text-wrap: avoid;
+}
+
+#chart .c3-line-data1,#Traffic .c3-line-data1,#Traffic .c3-line-data2
+ {
+    stroke-width: 3px;
+}
+
+.strike{
+    text-decoration:line-through;
+}
+#Flight_left{
+        border-right: 2px #000 dashed;
+}
+.issue_progress{
+    font-weight: bold;
+    color: white;
+    font-size: 70%;
+    border-radius: 5px;
+    padding: 0px 5px;
+    margin: 0px 8px;
+}
+
+@media (max-width: 456px) {
+    md-sidenav, md-sidenav-right {
+        width: 260px !important;
+    }
+
+    #right2 {
+        width: 304px !important;
+    }
+}
+
+md-sidenav {
+    max-width: 260px !important;
+}
+
+#Online_circle_toolbar {
+    width: 10px;
+    height: 10px;
+    -webkit-border-radius: 25px;
+    -moz-border-radius: 25px;
+    border-radius: 25px;
+    margin: 0px 7px;
+}
+
+#Online_circle {
+    width: 8px;
+    height: 8px;
+    -webkit-border-radius: 25px;
+    -moz-border-radius: 25px;
+    border-radius: 25px;
+    position: absolute;
+    margin: 10px;
+    bottom: 0px;
+    left: 36px;
+    z-index: 9999;
+}
+
+#White_circle {
+    width: 12px;
+    height: 12px;
+    -webkit-border-radius: 25px;
+    -moz-border-radius: 25px;
+    border-radius: 25px;
+    position: absolute;
+    background: white;
+    margin: 10px;
+    bottom: -2px;
+    left: 34px;
+    z-index: 0;
+}
+
+.active {
+    background: rgba(76, 175, 80, 0.88);
+}
+
+.inactive {
+    background: #F44336;
+}
+
+
+#chatBox {
+    height: 100%;
+    overflow-y: auto;
+}
+
+.chat_content_message {
+    position: relative;
+    margin-left: 6px;
+    padding: 0px 15px;
+    background-color: #9E9E9E;
+    float: left;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+.chat-conversation-user {
+    margin-bottom: 20px;
+    float: left;
+    width: 100%;
+    animation-name: slideFromBottom;
+    animation-duration: 1s;
+}
+
+#chatBox > div:nth-last-child(2) {
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+.chat-conversation-user.me .chat_content_message {
+    position: relative;
+    margin-left: 0;
+    margin-right: 6px;
+    background-color: #03A9F4;
+    float: right;
+}
+
+.messages_box_content {
+    padding: 15px;
+    font-size: 14px;
+}
+
+.chat-conversation-user.him .chat_content_message::before {
+    border-top: 15px solid #9E9E9E;
+    border-left: 15px solid transparent;
+    left: 0;
+    margin-left: -14px;
+}
+
+.chat_content_message::before {
+    content: "";
+    width: 0;
+    height: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.chat-conversation-user.me .chat_content_message::before {
+    right: 0;
+    margin-right: -14px;
+    border-top: 15px solid #03A9F4;
+    border-right: 15px solid transparent;
+}
+
+.chat-conversation-user {
+    text-align: center;
+}
+
+.me > div > p {
+    text-align: right;
+}
+
+.him > div > p {
+    text-align: left;
+}
+
+    .him > div > p > small {
+        float: left;
+        padding: 5px 2px;
+    }
+
+.me > div > p > small {
+    float: right;
+    padding: 5px 2px;
+}
+
+.message_box {
+    width: 100%;
+    outline: none;
+    border: none;
+}
+
+
+
+.send_box_content {
+    padding: 12px 4px;
+    transform: translateZ(0);
+    perspective: 1000;
+    position: fixed;
+    bottom: 0px;
+    background-color: white;
+    width: 100%;
+    left: 0px;
+    height: 39px;
+    border-top: 1.4px solid rgba(93, 93, 93, 0.76);
+}
+
+
+.material-icons
+{
+    -webkit-animation-name: fadeIn;
+    animation-name: fadeIn;
+    transition-duration:.5s;
+
+}
+
+    .send_box_content input {
+        padding-left: 10px;
+    }
+
+.send_inactive {
+    color: rgba(0, 0, 0, 0.26) !important;
+}
+
+.send_active {
+    color: #4cc3d9 !important;
+}
+
+md-icon {
+    outline: none;
+}
+
+@-webkit-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.fadeIn {
+    -webkit-animation-name: fadeIn;
+    animation-name: fadeIn;
+    transition-duration:1s;
+}
+
+
+
+@keyframes example {
+    0% {
+        margin-top: -20px;
+        opacity: 0;
+    }
+
+    100% {
+        margin-top: 0;
+        opacity: 1;
+    }
+}
+
+@keyframes slideFromLeft {
+    0% {
+        margin-left: -200px;
+        opacity: 0;
+    }
+
+    100% {
+        margin-left: 0;
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes slideFromLeft {
+    0% {
+        margin-left: -200px;
+        opacity: 0;
+    }
+
+    100% {
+        margin-left: 0;
+        opacity: 1;
+    }
+}
+
+@keyframes slideFromRight {
+    0% {
+        margin-right: -200px;
+        opacity: 0;
+    }
+
+    100% {
+        margin-right: 0;
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes slideFromRight {
+    0% {
+        margin-right: -200px;
+        opacity: 0;
+    }
+
+    100% {
+        margin-right: 0;
+        opacity: 1;
+    }
+}
+
+@keyframes slideFromBottom {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes slideFromBottom {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+
+
+
+
+/*-------------------------------------------------------------------Chart----------------------------------------------------------------------*/
+#chartdiv {
+    width: 100%;
+    height: 435px;
+}
+
+.map-marker {
+    /* adjusting for the marker dimensions
+    so that it is centered on coordinates */
+    margin-left: -8px;
+    margin-top: -8px;
+}
+
+    .map-marker.map-clickable {
+        cursor: pointer;
+    }
+
+.pulse {
+    width: 10px;
+    height: 10px;
+    border: 5px solid #f7f14c;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    border-radius: 30px;
+    background-color: #716f42;
+    z-index: 10;
+    position: absolute;
+}
+
+.map-marker .dot {
+    border: 10px solid #fff601;
+    background: transparent;
+    -webkit-border-radius: 60px;
+    -moz-border-radius: 60px;
+    border-radius: 60px;
+    height: 50px;
+    width: 50px;
+    -webkit-animation: pulse 3s ease-out;
+    -moz-animation: pulse 3s ease-out;
+    animation: pulse 3s ease-out;
+    -webkit-animation-iteration-count: infinite;
+    -moz-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    position: absolute;
+    top: -25px;
+    left: -25px;
+    z-index: 1;
+    opacity: 0;
+}
+
+@-moz-keyframes pulse {
+    0% {
+        -moz-transform: scale(0);
+        opacity: 0.0;
+    }
+
+    25% {
+        -moz-transform: scale(0);
+        opacity: 0.1;
+    }
+
+    50% {
+        -moz-transform: scale(0.1);
+        opacity: 0.3;
+    }
+
+    75% {
+        -moz-transform: scale(0.5);
+        opacity: 0.5;
+    }
+
+    100% {
+        -moz-transform: scale(1);
+        opacity: 0.0;
+    }
+}
+
+@-webkit-keyframes pulse {
+    0% {
+        -webkit-transform: scale(0);
+        opacity: 0.0;
+    }
+
+    25% {
+        -webkit-transform: scale(0);
+        opacity: 0.1;
+    }
+
+    50% {
+        -webkit-transform: scale(0.1);
+        opacity: 0.3;
+    }
+
+    75% {
+        -webkit-transform: scale(0.5);
+        opacity: 0.5;
+    }
+
+    100% {
+        -webkit-transform: scale(1);
+        opacity: 0.0;
+    }
+}
+md-dialog.fullscreen-dialog {
+    max-width: 80%;
+    max-height: 80%;
+    width: 80%;
+    height: 80%;
+    border-radius: 0;
+}
+md-dialog.fullscreen-dialog-login{
+    max-width: 100%;
+    max-height: 100%;
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+}
+.login {
+  margin-top: 4em;
+  text-align: center;
+}
+
+h5,
+h3 {
+  font-weight: 300;
+}
+
+h3 {
+  color: #636363;
+}
+
+h5 {
+  color: #4a89dc;
+}
+
+footer p {
+  color: #888;
+  font-size: 13px;
+  letter-spacing: .4px;
+}
+/* Form Styles */
+.login_form {
+  width: 340px;
+  margin: 4em auto;
+  padding: 3em 2em 2em 2em;
+  background: #fafafa;
+  border: 1px solid #ebebeb;
+  box-shadow: rgba(0, 0, 0, 0.14902) 0px 1px 1px 0px, rgba(0, 0, 0, 0.09804) 0px 1px 2px 0px;
+}
+
+.inputIconDemo {
+  min-height: 48px;
+}
+
+md-input-container:not(.md-input-invalid) > md-icon.email {
+  color: green;
+}
+
+md-input-container.md-icon-float {
+  margin-bottom: 10px;
+}
+
+md-input-container:not(.md-input-invalid) > md-icon.name {
+  color: #4a89dc;
+}
+
+md-input-container.md-input-invalid > md-icon.email,
+.inputdemoIcons md-input-container.md-input-invalid > md-icon.name {
+  color: red;
+}
+
+md-input-container ng-messages,
+md-input-container [ng-messages] {
+  padding-left: 36px;
+}
+
+.login-button:not([disabled]) {
+  width: 100%;
+  margin-top: 40px;
+  background-color: #4a89dc;
+  height: 48px;
+  color: white;  
+}
+
+
+/* Footer Styles */
+
+footer a {
+  color: #4a89dc;
+  text-decoration: none;
+  transition: all .2s ease;
+}
+
+footer a:hover {
+  color: #666;
+  text-decoration: underline;
+}
+
+footer img {
+  width: 180px;
+  transition: all .2s ease;
+}
+
+footer img:hover {
+  opacity: .83;
+}
+
+footer img:focus,
+footer a:focus {
+  outline: none;
+}
+/*Chart config*/
+.c3-grid text {
+    fill: black !important;
+    font-weight:bold;
+}
+.c3-ygrid-line
+{ stroke-dasharray: 5,5; }

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="en" ng-app="myApp" class="no-js">
+    <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Covanent </title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!--<link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
+<link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">-->
+        <link rel="stylesheet" href="html5-boilerplate/dist/css/normalize.css">
+        <link rel="stylesheet" href="html5-boilerplate/dist/css/main.css">
+        <link rel="stylesheet" href="app/app.css">
+        <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.indigo-blue.min.css">
+        <link rel="stylesheet" href="app/table.css">
+        <link rel="stylesheet" href="app/map.css">
+        <link rel="stylesheet" href="app/loader.css">
+        <!--<link rel="stylesheet" href="/bower_components/angular-material/angular-material.css">-->
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.min.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+        <link href="app/assets/css/c3.min.css" rel="stylesheet" type="text/css" />
+        <script src="html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+    </head>
+    <body id="body" ng-controller="AppCtrl" ng-cloak md-theme="primary" layout="column" ng-init="Mytheme='altTheme2'">
+        <md-content flex layout="row">
+            
+            <md-content flex layout="column" md-theme="{{Mytheme}}">
+                <md-toolbar spy-style spy-attribute="color" md-whiteframe="2" style="background-color:white;color:black" >
+                    <div class="md-toolbar-tools">
+                        <md-button aria-label="Menu" hide-gt-xs class="md-icon-button" ng-click="toggleLeft()">
+                            <md-icon class="material-icons md-toolbar_icon md-24">
+                                menu
+                            </md-icon>
+                        </md-button>
+                        <img src="app/images/logo.png" width="125" height="60" style="margin-right:15px">
+                        <h3 style="color:black">
+                            <b>Trailer Management</b>
+                        </h3>
+
+                        <span flex></span>
+                       
+
+                        <md-button aria-label="Menu" class="md-icon-button" >
+                            <md-icon class="material-icons md-toolbar_icon md-24" style="color:black">
+                                account_circle
+                            </md-icon>
+
+                        </md-button>
+                    </div>
+                </md-toolbar>
+                <md-progress-linear md-colors="{background: '{{primary}}'}" ng-if="Load_Document" class="md-accent" md-mode="indeterminate"></md-progress-linear>
+                <md-content flex >
+                    <div ng-view></div>
+                    <md-sidenav class="md-sidenav-right md-whiteframe-14dp" md-component-id="right" layout="column">
+                        <md-content flex layout="column" layout-wrap ng-controller="RightCtrl" layout-padding layout-margin>
+                            <md-toolbar md-colors="::{backgroundColor: 'background'}">
+                                <div class="md-toolbar-tools" layout="row" layout-align="start center">
+                                    Data Simulator
+                                </div>
+                            </md-toolbar>
+                            <md-content flex layout="column" layout-padding layout-margin>
+                                <form name="simulatorForm">
+                                    <!--<md-input-container flex="100">
+
+<label>Use Cases  </label>
+<md-select ng-model="simulator.USECASE" >
+
+<md-option ng-repeat="useCase in useCases" ng-value="useCase.id" >
+{{useCase.name}}
+</md-option>
+</md-select>
+</md-input-container>-->
+                                    <md-input-container flex>
+                                        <label>No of Machines</label>
+                                        <input ng-model="simulator.MACHINE" required>
+                                    </md-input-container>
+
+                                    <md-input-container flex>
+                                        <label>Frequency in Minutes</label>
+                                        <input ng-model="simulator.DURATIONFORDATA"  required/>
+
+                                        <md-tooltip md-direction="bottom">*Each Machine will trigger the data on above frequency</md-tooltip>
+                                    </md-input-container>
+
+
+                                    <div layout="row" layout-align="center center">
+                                        <md-button ng-disabled="simulator.inProgress"  class="md-raised md-primary" ng-click="run(simulator)">Run</md-button>
+                                        <md-button   class="md-raised md-warn" ng-click="stop(simulator)">Stop </md-button>
+                                        <!--<p class="md-list-item-text" ng-show="user.Online">Stop</p>
+<p class="md-list-item-text" ng-hide="user.Online">Run</p>
+<md-switch class="md-primary" ng-model="user.Online"></md-switch>-->
+
+                                    </div>
+
+
+
+                                </form>
+
+
+                                <div layout="row" layout-align="center center">
+                                    <md-input-container flex>
+                                        <div  >{{successMessage}}</div>
+                                    </md-input-container>
+                                </div>
+                            </md-content>
+                        </md-content>
+                    </md-sidenav>
+                </md-content>
+            </md-content>
+        </md-content>
+        <!--[if lt IE 9]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+        <!-- In production use:
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+-->
+        <!--<script src="/bower_components/angular/angular.js"></script>
+<script src="/bower_components/angular-aria/angular-aria.js"></script>
+<script src="/bower_components/angular-animate/angular-animate.js"></script>
+<script src="/bower_components/angular-material/angular-material.js"></script>
+<script src="bower_components/angular-route/angular-route.js"></script>-->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-animate.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-aria.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-messages.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-touch.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-route.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.min.js"></script>
+        <script src="https://rawgithub.com/gsklee/ngStorage/master/ngStorage.js"></script>
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.min.css">
+        <!-- Resources for Map -->
+        <script src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=geometry,places&ext=.js&key=AIzaSyAafsMtGWbhgmfXU1TV-K-VUh8y1d8jZjI&v=3"></script>
+        <script
+                src="https://code.jquery.com/jquery-3.2.1.min.js"
+                integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+                crossorigin="anonymous"></script>
+        <script type="text/javascript" src="app/assets/js/gmap/markerclusterer.js"></script>
+        <script type="text/javascript" src="app/assets/js/gmap/markerwithlabel.js"></script>
+        <script src="app/assets/js/underscore-min.js"></script>
+        <script src="app/assets/js/gmap/googleautocomplete.js"></script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js'></script>
+        <script src="app/assets/js/d3.min.js" charset="utf-8"></script>
+        <script src="app/assets/js/c3.min.js"></script>
+        <script src="app/config.js"></script>
+        <script src="app/app.js"></script>
+        <script src="app/view1/view1.js"></script>
+        <script src="app/view2/view2.js"></script>
+        <script src="app/login/login.js"></script>
+        <script src="app/components/version/version.js"></script>
+        <script src="app/components/version/version-directive.js"></script>
+        <script src="app/components/version/interpolate-filter.js"></script>
+        <script src="app/assets/js/c3-angular.min.js"></script>
+        <script src="http://angular-data-grid.github.io/dist/pagination.js"></script>
+        <script src="http://angular-data-grid.github.io/dist/dataGrid.js"></script>
+        <script src="app/data/data.json"></script>
+
+    </body>
+</html>
+

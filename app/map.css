@@ -1,0 +1,167 @@
+.altura-mapa {
+    height: 400px;
+    margin: 0px 10px 0px 10px;
+}
+.info{
+    height: 80px;
+}
+/* Animaitons */
+keyframes pulse{
+    to { 
+        transform: scale(0.7);
+        -webkit-transform: scale(0.7);  
+    }
+}
+
+@-webkit-keyframes pulse{
+    to { 
+        transform: scale(0.7);
+        -webkit-transform: scale(0.7);  
+    }
+}
+
+@-webkit-keyframes wobble {
+    from {
+        -webkit-transform: none;
+        transform: none;
+    }
+
+    15% {
+        -webkit-transform: translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg);
+        transform: translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg);
+    }
+
+    30% {
+        -webkit-transform: translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg);
+        transform: translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg);
+    }
+
+    45% {
+        -webkit-transform: translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg);
+        transform: translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg);
+    }
+
+    60% {
+        -webkit-transform: translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg);
+        transform: translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg);
+    }
+
+    75% {
+        -webkit-transform: translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg);
+        transform: translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg);
+    }
+
+    to {
+        -webkit-transform: none;
+        transform: none;
+    }
+}
+
+@keyframes wobble {
+    from {
+        -webkit-transform: none;
+        transform: none;
+    }
+
+    15% {
+        -webkit-transform: translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg);
+        transform: translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg);
+    }
+
+    30% {
+        -webkit-transform: translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg);
+        transform: translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg);
+    }
+
+    45% {
+        -webkit-transform: translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg);
+        transform: translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg);
+    }
+
+    60% {
+        -webkit-transform: translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg);
+        transform: translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg);
+    }
+
+    75% {
+        -webkit-transform: translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg);
+        transform: translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg);
+    }
+
+    to {
+        -webkit-transform: none;
+        transform: none;
+    }
+}
+
+@-webkit-keyframes flicker {
+    from, 50%, to {
+        opacity: 1;
+    }
+
+    25%, 75% {
+        opacity: 0;
+    }
+}
+
+@keyframes flicker {
+    from, 50%, to {
+        opacity: 1;
+    }
+
+    25%, 75% {
+        opacity: 0;
+    }
+}
+
+#markerLayer img[src='app/images/markers/over_heat_running.png'] {
+
+    animation: flicker .5s infinite alternate;
+    -webkit-animation: pulse .5s infinite alternate;
+    transform-origin: center;
+    -webkit-transform-origin: center;
+}
+#markerLayer img[src='app/images/markers/over_heat_idle.png'] {
+
+    animation: flicker .5s infinite alternate;
+    -webkit-animation: pulse .5s infinite alternate;
+    transform-origin: center;
+    -webkit-transform-origin: center;
+}
+
+.labels {
+
+    font-family:"Lucida Grande", "Arial", sans-serif;
+    font-size: 10px;
+    text-align: center;
+    width: 30px;
+    white-space: nowrap;
+}
+.idleLabel{
+    color: white;
+    background-color: #6432CC;
+}
+.runningLabel{
+    color: white;
+    background-color: #00A4D2;
+}
+.overHeatLabel{
+    color: white;
+    background-color: #C60D0D;
+}
+
+.cluster div{
+    color: white !important;
+}
+/*****/
+.stations, .stations svg {
+    position: absolute;
+}
+
+
+
+.stations circle {
+    fill: none;
+    stroke: red;
+}
+/*-----*/

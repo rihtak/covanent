@@ -1,0 +1,41 @@
+<md-dialog aria-label="Login Infromation" class="fullscreen-dialog-login">
+<div layout="row" layout-align="center center">
+
+  <div class="login">
+    <h3>BDI IOT Data Simulator</h3>
+    <h5>Realtime Analytics</h5>
+      <form name="clientLogin" class="login_form"  >
+        <md-input-container>
+           <md-icon style="margin:12px" class="material-icons  md-24">
+                                account_box
+                            </md-icon>
+          <input ng-model="user.name" name="userName" type="text" placeholder="Email" ng-required="true">
+          <div ng-messages="clientLogin.userName.$error">
+            <div ng-message="required">Your email is required.</div>
+          </div>
+        </md-input-container>
+        <md-input-container >
+          <!-- Use floating placeholder instead of label -->
+           <md-icon style="margin:12px" class="material-icons  md-24">
+                                lock_outline
+                            </md-icon>
+          <input ng-model="user.password" type="password" placeholder="Password" ng-required="true" name="userPassword">
+          <div ng-messages="clientLogin.userPassword.$error">
+            <div ng-message="required">Your password is required.</div>
+          </div>
+        </md-input-container>
+      
+         
+        <md-button class="md-raised md-primary login-button" ng-click="doLogin()">Login</md-button>
+             <div ng-show = "isInvalid" style="color:red;font-size:12px">You are Unauthorized.</div>
+      </form>
+    <footer>
+      
+      <p><a href="http://dminc.com/" target="_blank"><img src="app/images/dmi-logo.svg" width="150"></a></p>
+    </footer>
+
+  </div>
+
+
+</div>
+</md-dialog>

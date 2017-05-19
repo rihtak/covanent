@@ -1,0 +1,37 @@
+
+<md-dialog aria-label="Detailed Infromation" class="fullscreen-dialog">
+    <form ng-cloak >
+        <md-toolbar class=" md-primary md-hue-4" style="background-color:cornflowerblue"  >
+            <div class="md-toolbar-tools">
+                <h2>{{titleText}} </h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon class="material-icons md-toolbar_icon md-24">
+                        close
+                    </md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                
+                <div layout="row" layout-align="center center" ng-show="isChartLoading" style="margin-top:10%">
+                    
+                     <md-progress-circular  class="md-accent md-hue-3" md-diameter="200px"></md-progress-circular>
+                </div>
+                           <div id="chart"></div>
+                       
+            </div>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row" ng-show="showGraph">
+
+            <span flex></span>
+            <md-button  class="md-raised md-warn"  ng-click="answer('done')">
+                Close
+            </md-button>
+
+        </md-dialog-actions>
+    </form>
+</md-dialog>
