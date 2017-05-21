@@ -93,7 +93,9 @@ angular.module('myApp.view1', ['ngRoute', 'dataGrid', 'pagination'])
         function DialogController($scope, $mdDialog,machine) {
             $scope.machine = machine;
             $scope.titleText = "Maintenance " +machine.status +" for machine "+machine.rowid;
-
+$scope.detaileData = [{"orderID":"","trailerId":"1234","tracktor":"33331","destinationcity":"Ontoria OH","service":"TEAM"},
+                     {"status":"Completed","orderID":"","trailerId":"1235","tracktor":"33332","destinationcity":"BUFORD,GA","service":"TEAM"},
+                     {"status":"Completed","orderID":"","trailerId":"1236","tracktor":"33333","destinationcity":"BUFORD,GA","service":"TEAM"}];
 
             $scope.hide = function() {
                 $mdDialog.hide();
