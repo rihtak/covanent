@@ -26,16 +26,40 @@ angular.module('myApp.view1', ['ngRoute', 'dataGrid', 'pagination'])
 
 
     .controller('View1Ctrl', ['$scope',  '$timeout', 'Load_document', '$rootScope','myAppFactory','$mdDialog','$window','$http', function ($scope,  $timeout, Load_document, $rootScope,  myAppFactory,$mdDialog,$window,$http,$element) {
+        $scope.isOrderClicked = false;
+        // $scope.selectedrow = {};
+       // $scope.selectedtrailerow = {};
+        $scope.showTrailers = function(item){
+            $scope.isOrderClicked = true;
+            $scope.selectedrow=item;
+           console.log($scope.selectedrow);
+            item.selectedClass="selectedClass"
+        }
+        $scope.doAllocate = function(item){
+            $scope.selectedtrailerow = item;
+            item.selectedtClass="selectedtClass"
+        }
+        $scope.allocate = function(){
+            alert("Trailer id: "+$scope.selectedtrailerow.trailerId +" Allocated to order id: "+$scope.selectedrow.order);
+              $scope.gridOptions.data = JSON.parse(JSON.stringify(allocationData));//responseData.data;
+            $scope.gridOptions2.data = JSON.parse(JSON.stringify(trailerData));
+            
+        }
         $rootScope.isRealTime = false;
         $scope.isAdhocReportLoading = false;
         $scope.gridOptions = {
             data: [],
             urlSync: false
         };
+         $scope.gridOptions2 = {
+            data: [],
+            urlSync: false
+        };
         $scope.isAdhocReportLoading = true;
         myAppFactory.getData().then(function(responseData) {
             $scope.isAdhocReportLoading = false;
-            $scope.gridOptions.data = responseData.data;
+           $scope.gridOptions.data = JSON.parse(JSON.stringify(allocationData));//responseData.data;
+            $scope.gridOptions2.data = JSON.parse(JSON.stringify(trailerData));
             $scope.decode($scope.gridOptions.data,0);
 
         }).then(function(error) {

@@ -29,17 +29,13 @@ angular.module('myApp.view2', ['ngRoute','vsGoogleAutocomplete'])
         var image = {};
         var markerImage;
         var clusterImage;
-        if(machine.Temperature > OVER_HEAT_TEMPERATURE){
-            markerImage = overHeatImage;
+        if(machine.isOverHeat){
+            markerImage = runningImage;
         }
         else{
-            if(machine.EngineOn == 1){
-                markerImage = runningImage;
-            }
-            else{
-                markerImage = idleImage;
-            }
+            markerImage = idleImage;
         }
+        
 
         var markerImage = new google.maps.MarkerImage(markerImage,
                                                       new google.maps.Size(40, 40));
@@ -69,9 +65,19 @@ angular.module('myApp.view2', ['ngRoute','vsGoogleAutocomplete'])
             var engineNoise = machine.EngineNoise;
             var battery = machine.Battery;
             var engineStatus = gms.getEngineStatus(machine.EngineOn);
-
-            var infoHtml = '<div class="info"><div class="row">Machine ID : '+machineID+
-                '</div><div class="row"> Status : '+engineStatus+'</div><div class="row">Temperature :'+temperature+'</div><div class="row">Engine Noise :'+engineNoise+'</div><div class="row">Battery :'+battery+'</div></div>';
+            var machineStatusText = "";
+            var mcss = "";
+            if(machine.isOverHeat){
+                machineStatusText ="ALLOCATED";
+                mcss = "allocated";
+            }
+            else{
+                machineStatusText ="AVAILABLE";
+                 mcss = "available";
+            }
+            var infoHtml = '<div class="infowindow"><div class="row header"> <div class="row head1">CTG 11029</div><div class="row head2">Ford F-150 Raptor</div><div class="row head3">Refrigerated </div></div><div class="row title"><span class="vehicle-date" >DOT Date:01/05/2017</sapn>  <span class="vehicletype '+mcss+'">'+machineStatusText+'</span></div><div class="row content">Ohio to Florida</div><div class="row footer"><div class="status"> <div class="row">Complaince:Pass</div><div class="row">IOT Info:Active</div><div class="row">Road Worhiness:pass</div></div><div class="history"><a href="#">View History</a></div></div></div>';
+            /*var infoHtml = '<div class="info"><div class="row">Machine ID : '+machineID+
+                '</div><div class="row"> Status : '+engineStatus+'</div><div class="row">Temperature :'+temperature+'</div><div class="row">Engine Noise :'+engineNoise+'</div><div class="row">Battery :'+battery+'</div></div>';*/
             /*var infoHtml = '<div class="info"><h3>Machine ID : '+machineID+
             '</h3><div class="info-body1"> <h4>Status : '+engineStatus+'</h4></div></div>';*/
             /* if(true){
@@ -140,7 +146,8 @@ angular.module('myApp.view2', ['ngRoute','vsGoogleAutocomplete'])
             google.maps.event.addListener(marker, 'mouseover', fn);
             google.maps.event.addListener(marker, 'mouseout', function () {
                 setTimeout(function(){
-                    infoWindow.close();},2000);
+                   // infoWindow.close();
+                },2000);
             }
                                          );
 
@@ -433,7 +440,7 @@ angular.module('myApp.view2', ['ngRoute','vsGoogleAutocomplete'])
             };
             function update(){
                 $.get({url:MAP_DATA_URL,cache: false}).then(function(data) {
-                    var jsonData = makeAsJSON(data);
+                    var jsonData = JSON.parse(data);//makeAsJSON(data);
                     console.log(new Date()+"--->machine Length->",jsonData.length);
                     if(jsonData.length < MACHINE_DROPDOWN_THRESHOLD){
                         MACHINE_DROPDOWN_THRESHOLD = jsonData.length;

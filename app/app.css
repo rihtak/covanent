@@ -668,3 +668,10 @@ footer a:focus {
 }
 .c3-ygrid-line
 { stroke-dasharray: 5,5; }
+.selectedClass{
+    background-color: #D3D3D3;
+}
+
+.selectedtClass{
+    background-color: #D3D3D3;
+}
