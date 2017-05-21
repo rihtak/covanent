@@ -169,7 +169,7 @@ angular.module('myApp.view2', ['ngRoute','vsGoogleAutocomplete'])
     .controller('View2Ctrl', [ '$scope','gmapService','$http','$mdToast','$interval','$rootScope','$mdDialog','myAppFactory', function ( $scope,gmapService,$http,$mdToast,$interval,$rootScope,$mdDialog,myAppFactory) {
         function DialogController($scope, $mdDialog) {
            
-            $scope.titleText = "History";
+            $scope.titleText = "CTG 11029";
 
 
             $scope.hide = function() {

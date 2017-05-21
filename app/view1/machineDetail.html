@@ -1,18 +1,21 @@
 <md-dialog aria-label="Detailed Infromation" class="fullscreen-dialog">
     <form ng-cloak>
-        <md-toolbar class=" md-primary md-hue-4" style="background:lightgrey">
-            <div class="md-toolbar-tools">
+        
 
-                <div layout="row">
-                    <h2>{{titleText}}1 </h2>
-                </div><br>
-                <div layout="row">
-                    <h3>Ford F-150 Raptor</h3>
-                </div>
-                <div layout="row">
-                    <h1>Refigrated</h1>
-                </div>
-
+        <md-dialog-content>
+            <div layout="row" style="background:lightgrey">
+                
+                <ul>
+                <li layout="row" style="font-size:25px;font-weight:bold;padding-bottom: 5px;">
+                    <Label>{{titleText}}1 </Label>
+                </li><span flex></span>
+                <li layout="row" style="font-size:18px;font-weight:bold;color:red">
+                    <Label>Ford F-150 Raptor</Label>
+                </li><span flex></span>
+                <li layout="row" style="font-size:15px">
+                    <Label>Refigrated</Label>
+                </li>
+                    </ul> 
                 <span flex></span>
                 <md-button class="md-icon-button" ng-click="cancel()">
                     <md-icon class="material-icons md-toolbar_icon md-24">
@@ -20,12 +23,9 @@
                     </md-icon>
                 </md-button>
             </div>
-        </md-toolbar>
-
-        <md-dialog-content>
             <div class="md-dialog-content">
 
-                <div layout="row">
+                <div layout="row" style="padding-bottom:15px;border-bottom:1px solid lightgrey">
                     <label style="float: right;
     width: 30%;font-size:12px">DOT Date:01/01/2017</label>
                     <label style="
@@ -39,9 +39,9 @@
     color: red;font-size:20px">Allocated</label>
 
                 </div>
-                <div layout="row">
+                <div layout="row" style="padding:10px 0 10px 0;border-bottom:1px solid lightgrey">
                     <div style="width:30%"></div>
-                    <div style="width:70%;height:300px;overflow:scroll">
+                    <div style="width:70%;height:200px;overflow:scroll">
                         <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
                             <thead>
                                 <tr>
