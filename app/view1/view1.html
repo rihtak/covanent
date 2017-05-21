@@ -51,7 +51,7 @@
             </div>
             <div>
                 <div layout="row " class="tittle">
-                    <div class="title-txt">List of orders</div>
+                    <div class="title-txt">List of Orders</div>
                     
                     
                 </div>
@@ -107,7 +107,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr grid-item  ng-click="showTrailers(item)" class="{{item.selectedClass}}">
+                        <tr grid-item  ng-click="showTrailers(item)"  ng-class="{selectedClass : item.order === selectedOrderId}">
                             <td>{{$index+1}}</td>
                             <td >
                                 <span>{{item.status}}</span>
@@ -147,7 +147,7 @@
                                 <span>{{item.orderremark}}</span>
                             </td>
                              <td >
-                                <a><span>{{item.details}}</span></a>
+                                <a><span>More info</span></a>
                             </td>
 
                         </tr>
@@ -171,51 +171,51 @@
                 
             </div>
             <div>
+                <br>
+                <br>
                 <div layout="row " class="tittle">
-                    List of Trailers
+                    Available  Trailers
                 </div>
                 <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
                     <thead>
                         <tr>
                             <th></th>
                             <th >
-                                <span>Status</span>
-                            </th>
-                            <th >
-                                <span>Order #</span>
-                            </th>
-                             <th >
                                 <span>Trailer ID</span>
                             </th>
-                             <th >
-                                <span>Tractor</span>
-                            </th>
-                            
-                             <th >
-                                <span>Destination City</span>
-                            </th>
-                             <th >
-                                <span>Service</span>
-                            </th>
-                             <th >
-                                <span>Prior Event</span>
-                            </th>
-                             <th >
-                                <span>Next Event</span>
-                            </th>
-                            
-                             <th >
-                                <span>Gps Location</span>
-                            </th>
-                             <th >
-                                <span>Next</span>
-                            </th>
-                             <th >
-                                <span>Available Date</span>
-                            </th>
                             <th >
-                                <span>Details</span>
+                                <span> Name</span>
                             </th>
+                             <th >
+                                <span> Type</span>
+                            </th>
+                             <th >
+                                <span> Location</span>
+                            </th>
+                            
+                             <th >
+                                <span>Location history </span>
+                            </th>
+                             <th >
+                                <span>Allocation status</span>
+                            </th>
+                             <th >
+                                <span>Compliance status</span>
+                            </th>
+                             <th >
+                                <span>Road worthiness Status</span>
+                            </th>
+                            
+                             <th >
+                                <span>Last DOT inspection date</span>
+                            </th>
+                             <th >
+                                <span>Trailer acessory</span>
+                            </th>
+                             <th >
+                                <span>Last Movement Date</span>
+                            </th>
+                           
 
 
 
@@ -224,46 +224,45 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr grid-item ng-click="doAllocate(item)" class="{{item.selectedtClass}}">
+                        <tr grid-item ng-click="doAllocate(item)"  ng-class="{selectedClass : item.trailerId === selectedTrailerId}">
                             <td>{{$index+1}}</td>
-                            <td >
-                                <span>{{item.status}}</span>
-                            </td>
-                            <td >
-                                <span>{{item.orderID}}</span>
-                            </td>
+                             
                             <td >
                                 <span>{{item.trailerId}}</span>
                             </td>
-                             <td >
-                                <span>{{item.tracktor}}</span>
+                            <td >
+                                <span>{{item.trailerName}}</span>
+                            </td>
+                            <td >
+                                <span>{{item.trailerType}}</span>
                             </td>
                              <td >
-                              <span>{{selectedrow.destination}}</span>
+                                <span>{{item.trailerLocation}}</span>
                             </td>
                              <td >
-                               <span>{{item.service}}</span>
+                             <a><span> History</span></a> 
                             </td>
                              <td >
-                               <span>{{item.priorevent}}</span>
+                               <span>{{item.allocationStatus}}</span>
                             </td>
                              <td >
-                               <span>{{item.nextEvent}}</span>
+                               <span>{{item.complianceStatus}}</span>
                             </td>
                              <td >
-                               <span>{{item.gpsloc}}</span>
+                               <span>{{item.roadWorthinessStatus}}</span>
                             </td>
                              <td >
-                                <span>{{item.next}}</span>
+                               <span>{{item.LastDotInspectionDate}}</span>
+                            </td>
+                             <td >
+                                <span>{{item.trailerAccessory}}</span>
                             </td>
                             
                              
                              <td >
-                                <span>{{item.availabledate}}</span>
+                                <span>{{item.lastMovementDate}}</span>
                             </td>
-                             <td >
-                                <a><span>{{item.details}}</span></a>
-                            </td>
+                            
                             
 
                         </tr>

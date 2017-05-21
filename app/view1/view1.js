@@ -31,18 +31,30 @@ angular.module('myApp.view1', ['ngRoute', 'dataGrid', 'pagination'])
        // $scope.selectedtrailerow = {};
         $scope.showTrailers = function(item){
             $scope.isOrderClicked = true;
+            $scope.selectedOrderId = item.order;
+             myAppFactory.getAvailableTrailers().then(function(responseData) {
+            $scope.isAdhocReportLoading = false;
+           $scope.gridOptions2.data = JSON.parse(JSON.stringify(responseData.data));//responseData.data;
+          
+
+        }).then(function(error) {
+            console.log(error)
+        })
+            $scope.selectedOrder = item.order;
             $scope.selectedrow=item;
            console.log($scope.selectedrow);
-            item.selectedClass="selectedClass"
+            
         }
         $scope.doAllocate = function(item){
             $scope.selectedtrailerow = item;
+            $scope.selectedTrailerId = item.trailerId;
             item.selectedtClass="selectedtClass"
         }
+        
         $scope.allocate = function(){
             alert("Trailer id: "+$scope.selectedtrailerow.trailerId +" Allocated to order id: "+$scope.selectedrow.order);
-              $scope.gridOptions.data = JSON.parse(JSON.stringify(allocationData));//responseData.data;
-            $scope.gridOptions2.data = JSON.parse(JSON.stringify(trailerData));
+            $scope.isOrderClicked = false;
+              listTheOrders();
             
         }
         $rootScope.isRealTime = false;
@@ -56,15 +68,22 @@ angular.module('myApp.view1', ['ngRoute', 'dataGrid', 'pagination'])
             urlSync: false
         };
         $scope.isAdhocReportLoading = true;
-        myAppFactory.getData().then(function(responseData) {
+        function resetSelectedRows(){
+            $scope.selectedTrailerId = "";
+            $scope.selectedOrderId = "";
+        }
+        function listTheOrders(){
+            resetSelectedRows();
+            myAppFactory.getListOfOrders().then(function(responseData) {
             $scope.isAdhocReportLoading = false;
-           $scope.gridOptions.data = JSON.parse(JSON.stringify(allocationData));//responseData.data;
-            $scope.gridOptions2.data = JSON.parse(JSON.stringify(trailerData));
-            $scope.decode($scope.gridOptions.data,0);
+           $scope.gridOptions.data = JSON.parse(JSON.stringify(responseData.data));//responseData.data;
+           
 
         }).then(function(error) {
             console.log(error)
         })
+        }
+        listTheOrders();
         $rootScope.recentAlerts = [];
 
         Load_document.Start($rootScope);

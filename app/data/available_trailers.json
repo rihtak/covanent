@@ -1,0 +1,39 @@
+[{
+    "trailerId":"45332",
+    "trailerName":"Trailer Name1",
+    "trailerType":"Refrigerated",
+    "trailerLocation":"Ontoria OH",
+    "trailerLocationHistory":"urltoshowhistory",
+    "allocationStatus":"Avaialble",
+    "complianceStatus":"Pass",
+    "roadWorthinessStatus":"Pass",
+    "LastDotInspectionDate":"26-03-2017",
+    "trailerAccessory":"Informations",
+    "lastMovementDate":"20--05-2017"
+},
+{
+    "trailerId":"45333",
+    "trailerName":"Trailer Name2",
+    "trailerType":"Refrigerated",
+    "trailerLocation":"Ontoria OH",
+    "trailerLocationHistory":"urltoshowhistory",
+    "allocationStatus":"Avaialble",
+    "complianceStatus":"Pass",
+    "roadWorthinessStatus":"Pass",
+    "LastDotInspectionDate":"26-03-2017",
+    "trailerAccessory":"Informations",
+    "lastMovementDate":"20--05-2017"
+},
+{
+    "trailerId":"45334",
+    "trailerName":"Trailer Name3",
+    "trailerType":"Refrigerated",
+    "trailerLocation":"Ontoria OH",
+    "trailerLocationHistory":"urltoshowhistory",
+    "allocationStatus":"Avaialble",
+    "complianceStatus":"Pass",
+    "roadWorthinessStatus":"Pass",
+    "LastDotInspectionDate":"26-03-2017",
+    "trailerAccessory":"Informations",
+    "lastMovementDate":"20--05-2017"
+}]

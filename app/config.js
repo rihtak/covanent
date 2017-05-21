@@ -20,7 +20,8 @@ var overHeatClusterImage = "app/images/markers/idle";
 
 /*URL*/
 var IOT_BASE_URL =  "http://52.14.203.215:8080/iothbase"; //"http://10.4.4.132/iothbase";
-var AD_HOC_REPORT_URL =  IOT_BASE_URL + "/api/v1/iothbase/gethivedata"; 
+var GET_LIST_OF_ORDERS_URL =  "app/data/list_of_orders.json"; 
+var GET_AVAILABLE_TRAILERS_URL = "app/data/available_trailers.json";
 //var AD_HOC_REPORT_URL = "app/data/output2.json";
 var RECENT_ALERT_URL = IOT_BASE_URL + "/api/v1/iothbase/gethivealertdata"; // (7days and temparature above 200)
 var DETAILED_INFO_ABOUT_MACHINE_URL = IOT_BASE_URL + "/api/v1/iothbase/gethivedetaildata"
@@ -695,11 +696,9 @@ var sampleData = [
 ];
 var recentData = [{"rowid":10,"latitude":31.34978103,"longitude":-82.63160898,"noise":22.0,"noise30btw50":0,"noise50btw75":0,"noise75Above":0,"temperature":220.0,"temperature110btw135":0,"temperature135btw158":0,"temperature158Above":0,"status":null,"statusVal":0,"mDate":"2017-05-04 05:32:53","count":0},{"rowid":10,"latitude":33.17169209,"longitude":-80.7284979,"noise":21.0,"noise30btw50":0,"noise50btw75":0,"noise75Above":0,"temperature":214.0,"temperature110btw135":0,"temperature135btw158":0,"temperature158Above":0,"status":null,"statusVal":0,"mDate":"2017-05-03 05:37:33","count":0}];
 
-var allocationData = [{"isChecked":true,"status":"Available","order":"2343443","orginName":"Covanent Transport","billToName":"VH Transport","origin":"Atlanta,GA","destination":"BUFORD,GA","service":"SOLO","tracktor":"","trailer":"","ref":"2342345","reftype":"SID","orderremark":"all set","details":"info"},
-                     {"isChecked":true,"status":"Available","order":"2343444","orginName":"Covanent Transport","billToName":"VH Transport","origin":"Atlanta,GA","destination":"Ontoria OH","service":"SOLO","tracktor":"","trailer":"","ref":"2342345","reftype":"SID","orderremark":"all set","details":"info"},
-                     {"isChecked":true,"status":"Available","order":"2343445","orginName":"Covanent Transport","billToName":"VH Transport","origin":"Atlanta,GA","destination":"Bentonville, AR","service":"SOLO","tracktor":"","trailer":"","ref":"2342345","reftype":"SID","orderremark":"all set","details":"info"}];
-var trailerData = [{"status":"Completed","orderID":"","trailerId":"1234","tracktor":"33331","destinationcity":"Ontoria OH","service":"TEAM","priorevent":"LUL","gpsloc":"2 m S of dalton ,GA","next":"unplanned","availabledate":"23-7-2017 12:04","details":"info","nextEvent":"UNK"},
-                     {"status":"Completed","orderID":"","trailerId":"1235","tracktor":"33332","destinationcity":"BUFORD,GA","service":"TEAM","priorevent":"LUL","gpsloc":"2 m S of dalton ,GA","next":"unplanned","availabledate":"23-7-2017 12:04","details":"info","nextEvent":"UNK"},
-                     {"status":"Completed","orderID":"","trailerId":"1236","tracktor":"33333","destinationcity":"BUFORD,GA","service":"TEAM","priorevent":"LUL","gpsloc":"2 m S of dalton ,GA","next":"unplanned","availabledate":"23-7-2017 12:04","details":"info","nextEvent":"UNK"}];
+var allocationData = [];
+var trailerData = [{"status":"Completed","orderID":"","trailerId":"1234","tracktor":"33331","destinationcity":"Ontoria OH","service":"TEAM","priorevent":"LUL","gpsloc":"2 m S of dalton ,GA","next":"unplanned","availabledate":"23-7-2017 12:04","details":"more info","nextEvent":"UNK"},
+                     {"status":"Completed","orderID":"","trailerId":"1235","tracktor":"33332","destinationcity":"BUFORD,GA","service":"TEAM","priorevent":"LUL","gpsloc":"2 m S of dalton ,GA","next":"unplanned","availabledate":"23-7-2017 12:04","details":"more info","nextEvent":"UNK"},
+                     {"status":"Completed","orderID":"","trailerId":"1236","tracktor":"33333","destinationcity":"BUFORD,GA","service":"TEAM","priorevent":"LUL","gpsloc":"2 m S of dalton ,GA","next":"unplanned","availabledate":"23-7-2017 12:04","details":"more info","nextEvent":"UNK"}];
 
 var statesjson = {"KMAE":[-120.12,36.98,"MADERA MUNICIPAL AIRPORT",[26,1,2,5,6,3,2,1,2,7,29,12,3]]}

@@ -30,12 +30,18 @@ angular.module('myApp', [
     .controller('AppCtrl', AppCtrl)
     .service('myAppFactory', function ($http) {
     return {
-        getData: function () {
+        getListOfOrders: function () {
             return $http({
                 method: 'GET',
-                url: AD_HOC_REPORT_URL
+                url: GET_LIST_OF_ORDERS_URL
             });
-        },        
+        },       
+         getAvailableTrailers: function () {
+            return $http({
+                method: 'GET',
+                url: GET_AVAILABLE_TRAILERS_URL
+            });
+        },    
         getRecentAlertData:function(){
             return $http({
                 method: 'GET',
