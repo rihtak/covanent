@@ -7,7 +7,7 @@ angular.module('myApp.view2', ['ngRoute','vsGoogleAutocomplete'])
             controller: 'View2Ctrl'
         });
     }])
-    .factory('gmapService', function ( $http,$rootScope) {
+    .factory('gmapService', function ( $http,$rootScope,$compile) {
     var googleMapService = {};
 
     var data = [];
@@ -75,7 +75,7 @@ angular.module('myApp.view2', ['ngRoute','vsGoogleAutocomplete'])
                 machineStatusText ="AVAILABLE";
                  mcss = "available";
             }
-            var infoHtml = '<div class="infowindow"><div class="row header"> <div class="row head1">CTG 11029</div><div class="row head2">Ford F-150 Raptor</div><div class="row head3">Refrigerated </div></div><div class="row title"><span class="vehicle-date" >DOT Date:01/05/2017</sapn>  <span class="vehicletype '+mcss+'">'+machineStatusText+'</span></div><div class="row content">Ohio to Florida</div><div class="row footer"><div class="status"> <div class="row">Complaince:Pass</div><div class="row">IOT Info:Active</div><div class="row">Road Worhiness:pass</div></div><div class="history"><a href="#">View History</a></div></div></div>';
+            var infoHtml = '<div class="infowindow"><div class="row header"> <div class="row head1">CTG 11029</div><div class="row head2">Ford F-150 Raptor</div><div class="row head3">Refrigerated </div></div><div class="row title"><span class="vehicle-date" >DOT Date:01/05/2017</sapn>  <span class="vehicletype '+mcss+'">'+machineStatusText+'</span></div><div class="row content">Ohio to Florida</div><div class="row footer"><div class="status"> <div class="row">Complaince:Pass</div><div class="row">IOT Info:Active</div><div class="row">Road Worhiness:pass</div></div><div class="history"><button ng-click="showDetail()">View History</a></div></div></div>';
             /*var infoHtml = '<div class="info"><div class="row">Machine ID : '+machineID+
                 '</div><div class="row"> Status : '+engineStatus+'</div><div class="row">Temperature :'+temperature+'</div><div class="row">Engine Noise :'+engineNoise+'</div><div class="row">Battery :'+battery+'</div></div>';*/
             /*var infoHtml = '<div class="info"><h3>Machine ID : '+machineID+
@@ -84,9 +84,9 @@ angular.module('myApp.view2', ['ngRoute','vsGoogleAutocomplete'])
                 infoHtml += '<div style="width:100%;float:right"> <input type="button" id="detailButton" data="'+machineID+'" style="float:right;margin-right:10%"  value="Details"></div>';
             }*/
 
+            var compiled = $compile(infoHtml)($rootScope)
 
-
-            infoWindow.setContent(infoHtml);
+            infoWindow.setContent(compiled[0]);
             infoWindow.setPosition(latlng);
             infoWindow.open(map);
             google.maps.event.addDomListener(infoWindow, 'domready', function() {
@@ -167,6 +167,95 @@ angular.module('myApp.view2', ['ngRoute','vsGoogleAutocomplete'])
     return googleMapService;
 })
     .controller('View2Ctrl', [ '$scope','gmapService','$http','$mdToast','$interval','$rootScope','$mdDialog','myAppFactory', function ( $scope,gmapService,$http,$mdToast,$interval,$rootScope,$mdDialog,myAppFactory) {
+        function DialogController($scope, $mdDialog) {
+           
+            $scope.titleText = "History";
+
+
+            $scope.hide = function() {
+                $mdDialog.hide();
+            };
+
+            $scope.cancel = function() {
+                $mdDialog.cancel();
+            };
+
+            $scope.answer = function(answer) {
+                $mdDialog.hide(answer);
+            };
+
+        }
+        $rootScope.showDetail  = function(ev){
+            $scope.showGraph = false;
+           
+            
+            $mdDialog.show({
+                controller: DialogController,
+                templateUrl: 'app/view1/machineDetail.html',
+                parent: angular.element(document.body),
+                targetEvent: ev,   
+                animation:undefined,
+                clickOutsideToClose:true,
+                locals: { machine: "" },
+                onComplete:afterShowAnimation,
+                fullscreen: true // Only for -xs, -sm breakpoints.
+            });
+            function getRandomInt(min, max) {
+                return Math.floor(Math.random() * (max - min + 1)) + min;
+            }
+            function genrateMachineData(){
+                var days = [];
+
+                var s = new Date('2017-01-01');
+                var e = new Date('2017-01-30');
+                var a = [];
+
+                while(s < e) {
+                    a.push(s);
+
+                    //machine.date = s.getFullYear() + "-" +s.getMonth()+1 + "-" +s.getDate();
+
+
+                    s = new Date(s.setDate(
+                        s.getDate() + 1
+                    ));
+                    var dt = angular.copy(s),
+                        rc = [];
+                    while (dt.getDate() == s.getDate()) {
+
+                        dt.setMinutes(dt.getMinutes() + 50);
+                        var machine = {};
+                        machine.date = angular.copy(dt);
+                        machine.temprature = getRandomInt(150,200);
+                        machine.engineNoise = getRandomInt(70,100);
+                        days.push(machine); 
+                    }
+
+
+                }
+                console.log("datapoints ",days.length)
+
+                return days;
+
+
+            }
+            function afterShowAnimation(scope, element, options) {
+                // post-show code here: DOM element focus, etc.
+                scope.isChartLoading = true;
+                myAppFactory.getMachineData(machine).then(function(response) {
+                    scope.isChartLoading = false;
+                    console.log("machine for",machine);
+                    console.log("machine.ndata",response.data);
+
+                   
+                    scope.showGraph = true;
+
+                })
+
+
+            }
+
+        }
         $rootScope.isRecentAlertLoading = true;
         $rootScope.$on('triggerMachineDetail', function(event,machine){
             console.log("triggered",machine)

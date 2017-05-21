@@ -121,7 +121,7 @@ angular.module('myApp.view1', ['ngRoute', 'dataGrid', 'pagination'])
                 clickOutsideToClose:true,
                 locals: { machine: machine },
                 onComplete:afterShowAnimation,
-                fullscreen: true // Only for -xs, -sm breakpoints.
+                fullscreen: false // Only for -xs, -sm breakpoints.
             });
             function getRandomInt(min, max) {
                 return Math.floor(Math.random() * (max - min + 1)) + min;
