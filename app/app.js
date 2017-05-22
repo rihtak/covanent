@@ -49,7 +49,15 @@ angular.module('myApp', [
                 method: 'GET',
                 url: GET_AVAILABLE_TRAILERS_URL
             });
-        },    
+        },  
+        
+        getTrailerHistoryData:function(){
+            return $http({
+                method: 'GET',
+                url: GET_TRAILER_HISTORY
+            });
+
+        },
         getRecentAlertData:function(){
             return $http({
                 method: 'GET',
