@@ -71,23 +71,23 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr grid-item ng-click="showTrailers(item)" ng-class="{selectedClass : item.order === selectedOrderId}">
+                                <tr grid-item ng-click="showTrailers(item)" >
                                     <td>{{$index+1}}</td>
                                     <td>
-                                        <span>{{item.status}}</span>
+                                        <span>{{item.trailerid}}</span>
                                     </td>
                                     <td>
-                                        <span>{{item.order}}</span>
+                                        <span>{{item.trailerName}}</span>
                                     </td>
                                     <td>
-                                        <span>{{item.orginName}}</span>
+                                        <span>{{item.tsForParkedAtYard}}</span>
                                     </td>
                                     <td>
 
-                                        <span>{{item.billToName}}</span>
+                                        <span>{{item.idleTime}}</span>
                                     </td>
                                     <td>
-                                        <span>{{item.origin}}</span>
+                                        <span>{{item.lastInspection}}</span>
                                     </td>
                                     <td><img src="app/images/markers/play.png" width="20" height="20" style="margin-right:15px"><img src="app/images/markers/download.png" width="20" height="20"></td>
 
