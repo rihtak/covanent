@@ -1,26 +1,111 @@
-<md-content id="view1" layout="row" flex layout-wrap layout-padding >
+<md-content id="view1" layout="row" flex layout-wrap layout-padding>
 
-<div layout="row" >
-           <!-- <md-button  class="md-raised md-primary login-button" ng-click="doLogin()">Trailer Management</md-button>
+    <div layout="row">
+        <!-- <md-button  class="md-raised md-primary login-button" ng-click="doLogin()">Trailer Management</md-button>
             <md-button  class="md-raised md-primary login-button" ng-click="doLogin()">Yard Management</md-button>-->
-     <div style="padding: 7px 20px 0px 20px;height:30px;border-right:2px solid silver;  "><a href="#!/tracker" style="color:gray; text-decoration:none;font-size:18px">Home</a></div>
-        <div style="padding: 7px 20px 0px 20px;height:30px;border-right:2px solid silver;   "><a href="#!/allocation" style="color:gray; text-decoration:none;font-size:18px">Allocation</a></div>
+        <div style="padding: 7px 20px 0px 20px;height:30px;border-right:2px solid #00264B;  "><a href="#!/tracker" style="color:gray; text-decoration:none;font-size:18px">Home</a></div>
+        <div style="padding: 7px 20px 0px 20px;height:30px;border-right:2px solid #00264B;   "><a href="#!/allocation" style="color:gray; text-decoration:none;font-size:18px">Allocation</a></div>
         <div style="padding: 7px 20px 0px 20px;height:30px;background: #00264B"><a href="#" style="color:white;text-decoration:none;font-size:18px">Yard Management</a></div>
-        
-        </div>
+
+    </div>
     <div flex-gt-md="100" flex-md="100" flex-xs="100">
 
-       
-           <md-card flex="100" md-whiteframe="2" style="
+
+        <md-card flex="100" md-whiteframe="2" style="
     padding-top: 0px;
     padding-left: 0px;
     padding-right: 0px;">
-        <!-- <md-card-title>-->
-         <div layout="row" style="background:lightgrey">
-            <div style="font-size:16px;PADDING: 10px 0px 10px 28px;"><b > Yard Managment</b> </div>
-        </div>
+            <!-- <md-card-title>-->
+            <div layout="row" style="background:lightgrey">
+                <div style="font-size:16px;PADDING: 10px 0px 10px 28px;"><b> Yard Managment</b> </div>
+            </div>
+
+            <md-card-content>
+                <div grid-data id='test' grid-options="gridOptions" grid-actions="gridActions">
+                    <div layout-gt-sm="row" layout-sm="column">
+
+                        <div layout="row" flex-gt-sm="25" flex-sm="100" layout-align=" start">
+                            
+                            <md-input-container flex="60">
+                                <label>Please choose yard</label>
+                                <md-select ng-model="yard" >
+
+                                    <md-option>Chattanooga West yard</md-option>
+                                    <md-option>Atlanta</md-option>
+                                    <md-option>Nashville</md-option>
+                                </md-select>
+                            </md-input-container>
+
+                        </div>
+
+
+                    </div>
+                    <div style="overflow:scroll">
+                        <div layout="row " class="tittle">
+                            <div class="title-txt">Trailers at yard</div>
+
+
+                        </div>
+                        <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+                            <thead>
+                                <tr>
+                                    <th>Sl no</th>
+                                    <th>
+                                        <span>Trailer Id</span>
+                                    </th>
+                                    <th>
+                                        <span>Trailer Name</span>
+                                    </th>
+                                    <th>
+                                        <span>Timestamp parked at yard</span>
+                                    </th>
+                                    <th>
+                                        <span>Idle time at yard</span>
+                                    </th>
+                                    <th>
+                                        <span>Last inpection timestamp</span>
+                                    </th>
+                                    <th>Action</th>
+
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr grid-item ng-click="showTrailers(item)" ng-class="{selectedClass : item.order === selectedOrderId}">
+                                    <td>{{$index+1}}</td>
+                                    <td>
+                                        <span>{{item.status}}</span>
+                                    </td>
+                                    <td>
+                                        <span>{{item.order}}</span>
+                                    </td>
+                                    <td>
+                                        <span>{{item.orginName}}</span>
+                                    </td>
+                                    <td>
+
+                                        <span>{{item.billToName}}</span>
+                                    </td>
+                                    <td>
+                                        <span>{{item.origin}}</span>
+                                    </td>
+                                    <td><img src="app/images/markers/play.png" width="20" height="20" style="margin-right:15px"><img src="app/images/markers/download.png" width="20" height="20"></td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div layout="row" layout-align="center center" ng-if="gridOptions.data.length === 0" layout-padding layout-margin>
+                            <span ng-show="!isAdhocReportLoading">No data available</span>
+                            <md-progress-circular md-diameter="20" ng-show="isAdhocReportLoading"></md-progress-circular><span ng-show="isAdhocReportLoading">Loading ...</span>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </md-card-content>
         </md-card>
     </div>
 </md-content>
-
-
