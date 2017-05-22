@@ -30,12 +30,11 @@
                                 <label>Please choose yard</label>
                                 <md-select ng-model="yard" ng-change="gridActions.filter()">
 
-                                    <md-option>Chattanooga West yard</md-option>
-                                    <md-option>Atlanta</md-option>
-                                    <md-option>Nashville</md-option>
+                                    <md-option value="Chattanooga West yard">Chattanooga West yard</md-option>
+                                    <md-option value="Atlanta">Atlanta</md-option>
+                                    <md-option value="Nashville">Nashville</md-option>
                                 </md-select>
                             </md-input-container>
-
                         </div>
 
 
@@ -96,10 +95,10 @@
                                         <span>{{item.lastInspection}}</span>
                                     </td>
                                     <td>
- <img src="app/images/markers/play.png" width="20" height="20" style="margin-right:15px">
-                                        
+                                        <img src="app/images/markers/play.png" width="20" height="20" style="margin-right:15px" ng-click="showConfirm($event)">
+
                                         <img src="app/images/markers/download.png" width="20" height="20" ng-click="openUpload()">
-<input type="file" id="uploadfile" style="display:none"/>  </td>
+                                        <input type="file" id="uploadfile" style="display:none" /> </td>
 
 
                                 </tr>

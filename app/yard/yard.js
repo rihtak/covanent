@@ -61,52 +61,69 @@ angular.module('myApp.yard', ['ngRoute', 'dataGrid', 'pagination'])
             urlSync: false
         };
 
+        $scope.showConfirm = function (ev) {
+            // Appending dialog to document.body to cover sidenav in docs app
+            var confirm = $mdDialog.confirm()
+                .title('Do you want to initiate yard inspection for this trailer?')
+                .textContent('Do you want to initiate yard inspection for this trailer?')
+                .ariaLabel('Lucky day')
+                .targetEvent(ev)
+                .ok('Ok')
+                .cancel('Cancel');
+
+            $mdDialog.show(confirm).then(function () {
+                $scope.status = 'You decided to get rid of your debt.';
+            }, function () {
+                $scope.status = 'You decided to keep your debt.';
+            });
+        };
+
         $scope.gridOptions.data = [{
             trailerid: "45833",
             trailerName: "TRS",
             tsForParkedAtYard: "05/16/2017  10:52:00",
             idleTime: "5 Days, 12 hrs 32 min",
             lastInspection: "05/17/2017  11:52:00",
-            location:"Chattanooga West yard"
+            location: "Chattanooga West yard"
         }, {
             trailerid: "44422",
             trailerName: "TRS",
             tsForParkedAtYard: "05/18/2017  09:32:01",
             idleTime: "3 Days, 07 hrs 32 min",
             lastInspection: "05/19/2017  02:32:01",
-            location:"Nashville"
+            location: "Nashville"
         }, {
             trailerid: "45833",
-            trailerName: "TRS",
+            trailerName: "TR3",
             tsForParkedAtYard: "05/16/2017  10:52:00",
             idleTime: "5 Days, 12 hrs 32 min",
             lastInspection: "05/17/2017  11:52:00",
-            location:"Nashville"
+            location: "Nashville"
         }, {
-            trailerid: "45833",
-            trailerName: "TRS",
-            tsForParkedAtYard: "05/16/2017  10:52:00",
-            idleTime: "5 Days, 12 hrs 32 min",
-            lastInspection: "05/17/2017  11:52:00",
-            location:"Atlanta"
+            trailerid: "44742",
+            trailerName: "TR1",
+            tsForParkedAtYard: "05/20/2017  12:56:03",
+            idleTime: "2 Days, 09 hrs 32 min",
+            lastInspection: "05/21/2017  12:56:03",
+            location: "Atlanta"
         }, {
             trailerid: "R3371",
             trailerName: "TR7",
             tsForParkedAtYard: "05/21/2017  07:48:04",
             idleTime: "1 Days, 06 hrs 32 min",
-            lastInspection: "05/17/2017  11:52:00",
-            location:"Atlanta"
+            lastInspection: "05/16/2017  07:48:04",
+            location: "Atlanta"
         }, {
-            trailerid: "45833",
-            trailerName: "TRS",
-            tsForParkedAtYard: "05/16/2017  10:52:00",
-            idleTime: "5 Days, 12 hrs 32 min",
-            lastInspection: "05/17/2017  11:52:00",
-            location:"Atlanta"
+            trailerid: "44561",
+            trailerName: "TR9",
+            tsForParkedAtYard: "05/21/2017  02:18:05",
+            idleTime: "1 Days, 01 hrs 32 min",
+            lastInspection: "05/16/2017  04:48:05",
+            location: "Atlanta"
         }];
-        
-        $scope.openUpload=function(){
-            console.log("upload clicked") ;
+
+        $scope.openUpload = function () {
+            console.log("upload clicked");
             $("#uploadfile").click();
         }
         $scope.isAdhocReportLoading = true;
