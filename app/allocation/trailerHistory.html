@@ -1,0 +1,119 @@
+<md-dialog aria-label="Detailed Infromation" class="fullscreen-dialog">
+    <form ng-cloak>
+        
+
+        <md-dialog-content>
+            <div layout="row" style="background:lightgrey">
+                
+                <ul>
+                <li layout="row" style="font-size:25px;font-weight:bold;padding-bottom: 5px;">
+                    <Label>{{titleText}}1 </Label>
+                </li><span flex></span>
+                <li layout="row" style="font-size:18px;font-weight:bold;color:red">
+                    <Label>Ford F-150 Raptor</Label>
+                </li><span flex></span>
+                <li layout="row" style="font-size:15px">
+                    <Label>Refigrated</Label>
+                </li>
+                    </ul> 
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon class="material-icons md-toolbar_icon md-24">
+                        close
+                    </md-icon>
+                </md-button>
+            </div>
+            <div class="md-dialog-content">
+
+                <div layout="row" style="padding-bottom:15px;border-bottom:1px solid lightgrey">
+                    <label style="float: right;
+    width: 30%;font-size:12px">DOT Date:01/01/2017</label>
+                    <label style="
+    text-align: rle;
+    width: 35%;
+    font-weight: bold;font-size:15px
+">History</label>
+                    <label style="text-align: right;
+    width: 35%;
+    font-weight: bold;
+    color: green;font-size:20px">Available</label>
+
+                </div>
+                <div layout="row" style="padding:10px 0 10px 0;border-bottom:1px solid lightgrey">
+                    <div style="width:30%"></div>
+                    <div style="width:70%;height:200px;overflow:scroll">
+                        <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+                            <thead>
+                                <tr>
+                                    <th>Trailer Id</th>
+
+                                    <th>
+                                        <span>Trailer Name</span>
+                                    </th>
+                                    <th>
+                                        <span>Origin City</span>
+                                    </th>
+                                   
+                                    <th>
+                                        <span>Destination City</span>
+                                    </th>
+                                    <th>
+                                        <span>Attached Time</span>
+                                    </th>
+                                    <th>
+                                        <span>Detached Time</span>
+                                    </th>
+                                    
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr grid-item ng-click="showTrailers(item)" ng-class="{selectedClass : item.order === selectedOrderId}">
+                                    <td>{{$index+1}}</td>
+                                    <td>
+                                        <span>{{item.status}}</span>
+                                    </td>
+                                    <td>
+                                        <span>{{item.order}}</span>
+                                    </td>
+                                    <td>
+                                        <span>{{item.orginName}}</span>
+                                    </td>
+                                    <td>
+
+                                        <span>{{item.billToName}}</span>
+                                    </td>
+                                    <td>
+                                        <span>{{item.origin}}</span>
+                                    </td>
+                                    <td>
+                                        <span>{{item.destination}}</span>
+                                    </td>
+                                    <td>
+                                        <span>{{item.service}}</span>
+                                    </td>
+                                    <td>
+                                        <span>{{item.tracktor}}</span>
+                                    </td>
+
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div layout="row">
+                    <ul style="list-style:none;font-size:12px">
+                        <li><label>Compliance:pass</label></li>
+                        <li><label>IOT Info:Active</label></li>
+                        <li><label>Road Worthiness:Ready</label></li>
+                    </ul>
+                </div>
+                 
+            </div>
+        </md-dialog-content>
+
+        
+    </form>
+</md-dialog>

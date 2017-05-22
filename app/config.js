@@ -11,6 +11,13 @@ var MINIMUM_MACHINE_COUNT = 300;
 var runningImage = "app/images/markers/red-truck.png";
 var idleImage = "app/images/markers/green-truck.png";
 var overHeatImage = "app/images/markers/green-truck.png";
+var allotedTruckImage = "app/images/markers/alloted-truck.png";
+var pllanedTruckImage = "app/images/markers/planned-truk.png";
+var availableTruckImage = "app/images/markers/available-truck.png";
+
+var AVAILABLE_STATUS = 0;
+var PLANNED_STATUS = 1;
+var ALLOTED_STATUS = 2;
 
 /*Cluster Prefix remove the index*/
 

@@ -65,6 +65,9 @@
                             <th >
                                 <span>Order #</span>
                             </th>
+                            <th >
+                                <span>Order Date</span>
+                            </th>
                              <th >
                                 <span>Orgin Name</span>
                             </th>
@@ -112,6 +115,9 @@
                             </td>
                             <td >
                                 <span >{{item.order}}</span>
+                            </td>
+                            <td >
+                                <span >{{item.orderDateTime}}</span>
                             </td>
                              <td >
                                 <span>{{item.orginName}}</span>
@@ -222,7 +228,7 @@
                             <td>{{$index+1}}</td>
                              
                             <td >
-                                <span><a>{{item.trailerId}}<md-tooltip md-direction="bottom">View trialer history</md-tooltip></a></span>
+                                <span><a href ng-click="showHistory()">{{item.trailerId}}<md-tooltip md-direction="bottom">View trialer history</md-tooltip></a></span>
                             </td>
                             <td >
                                 <span>{{item.trailerName}}</span>
@@ -231,7 +237,7 @@
                                 <span>{{item.trailerType}}</span>
                             </td>
                              <td >
-                                <span>{{item.trailerLocation}}</span>
+                                <span>{{selectedrow.origin}}</span>
                             </td>
                             
                              <td >
@@ -241,7 +247,7 @@
                                <span>{{item.complianceStatus}}</span>
                             </td>
                              <td >
-                               <span>{{item.roadWorthinessStatus}}</span>
+                               <span>{{item.roadWorthinessStatsstus}}</span>
                             </td>
                              <td >
                                <span>{{item.LastDotInspectionDate}}</span>
