@@ -66,26 +66,49 @@ angular.module('myApp.yard', ['ngRoute', 'dataGrid', 'pagination'])
             trailerName: "TRS",
             tsForParkedAtYard: "05/16/2017  10:52:00",
             idleTime: "5 Days, 12 hrs 32 min",
-            lastInspection: "05/17/2017  11:52:00"
+            lastInspection: "05/17/2017  11:52:00",
+            location:"Chattanooga West yard"
         }, {
             trailerid: "44422",
             trailerName: "TRS",
             tsForParkedAtYard: "05/18/2017  09:32:01",
             idleTime: "3 Days, 07 hrs 32 min",
-            lastInspection: "05/19/2017  02:32:01"
+            lastInspection: "05/19/2017  02:32:01",
+            location:"Nashville"
         }, {
             trailerid: "45833",
             trailerName: "TRS",
             tsForParkedAtYard: "05/16/2017  10:52:00",
             idleTime: "5 Days, 12 hrs 32 min",
-            lastInspection: "05/17/2017  11:52:00"
+            lastInspection: "05/17/2017  11:52:00",
+            location:"Nashville"
         }, {
             trailerid: "45833",
             trailerName: "TRS",
             tsForParkedAtYard: "05/16/2017  10:52:00",
             idleTime: "5 Days, 12 hrs 32 min",
-            lastInspection: "05/17/2017  11:52:00"
+            lastInspection: "05/17/2017  11:52:00",
+            location:"Atlanta"
+        }, {
+            trailerid: "R3371",
+            trailerName: "TR7",
+            tsForParkedAtYard: "05/21/2017  07:48:04",
+            idleTime: "1 Days, 06 hrs 32 min",
+            lastInspection: "05/17/2017  11:52:00",
+            location:"Atlanta"
+        }, {
+            trailerid: "45833",
+            trailerName: "TRS",
+            tsForParkedAtYard: "05/16/2017  10:52:00",
+            idleTime: "5 Days, 12 hrs 32 min",
+            lastInspection: "05/17/2017  11:52:00",
+            location:"Atlanta"
         }];
+        
+        $scope.openUpload=function(){
+            console.log("upload clicked") ;
+            $("#uploadfile").click();
+        }
         $scope.isAdhocReportLoading = true;
 
         function resetSelectedRows() {
