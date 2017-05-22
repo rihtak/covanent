@@ -51,7 +51,7 @@ angular.module('myApp.allocation', ['ngRoute', 'dataGrid', 'pagination'])
         }
         $scope.doAllocate = function(item){
             $scope.selectedtrailerow = item;
-            $scope.selectedTrailerId = item.trailerId;
+            $scope.selectedTrailerId = item.TrailerID;
             item.selectedtClass="selectedtClass"
         }
         
