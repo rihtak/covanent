@@ -25,10 +25,10 @@
                     <div layout-gt-sm="row" layout-sm="column">
 
                         <div layout="row" flex-gt-sm="25" flex-sm="100" layout-align=" start">
-                            
+
                             <md-input-container flex="60">
                                 <label>Please choose yard</label>
-                                <md-select ng-model="yard" >
+                                <md-select ng-model="yard" ng-change="gridActions.filter()">
 
                                     <md-option>Chattanooga West yard</md-option>
                                     <md-option>Atlanta</md-option>
@@ -57,6 +57,9 @@
                                         <span>Trailer Name</span>
                                     </th>
                                     <th>
+                                        <span>Trailer Location</span>
+                                    </th>
+                                    <th>
                                         <span>Timestamp parked at yard</span>
                                     </th>
                                     <th>
@@ -71,25 +74,32 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr grid-item ng-click="showTrailers(item)" ng-class="{selectedClass : item.order === selectedOrderId}">
+                                <tr grid-item ng-click="showTrailers(item)">
                                     <td>{{$index+1}}</td>
                                     <td>
-                                        <span>{{item.status}}</span>
+                                        <span>{{item.trailerid}}</span>
                                     </td>
                                     <td>
-                                        <span>{{item.order}}</span>
+                                        <span>{{item.trailerName}}</span>
                                     </td>
                                     <td>
-                                        <span>{{item.orginName}}</span>
+                                        <span>{{item.location}}</span>
+                                    </td>
+                                    <td>
+                                        <span>{{item.tsForParkedAtYard}}</span>
                                     </td>
                                     <td>
 
-                                        <span>{{item.billToName}}</span>
+                                        <span>{{item.idleTime}}</span>
                                     </td>
                                     <td>
-                                        <span>{{item.origin}}</span>
+                                        <span>{{item.lastInspection}}</span>
                                     </td>
-                                    <td><img src="app/images/markers/play.png" width="20" height="20" style="margin-right:15px"><img src="app/images/markers/download.png" width="20" height="20"></td>
+                                    <td>
+ <img src="app/images/markers/play.png" width="20" height="20" style="margin-right:15px">
+                                        
+                                        <img src="app/images/markers/download.png" width="20" height="20" ng-click="openUpload()">
+<input type="file" id="uploadfile" style="display:none"/>  </td>
 
 
                                 </tr>
