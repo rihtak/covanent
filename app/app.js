@@ -31,6 +31,13 @@ angular.module('myApp', [
     .controller('AppCtrl', AppCtrl)
     .service('myAppFactory', function ($http) {
     return {
+        getTrailerLocator:function(){
+            
+            return $http({
+                method: 'GET',
+                url: GET_TRACTOR_LOCATOR_URL
+            });
+        },
         getListOfOrders: function () {
             return $http({
                 method: 'GET',
