@@ -27,7 +27,7 @@
 
                 <div layout="row" style="padding-bottom:15px;border-bottom:1px solid lightgrey">
                     <label style="float: right;
-                                  width: 30%;font-size:12px">DOT Date:{{machine.DOTDate}}</label>
+                                  width: 30%;font-size:12px">DOT Date: {{machine.DOTDate}}</label>
                     <label style="
                                   text-align: rle;
                                   width: 35%;
@@ -40,11 +40,15 @@
 
                 </div>
                 <div layout="row" style="padding:10px 0 10px 0;border-bottom:1px solid lightgrey">
-                    <div style="width:30%"></div>
+                    <div style="width:30%">
+                        <div class="row"><h4>From: {{machine.from}}</h4></div>
+                        <div class="row"><h4>To: {{machine.to}}</h4></div>
+                    </div>
                     <div style="width:70%;height:200px;overflow:scroll">
                         <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
                             <thead>
                                 <tr>
+                                    <th>SNo.</th>
                                     <th>Order #</th>
 
                                     <th>
@@ -60,47 +64,40 @@
                                         <span>Destination City</span>
                                     </th>
                                     <th>
-                                        <span>Service</span>
+                                        <span>Start Date</span>
                                     </th>
                                     <th>
-                                        <span>Tractor</span>
+                                        <span>End Date</span>
                                     </th>
-                                    <th>
-                                        <span>Trailer</span>
-                                    </th>
-                                    <th>
-                                        <span>Ref #</span>
-                                    </th>
+                                   
 
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr grid-item ng-click="showTrailers(item)" ng-class="{selectedClass : item.order === selectedOrderId}">
+                                <tr ng-repeat="history in machine.histories" >
                                     <td>{{$index+1}}</td>
                                     <td>
-                                        <span>{{item.status}}</span>
+                                        <span>{{history.OrderID}}</span>
                                     </td>
                                     <td>
-                                        <span>{{item.order}}</span>
+                                        <span>{{history.OriginName}}</span>
                                     </td>
                                     <td>
-                                        <span>{{item.orginName}}</span>
+                                        <span>{{history.BillToName}}</span>
                                     </td>
                                     <td>
 
-                                        <span>{{item.billToName}}</span>
+                                        <span>{{history.OriginCity}}</span>
                                     </td>
                                     <td>
-                                        <span>{{item.origin}}</span>
+                                        <span>{{history.DestinationCity}}</span>
+                                    </td>
+                                    
+                                    <td>
+                                        <span>{{history.StartDate}}</span>
                                     </td>
                                     <td>
-                                        <span>{{item.destination}}</span>
-                                    </td>
-                                    <td>
-                                        <span>{{item.service}}</span>
-                                    </td>
-                                    <td>
-                                        <span>{{item.tracktor}}</span>
+                                        <span>{{history.EndDate}}</span>
                                     </td>
 
 
@@ -112,9 +109,9 @@
                 </div>
                 <div layout="row">
                     <ul style="list-style:none;font-size:12px">
-                        <li><label>Compliance:pass</label></li>
-                        <li><label>IOT Info:Active</label></li>
-                        <li><label>Road Worthiness:Ready</label></li>
+                        <li><label>Compliance: {{machine.Compliance}}</label></li>
+                        <li><label>IOT Info: {{machine.IOTInfo}}</label></li>
+                        <li><label>Road Worthiness: {{machine.RoadWorthiness}}</label></li>
                     </ul>
                 </div>
 
