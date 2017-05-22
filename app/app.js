@@ -1,8 +1,9 @@
 'use strict';
 angular.module('myApp', [
     'ngRoute',
-    'myApp.view1',
-    'myApp.view2',
+    'myApp.tracker',
+    'myApp.allocation',
+     'myApp.yard',
     'myApp.login',
     'myApp.version',
     'ngMaterial',
@@ -117,7 +118,7 @@ function config($locationProvider, $routeProvider, $mdThemingProvider,$qProvider
         'default': '200' // use shade 200 for default, and keep all other shades the same
     });
 
-    $routeProvider.otherwise({ redirectTo: '/view2' });
+    $routeProvider.otherwise({ redirectTo: '/tracker' });
 }
 
 

@@ -1,9 +1,9 @@
 'use strict';
-angular.module('myApp.view2', ['ngRoute','vsGoogleAutocomplete'])
+angular.module('myApp.tracker', ['ngRoute','vsGoogleAutocomplete'])
     .config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.when('/view2', {
+        $routeProvider.when('/tracker', {
             //use  templateUrl: 'view2/view2.html', in local
-            templateUrl: 'app/view2/view2.html',
+            templateUrl: 'app/tracker/tracker.html',
             controller: 'View2Ctrl'
         });
     }])
@@ -35,7 +35,7 @@ angular.module('myApp.view2', ['ngRoute','vsGoogleAutocomplete'])
         else{
             markerImage = idleImage;
         }
-        
+
 
         var markerImage = new google.maps.MarkerImage(markerImage,
                                                       new google.maps.Size(40, 40));
@@ -73,9 +73,9 @@ angular.module('myApp.view2', ['ngRoute','vsGoogleAutocomplete'])
             }
             else{
                 machineStatusText ="AVAILABLE";
-                 mcss = "available";
+                mcss = "available";
             }
-            var infoHtml = '<div class="infowindow"><div class="row header"> <div class="row head1">CTG 11029</div><div class="row head2">Ford F-150 Raptor</div><div class="row head3">Refrigerated </div></div><div class="row title"><span class="vehicle-date" >DOT Date:01/05/2017</sapn>  <span class="vehicletype '+mcss+'">'+machineStatusText+'</span></div><div class="row content">Ohio to Florida</div><div class="row footer"><div class="status"> <div class="row">Complaince:Pass</div><div class="row">IOT Info:Active</div><div class="row">Road Worhiness:pass</div></div><div class="history"><button ng-click="showDetail()">View History</a></div></div></div>';
+            var infoHtml = '<div class="infowindow"><div class="row header"> <div class="row head1">CTG 11029</div><div class="row head2">Ford F-150 Raptor</div><div class="row head3">Refrigerated </div></div><div class="row title"><span class="vehicle-date" >DOT Date:01/05/2017</sapn>  <span class="vehicletype '+mcss+'">'+machineStatusText+'</span></div><div class="row content">Ohio to Florida</div><div class="row footer"><div class="status"> <div class="row">Complaince:Pass</div><div class="row">IOT Info:Active</div><div class="row">Road Worhiness:pass</div></div><div class="history"><a href ng-click="showDetail('+(machine.isOverHeat)+')">View History</a></div></div></div>';
             /*var infoHtml = '<div class="info"><div class="row">Machine ID : '+machineID+
                 '</div><div class="row"> Status : '+engineStatus+'</div><div class="row">Temperature :'+temperature+'</div><div class="row">Engine Noise :'+engineNoise+'</div><div class="row">Battery :'+battery+'</div></div>';*/
             /*var infoHtml = '<div class="info"><h3>Machine ID : '+machineID+
@@ -112,9 +112,9 @@ angular.module('myApp.view2', ['ngRoute','vsGoogleAutocomplete'])
             var marker = new MarkerWithLabel({
                 position: latLng,
                 optimized: false,
-               // labelContent: machine.MachineId,
+                // labelContent: machine.MachineId,
                 labelAnchor: new google.maps.Point(10, 0),
-               // labelClass: "labels", // the CSS class for the label
+                // labelClass: "labels", // the CSS class for the label
                 labelInBackground: false,
                 map:map,
                 icon:this.getImage(machine)
@@ -146,7 +146,7 @@ angular.module('myApp.view2', ['ngRoute','vsGoogleAutocomplete'])
             google.maps.event.addListener(marker, 'mouseover', fn);
             google.maps.event.addListener(marker, 'mouseout', function () {
                 setTimeout(function(){
-                   // infoWindow.close();
+                    // infoWindow.close();
                 },2000);
             }
                                          );
@@ -156,19 +156,19 @@ angular.module('myApp.view2', ['ngRoute','vsGoogleAutocomplete'])
         }
         var mcOptions = { gridSize: 60, minZoom: 4, maxZoom: 12, imagePath: runningClusterImage };
 
-       // runningCluster = new MarkerClusterer(map, Runningmarkers, mcOptions);
+        // runningCluster = new MarkerClusterer(map, Runningmarkers, mcOptions);
         var mcOptions = { gridSize: 60, minZoom: 4, maxZoom: 12, imagePath: idleClusterImage };
 
         //idleCluster = new MarkerClusterer(map, IdleMarkers, mcOptions);
         var mcOptions = { gridSize: 60, minZoom: 4, maxZoom: 12, imagePath: overHeatClusterImage,textColor:"red" };
 
-       // overHeatCluster = new MarkerClusterer(map, OverHeatMarkers, mcOptions);
+        // overHeatCluster = new MarkerClusterer(map, OverHeatMarkers, mcOptions);
     }
     return googleMapService;
 })
     .controller('View2Ctrl', [ '$scope','gmapService','$http','$mdToast','$interval','$rootScope','$mdDialog','myAppFactory', function ( $scope,gmapService,$http,$mdToast,$interval,$rootScope,$mdDialog,myAppFactory) {
         function DialogController($scope, $mdDialog) {
-           
+
             $scope.titleText = "CTG 11029";
 
 
@@ -182,13 +182,14 @@ angular.module('myApp.view2', ['ngRoute','vsGoogleAutocomplete'])
 
             $scope.answer = function(answer) {
                 $mdDialog.hide(answer);
+               
             };
 
         }
-        $rootScope.showDetail  = function(ev){
+        $rootScope.showDetail  = function(ev,machine){
             $scope.showGraph = false;
-           
-            
+
+            console.log(machine);
             $mdDialog.show({
                 controller: DialogController,
                 templateUrl: 'app/view1/machineDetail.html',
@@ -197,58 +198,16 @@ angular.module('myApp.view2', ['ngRoute','vsGoogleAutocomplete'])
                 animation:undefined,
                 clickOutsideToClose:true,
                 locals: { machine: "" },
-                onComplete:afterShowAnimation,
-                fullscreen: true // Only for -xs, -sm breakpoints.
+                escapeToClose: true,
+               // onComplete:afterShowAnimation,
+                // fullscreen: true // Only for -xs, -sm breakpoints.
             });
-            function getRandomInt(min, max) {
-                return Math.floor(Math.random() * (max - min + 1)) + min;
-            }
-            function genrateMachineData(){
-                var days = [];
 
-                var s = new Date('2017-01-01');
-                var e = new Date('2017-01-30');
-                var a = [];
-
-                while(s < e) {
-                    a.push(s);
-
-                    //machine.date = s.getFullYear() + "-" +s.getMonth()+1 + "-" +s.getDate();
-
-
-                    s = new Date(s.setDate(
-                        s.getDate() + 1
-                    ));
-                    var dt = angular.copy(s),
-                        rc = [];
-                    while (dt.getDate() == s.getDate()) {
-
-                        dt.setMinutes(dt.getMinutes() + 50);
-                        var machine = {};
-                        machine.date = angular.copy(dt);
-                        machine.temprature = getRandomInt(150,200);
-                        machine.engineNoise = getRandomInt(70,100);
-                        days.push(machine); 
-                    }
-
-
-                }
-                console.log("datapoints ",days.length)
-
-                return days;
-
-
-            }
-            function afterShowAnimation(scope, element, options) {
+            function afterShowAnimation(rootScope, element, options) {
                 // post-show code here: DOM element focus, etc.
-                scope.isChartLoading = true;
-                myAppFactory.getMachineData(machine).then(function(response) {
-                    scope.isChartLoading = false;
-                    console.log("machine for",machine);
-                    console.log("machine.ndata",response.data);
 
-                   
-                    scope.showGraph = true;
+                myAppFactory.getMachineData(machine).then(function(response) {
+
 
                 })
 
@@ -481,7 +440,7 @@ angular.module('myApp.view2', ['ngRoute','vsGoogleAutocomplete'])
                         .attr("cy", d.y)
 .style("left", (d.x - padding) + "px")
                        .style("top", (d.y - padding) + "px");
-                       
+
                         (function repeat() {
                             circle = circle.transition()
                                 .duration(2000)
