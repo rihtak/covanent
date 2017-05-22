@@ -29,6 +29,10 @@ angular.module('myApp.allocation', ['ngRoute', 'dataGrid', 'pagination'])
         $scope.isOrderClicked = false;
         // $scope.selectedrow = {};
        // $scope.selectedtrailerow = {};
+        $scope.showHistory = function(){
+            console.log("history");
+               $scope.showDetail();
+        }
         $scope.showTrailers = function(item){
             $scope.isOrderClicked = true;
             $scope.selectedOrderId = item.order;
@@ -52,9 +56,10 @@ angular.module('myApp.allocation', ['ngRoute', 'dataGrid', 'pagination'])
         }
         
         $scope.allocate = function(){
-            alert("Trailer id: "+$scope.selectedtrailerow.trailerId +" Allocated to order id: "+$scope.selectedrow.order);
-            $scope.isOrderClicked = false;
-              listTheOrders();
+           // alert("Trailer id: "+$scope.selectedtrailerow.trailerId +" Allocated to order id: "+$scope.selectedrow.order);
+             $scope.showConfirm(this,"Trailer id: "+$scope.selectedtrailerow.trailerId +" will map to Order id: "+$scope.selectedrow.order);
+          //  $scope.isOrderClicked = false;
+             // listTheOrders();
             
         }
         $rootScope.isRealTime = false;
@@ -90,9 +95,9 @@ angular.module('myApp.allocation', ['ngRoute', 'dataGrid', 'pagination'])
         var geodecoder = new google.maps.Geocoder();
         var DELAY_TIMER = 1500;
         var DELAY_INCREASE_INTERVAL = 500;
-        function DialogController($scope, $mdDialog,machine) {
-            $scope.machine = machine;
-            $scope.titleText = "Maintenance " +machine.status +" for machine "+machine.rowid;
+        function DialogController($scope, $mdDialog) {
+           
+            $scope.titleText = "Maintenance ";
 $scope.detaileData = [{"orderID":"","trailerId":"1234","tracktor":"33331","destinationcity":"Ontoria OH","service":"TEAM"},
                      {"status":"Completed","orderID":"","trailerId":"1235","tracktor":"33332","destinationcity":"BUFORD,GA","service":"TEAM"},
                      {"status":"Completed","orderID":"","trailerId":"1236","tracktor":"33333","destinationcity":"BUFORD,GA","service":"TEAM"}];
@@ -110,14 +115,31 @@ $scope.detaileData = [{"orderID":"","trailerId":"1234","tracktor":"33331","desti
             };
 
         }
+        $scope.showConfirm = function(ev,message) {
+    // Appending dialog to document.body to cover sidenav in docs app
+    var confirm = $mdDialog.confirm()
+          .title('Would you like to allocate this trailler?')
+          .textContent(message)
+          .ariaLabel('Trailer Allocation')
+          .targetEvent(ev)
+          .ok('allocate')
+          .cancel('cancel');
+
+    $mdDialog.show(confirm).then(function() {
+      //allocate process
+        
+    }, function() {
+      //cancel the allocation;
+    });
+  };
         
         $scope.showDetail  = function(){
             $scope.showGraph = false;
          
             $rootScope.isChartLoading = true;
             $mdDialog.show({
-               // controller: DialogController,
-                templateUrl: 'app/view1/machineDetail.html',
+               controller: DialogController,
+                templateUrl: 'app/allocation/trailerHistory.html',
                 parent: angular.element(document.body),
                // targetEvent: ev,   
               //  animation:undefined,

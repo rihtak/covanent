@@ -177,6 +177,8 @@ keyframes pulse{
 }
 .vehicletype {
     font-size: 14px;
+    float: right;
+    margin-top: 4px;
 }
 .allocated{
     color: red;
@@ -184,6 +186,10 @@ keyframes pulse{
 }
 .available{
      color: green;
+    font-weight: bold;
+}
+.planned{
+     color: blue;
     font-weight: bold;
 }
 .head1{

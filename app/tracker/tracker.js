@@ -29,16 +29,20 @@ angular.module('myApp.tracker', ['ngRoute','vsGoogleAutocomplete'])
         var image = {};
         var markerImage;
         var clusterImage;
-        if(machine.isOverHeat){
-            markerImage = runningImage;
+        if(machine.TrailerStatuVal == AVAILABLE_STATUS){
+            markerImage = availableTruckImage;
+        }
+        else  if(machine.TrailerStatuVal == PLANNED_STATUS){
+            markerImage = pllanedTruckImage;
+        }
+        else if(machine.TrailerStatuVal == ALLOTED_STATUS){
+            markerImage = allotedTruckImage;
         }
         else{
-            markerImage = idleImage;
+             markerImage = allotedTruckImage;
         }
-
-
         var markerImage = new google.maps.MarkerImage(markerImage,
-                                                      new google.maps.Size(40, 40));
+                                                       new google.maps.Size(40, 40));
 
         return markerImage;
     }
@@ -67,15 +71,22 @@ angular.module('myApp.tracker', ['ngRoute','vsGoogleAutocomplete'])
             var engineStatus = gms.getEngineStatus(machine.EngineOn);
             var machineStatusText = "";
             var mcss = "";
-            if(machine.isOverHeat){
-                machineStatusText ="ALLOCATED";
-                mcss = "allocated";
-            }
-            else{
-                machineStatusText ="AVAILABLE";
-                mcss = "available";
-            }
-            var infoHtml = '<div class="infowindow"><div class="row header"> <div class="row head1">CTG 11029</div><div class="row head2">Ford F-150 Raptor</div><div class="row head3">Refrigerated </div></div><div class="row title"><span class="vehicle-date" >DOT Date:01/05/2017</sapn>  <span class="vehicletype '+mcss+'">'+machineStatusText+'</span></div><div class="row content">Ohio to Florida</div><div class="row footer"><div class="status"> <div class="row">Complaince:Pass</div><div class="row">IOT Info:Active</div><div class="row">Road Worhiness:pass</div></div><div class="history"><a href ng-click="showDetail('+(machine.isOverHeat)+')">View History</a></div></div></div>';
+
+            machineStatusText =machine.trailerStatus;
+       
+            if(machine.TrailerStatuVal == AVAILABLE_STATUS){
+            
+                 mcss = "available";
+        }
+        else  if(machine.TrailerStatuVal == PLANNED_STATUS){
+           
+             mcss = "planned";
+        }
+        else if(machine.TrailerStatuVal == ALLOTED_STATUS){
+            mcss = "allocated";
+          
+        }
+            var infoHtml = '<div class="infowindow"><div class="row header"> <div class="row head1">CTG '+machine.TrailerID+'</div><div class="row head2">'+machine.TrailerName+'</div><div class="row head3">'+machine.TrailerType+' </div></div><div class="row title"><span class="vehicle-date" >DOT Date:'+machine.DOTDate+'</span>  <br><div class=" row vehicletype '+mcss+'">'+machineStatusText+'</div></div><div class="row content">'+machine.from+' - '+machine.to+'</div><div class="row footer"><div class="status"> <div class="row">Compliance:'+machine.Compliance+'</div><div class="row">IOT Info:'+machine.IOTInfo+'</div><div class="row">Road Worthiness:'+machine.RoadWorthiness+'</div></div><div class="history"><a href ng-click="showDetail('+(machine.TrailerID)+')">More info</a></div></div></div>';
             /*var infoHtml = '<div class="info"><div class="row">Machine ID : '+machineID+
                 '</div><div class="row"> Status : '+engineStatus+'</div><div class="row">Temperature :'+temperature+'</div><div class="row">Engine Noise :'+engineNoise+'</div><div class="row">Battery :'+battery+'</div></div>';*/
             /*var infoHtml = '<div class="info"><h3>Machine ID : '+machineID+
@@ -167,10 +178,12 @@ angular.module('myApp.tracker', ['ngRoute','vsGoogleAutocomplete'])
     return googleMapService;
 })
     .controller('View2Ctrl', [ '$scope','gmapService','$http','$mdToast','$interval','$rootScope','$mdDialog','myAppFactory', function ( $scope,gmapService,$http,$mdToast,$interval,$rootScope,$mdDialog,myAppFactory) {
-        function DialogController($scope, $mdDialog) {
+        function DialogController($scope, $mdDialog,machine) {
 
             $scope.titleText = "CTG 11029";
 
+            console.log("machine",machine);
+            $scope.machine = machine;
 
             $scope.hide = function() {
                 $mdDialog.hide();
@@ -182,24 +195,26 @@ angular.module('myApp.tracker', ['ngRoute','vsGoogleAutocomplete'])
 
             $scope.answer = function(answer) {
                 $mdDialog.hide(answer);
-               
+
             };
 
         }
-        $rootScope.showDetail  = function(ev,machine){
+        $rootScope.showDetail  = function(trailerID){
             $scope.showGraph = false;
 
-            console.log(machine);
+            console.log(trailerID);
+            var resultTrailer = _.find($scope.tractorData, function (x) { return x.TrailerID === trailerID; });
+            console.log(resultTrailer);
             $mdDialog.show({
                 controller: DialogController,
-                templateUrl: 'app/allocation/machineDetail.html',
+                templateUrl: 'app/tracker/moreInfo.html',
                 parent: angular.element(document.body),
-                targetEvent: ev,   
+                
                 animation:undefined,
                 clickOutsideToClose:true,
-                locals: { machine: "" },
+                locals: { machine: resultTrailer },
                 escapeToClose: true,
-               // onComplete:afterShowAnimation,
+                // onComplete:afterShowAnimation,
                 // fullscreen: true // Only for -xs, -sm breakpoints.
             });
 
@@ -486,12 +501,14 @@ angular.module('myApp.tracker', ['ngRoute','vsGoogleAutocomplete'])
 
                 return a;
             };
+            $scope.tractorData = [];
             function update(){
                 $.get({url:GET_TRACTOR_LOCATOR_URL,cache: false}).then(function(data) {
                     //var jsonData = JSON.parse(data);//makeAsJSON(data);
                     console.log(new Date()+"--->machine Length->",data.length);
-                   
+
                     gmapService.data = data;
+                    $scope.tractorData = data;
                     gmapService.placeMarkersOnMap(mapa);
                     /*$rootScope.isRecentAlertLoading =  true;
                         myAppFactory.getRecentAlertData().then(function(response){
@@ -503,13 +520,9 @@ angular.module('myApp.tracker', ['ngRoute','vsGoogleAutocomplete'])
                         })*/
                     /*Temp fix*/
 
-                    var recentAlerts = _.filter(machines, function(obj) {
-
-                        return obj.Temperature >= OVER_HEAT_TEMPERATURE ;
-                    });
-                    $rootScope.recentAlerts = $rootScope.recentAlerts.concat(recentAlerts).unique();
+                   
                     $scope.$digest();
-                    console.log("reAlerts",$rootScope.recentAlerts)
+                  
 
 
 
