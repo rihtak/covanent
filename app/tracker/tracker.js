@@ -192,7 +192,7 @@ angular.module('myApp.tracker', ['ngRoute','vsGoogleAutocomplete'])
             console.log(machine);
             $mdDialog.show({
                 controller: DialogController,
-                templateUrl: 'app/view1/machineDetail.html',
+                templateUrl: 'app/allocation/machineDetail.html',
                 parent: angular.element(document.body),
                 targetEvent: ev,   
                 animation:undefined,
@@ -487,16 +487,11 @@ angular.module('myApp.tracker', ['ngRoute','vsGoogleAutocomplete'])
                 return a;
             };
             function update(){
-                $.get({url:MAP_DATA_URL,cache: false}).then(function(data) {
-                    var jsonData = JSON.parse(data);//makeAsJSON(data);
-                    console.log(new Date()+"--->machine Length->",jsonData.length);
-                    if(jsonData.length < MACHINE_DROPDOWN_THRESHOLD){
-                        MACHINE_DROPDOWN_THRESHOLD = jsonData.length;
-                    }
-                    var threshold = parseInt(jsonData.length/MACHINE_DROPDOWN_THRESHOLD);
-                    $scope.MachineRanges = calucateRange(jsonData.length,threshold);
-                    machines =jsonData
-                    gmapService.data = filterData(machines);
+                $.get({url:GET_TRACTOR_LOCATOR_URL,cache: false}).then(function(data) {
+                    //var jsonData = JSON.parse(data);//makeAsJSON(data);
+                    console.log(new Date()+"--->machine Length->",data.length);
+                   
+                    gmapService.data = data;
                     gmapService.placeMarkersOnMap(mapa);
                     /*$rootScope.isRecentAlertLoading =  true;
                         myAppFactory.getRecentAlertData().then(function(response){

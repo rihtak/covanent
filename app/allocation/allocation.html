@@ -84,7 +84,7 @@
                                 <span>Tractor</span>
                             </th>
                              <th >
-                                <span>Trailer</span>
+                                <span>Trailer </span>
                             </th>
                              <th >
                                 <span>Ref #</span>
@@ -96,9 +96,7 @@
                              <th >
                                 <span>Order Remark</span>
                             </th>
-                             <th >
-                                <span>Details</span>
-                            </th>
+                             
 
 
 
@@ -146,9 +144,7 @@
                              <td >
                                 <span>{{item.orderremark}}</span>
                             </td>
-                             <td >
-                                <a><span>More info</span></a>
-                            </td>
+                             
 
                         </tr>
                     </tbody>
@@ -193,9 +189,7 @@
                                 <span> Location</span>
                             </th>
                             
-                             <th >
-                                <span>Location history </span>
-                            </th>
+                            
                              <th >
                                 <span>Allocation status</span>
                             </th>
@@ -228,7 +222,7 @@
                             <td>{{$index+1}}</td>
                              
                             <td >
-                                <span>{{item.trailerId}}</span>
+                                <span><a>{{item.trailerId}}<md-tooltip md-direction="bottom">View trialer history</md-tooltip></a></span>
                             </td>
                             <td >
                                 <span>{{item.trailerName}}</span>
@@ -239,9 +233,7 @@
                              <td >
                                 <span>{{item.trailerLocation}}</span>
                             </td>
-                             <td >
-                             <a><span> History</span></a> 
-                            </td>
+                            
                              <td >
                                <span>{{item.allocationStatus}}</span>
                             </td>

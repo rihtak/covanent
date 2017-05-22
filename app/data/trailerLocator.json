@@ -1,0 +1,8 @@
+[
+    {"timeStamp":1491823446456,"MachineId":10,"Temperature":270,"EngineNoise":20,"Battery":25,"Latitude":40.770299,"Longitude":-84.612163,"EngineOn":0,"isOverHeat":true},
+ {"timeStamp":1491823446462,"MachineId":12,"Temperature":70,"EngineNoise":20,"Battery":25,"Latitude":39.8274365,"Longitude":-105.22248132,"EngineOn":0,"isOverHeat":false},
+ {"timeStamp":1491823446456,"MachineId":120,"Temperature":270,"EngineNoise":20,"Battery":25,"Latitude":43.31208099,"Longitude":-112.11241163,"EngineOn":0,"isOverHeat":true},
+ {"timeStamp":1491823446462,"MachineId":22,"Temperature":70,"EngineNoise":20,"Battery":25,"Latitude":40.8274365,"Longitude":-105.22248132,"EngineOn":0,"isOverHeat":false},
+ {"timeStamp":1491823446456,"MachineId":110,"Temperature":270,"EngineNoise":20,"Battery":25,"Latitude":45.1208099,"Longitude":-112.11241163,"EngineOn":0,"isOverHeat":true},
+ {"timeStamp":1491823446462,"MachineId":21,"Temperature":70,"EngineNoise":20,"Battery":25,"Latitude":36.8274365,"Longitude":-105.22248132,"EngineOn":0,"isOverHeat":false}
+]
