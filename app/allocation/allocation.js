@@ -34,6 +34,7 @@ angular.module('myApp.allocation', ['ngRoute', 'dataGrid', 'pagination'])
             $scope.showDetail(trailer);
         }
         $scope.showTrailers = function(item){
+            console.log("asdf");
             $scope.isOrderClicked = true;
             $scope.selectedOrderId = item.order;
             myAppFactory.getAvailableTrailers().then(function(responseData) {
