@@ -86,14 +86,8 @@ angular.module('myApp.tracker', ['ngRoute','vsGoogleAutocomplete'])
             mcss = "allocated";
           
         }
-            var infoHtml = '<div class="infowindow"><div class="row header"> <div class="row head1">CTG '+machine.TrailerID+'</div><div class="row head2">'+machine.TrailerName+'</div><div class="row head3">'+machine.TrailerType+' </div></div><div class="row title"><span class="vehicle-date" >DOT Date:'+machine.DOTDate+'</span>  <br><div class=" row vehicletype '+mcss+'">'+machineStatusText+'</div></div><div class="row content">'+machine.from+' - '+machine.to+'</div><div class="row footer"><div class="status"> <div class="row">Compliance: '+machine.Compliance+'</div><div class="row">IOT Info: '+machine.IOTInfo+'</div><div class="row">Road Worthiness: '+machine.RoadWorthiness+'</div></div><div class="history"><a href ng-click="showDetail('+(machine.TrailerID)+')">More info</a></div></div></div>';
-            /*var infoHtml = '<div class="info"><div class="row">Machine ID : '+machineID+
-                '</div><div class="row"> Status : '+engineStatus+'</div><div class="row">Temperature :'+temperature+'</div><div class="row">Engine Noise :'+engineNoise+'</div><div class="row">Battery :'+battery+'</div></div>';*/
-            /*var infoHtml = '<div class="info"><h3>Machine ID : '+machineID+
-            '</h3><div class="info-body1"> <h4>Status : '+engineStatus+'</h4></div></div>';*/
-            /* if(true){
-                infoHtml += '<div style="width:100%;float:right"> <input type="button" id="detailButton" data="'+machineID+'" style="float:right;margin-right:10%"  value="Details"></div>';
-            }*/
+            var infoHtml = '<div class="infowindow"><div class="row header"> <div class="row head1">CTG '+machine.TrailerID+'</div><div class="row head2">'+machine.TrailerName+'</div><div class="row head3">'+machine.TrailerType+' </div></div><div class="row title"><span class="vehicle-date" >DOT Date:'+machine.DOTDate+'</span>  <br><div class=" row vehicletype '+mcss+'">'+machineStatusText+'</div></div><div class="row content">'+machine.from+' - '+machine.to+'</div><div class="row footer"><div class="status"> <div class="row">Compliance: '+machine.Compliance+'</div><div class="row">IOT Info: '+machine.IOTInfo+'</div><div class="row">Road Worthiness: '+machine.RoadWorthiness+'</div></div><div class="history"><a href >More info</a></div></div></div>';
+            /*<a href ng-click="showDetail('+(machine.TrailerID)+')">More info</a>*/
 
             var compiled = $compile(infoHtml)($rootScope)
 
