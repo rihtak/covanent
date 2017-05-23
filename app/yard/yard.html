@@ -97,8 +97,10 @@
                                     <td>
                                         <img src="app/images/markers/play.png" width="20" height="20" style="margin-right:15px" ng-click="showConfirm($event)">
 
-                                        <img src="app/images/markers/download.png" width="20" height="20" ng-click="openUpload()">
-                                        <input type="file" id="uploadfile" style="display:none" /> </td>
+                                        <span><img src="app/images/markers/download.png" width="20" height="20" ng-click="openUpload()">
+                                            <input type="file" id="uploadfile" style="display:none" /><md-tooltip md-direction="top">
+              click to upload
+            </md-tooltip></span> </td>
 
 
                                 </tr>
