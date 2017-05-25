@@ -5,7 +5,7 @@
 angular.module('angular-c3-simple', [])
 
 
-angular.module('myApp.allocation', ['ngRoute', 'dataGrid', 'pagination'])
+angular.module('myApp.allocation', ['ngRoute', 'dataGrid', 'pagination','ngAnimate'])
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/allocation', {
             //use  templateUrl: 'view2/view2.html', in local
@@ -29,6 +29,97 @@ angular.module('myApp.allocation', ['ngRoute', 'dataGrid', 'pagination'])
         $scope.isOrderClicked = false;
         // $scope.selectedrow = {};
         // $scope.selectedtrailerow = {};
+        $scope.selection = "orders"
+        $scope.initialize = function(){
+
+            var mapConfig = {
+                center: US_CENTER_LAT_LNG,
+                zoom: DEFAULT_ZOOM_LEVEL,
+                minZoom: DEFAULT_ZOOM_LEVEL,
+                'mapTypeId': google.maps.MapTypeId.ROADMAP,
+                fullscreenControl: true,
+                mapTypeControl: false,
+            };
+            var clatLng = new google.maps.LatLng(
+                US_CENTER_LAT_LNG.lat,
+                US_CENTER_LAT_LNG.lng);
+
+            var tkmapa = new google.maps.Map(document.getElementById('truckMap'), mapConfig);
+            var marker = new google.maps.Marker({
+                map: tkmapa,
+                icon:new google.maps.MarkerImage(availableTruckImage, new google.maps.Size(40, 40)),
+                position: new google.maps.LatLng(43.531702, -99.960714),
+                title: 'Some location'
+            });
+            var directionsService = new google.maps.DirectionsService;
+            var directionsDisplay = new google.maps.DirectionsRenderer;
+            directionsDisplay.setMap(tkmapa);
+            directionsDisplay.setOptions( { suppressMarkers: true } );
+
+            // Add circle overlay and bind to marker
+            var circle = new google.maps.Circle({
+                map: tkmapa,
+                radius: 16093*25,    // 10 miles in metres
+                fillColor: '#ffff00',
+                strokeColor:"#ffffff"
+            });
+            circle.bindTo('center', marker, 'position');
+             var orderStartCircle = new google.maps.Circle({
+            strokeColor: '#FFFFFF',
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: '#FF0000',
+            
+            map: tkmapa,
+            center: new google.maps.LatLng('41.231702', '-99.860714'),
+            radius: 1500
+          });
+            calculateAndDisplayRoute(directionsService, directionsDisplay);
+        }
+
+        function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+
+            var start = new google.maps.LatLng('41.231702', '-99.860714');
+            var end = new google.maps.LatLng('32.638309', '-82.031027');
+           
+            directionsService.route({
+                origin:start,
+                destination: end,
+                // waypoints: waypts,
+                optimizeWaypoints: true,
+                travelMode: 'DRIVING'
+            }, function(response, status) {
+                if (status === 'OK') {
+                    directionsDisplay.setDirections(response);
+
+
+                } else {
+                    window.alert('Directions request failed due to ' + status);
+                }
+            });
+        }
+        $scope.trailerInitialize = function(){
+
+            var mapConfig = {
+                center: US_CENTER_LAT_LNG,
+                zoom: DEFAULT_ZOOM_LEVEL,
+                minZoom: DEFAULT_ZOOM_LEVEL,
+                'mapTypeId': google.maps.MapTypeId.ROADMAP,
+                fullscreenControl: true,
+                mapTypeControl: false,
+            };
+            var clatLng = new google.maps.LatLng(
+                US_CENTER_LAT_LNG.lat,
+                US_CENTER_LAT_LNG.lng);
+
+            var trmapa = new google.maps.Map(document.getElementById('trialerMap'), mapConfig);
+        }
+        var imagePath = availableTruckImage;
+        $scope.showPath = function(truck){
+            console.log(truck);
+            $scope.selection = "trailer";
+        }
+
         $scope.showHistory = function(trailer){
             console.log("history");
             $scope.showDetail(trailer);
@@ -36,6 +127,7 @@ angular.module('myApp.allocation', ['ngRoute', 'dataGrid', 'pagination'])
         $scope.showTrailers = function(item){
             console.log("asdf");
             $scope.isOrderClicked = true;
+            $scope.selection = "truck"
             $scope.selectedOrderId = item.order;
             myAppFactory.getAvailableTrailers().then(function(responseData) {
                 $scope.isAdhocReportLoading = false;
@@ -180,28 +272,28 @@ angular.module('myApp.allocation', ['ngRoute', 'dataGrid', 'pagination'])
                 //allocate process
                 console.log("orders summary")
                 $mdDialog.show({
-                controller: function($scope){
-                    $scope.cancel = function(){
-                        $mdDialog.cancel();
-                    }
-                },
-                templateUrl: 'app/allocation/allocatedSummary.html',
-                parent: angular.element(document.body),
-                // targetEvent: ev,   
-                //  animation:undefined,
-                clickOutsideToClose:true,                
-                escapeToClose: true,
-                //  onComplete:afterShowAnimation,
-                //fullscreen: false // Only for -xs, -sm breakpoints.
-            });
-               /* $mdDialog.show(
+                    controller: function($scope){
+                        $scope.cancel = function(){
+                            $mdDialog.cancel();
+                        }
+                    },
+                    templateUrl: 'app/allocation/allocatedSummary.html',
+                    parent: angular.element(document.body),
+                    // targetEvent: ev,   
+                    //  animation:undefined,
+                    clickOutsideToClose:true,                
+                    escapeToClose: true,
+                    //  onComplete:afterShowAnimation,
+                    //fullscreen: false // Only for -xs, -sm breakpoints.
+                });
+                /* $mdDialog.show(
                     $mdDialog.alert()
                   //  .parent(angular.element(document.querySelector('#popupContainer')))
                     .clickOutsideToClose(true)
                     .title('Allocation Status')
                     .textContent('Your allocation done succesfully!')
                     .ariaLabel('Allocation Status')
-                    
+
                     .targetEvent(ev)
                 );
 */
