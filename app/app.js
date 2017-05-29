@@ -49,6 +49,11 @@ angular.module('myApp', [
                 method: 'GET',
                 url: GET_AVAILABLE_TRAILERS_URL
             });
+        },  getAvailableTrucks: function () {
+            return $http({
+                method: 'GET',
+                url: GET_AVAILABLE_TRUCKS_URL
+            });
         },  
         
         getTrailerHistoryData:function(){

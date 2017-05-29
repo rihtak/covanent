@@ -14,6 +14,7 @@ var overHeatImage = "app/images/markers/green-truck.png";
 var allotedTruckImage = "app/images/markers/alloted-truck.png";
 var pllanedTruckImage = "app/images/markers/planned-truk.png";
 var availableTruckImage = "app/images/markers/available-truck.png";
+var orderMarkerImage = "app/images/markers/play.png";
 
 var AVAILABLE_STATUS = 0;
 var PLANNED_STATUS = 1;
@@ -30,7 +31,8 @@ var IOT_BASE_URL =  "http://52.14.203.215:8080/iothbase"; //"http://10.4.4.132/i
 var GET_LIST_OF_ORDERS_URL =  "app/data/list_of_orders.json"; 
 var GET_AVAILABLE_TRAILERS_URL = "app/data/available_trailers.json";
 var GET_TRACTOR_LOCATOR_URL ="app/data/trailerLocator.json";
-var GET_TRAILER_HISTORY = "app/data/orderHistory.json"
+var GET_TRAILER_HISTORY = "app/data/orderHistory.json";
+var GET_AVAILABLE_TRUCKS_URL = "app/data/availableTrucks.json";
 //var AD_HOC_REPORT_URL = "app/data/output2.json";
 var RECENT_ALERT_URL = IOT_BASE_URL + "/api/v1/iothbase/gethivealertdata"; // (7days and temparature above 200)
 var DETAILED_INFO_ABOUT_MACHINE_URL = IOT_BASE_URL + "/api/v1/iothbase/gethivedetaildata"

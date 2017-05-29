@@ -6,8 +6,8 @@
         <div style="padding: 7px 20px 0px 20px;height:30px;border-right:2px solid #00264B;  "><a href="#!/tracker" style="color:gray; text-decoration:none;font-size:18px">Home</a></div>
         <div style="padding: 7px 20px 0px 20px;height:30px;border-right:2px solid #00264B;   background: #00264B"><a href="#!/allocation" style="color:white; text-decoration:none;font-size:18px">Allocation</a></div>
         <div style="padding: 7px 20px 0px 20px;height:30px;border-right:2px solid #00264B;  "><a href="#!/yard"  style="color:gray;text-decoration:none;font-size:18px">Yard Management</a></div>
-         <div style="padding: 7px 20px 0px 20px;height:30px;"><a href="#!/trailerPool"  style="color:gray;text-decoration:none;font-size:18px">Trailer Pool  Management</a></div>
-        </div>
+        <div style="padding: 7px 20px 0px 20px;height:30px;"><a href="#!/trailerPool"  style="color:gray;text-decoration:none;font-size:18px">Trailer Pool  Management</a></div>
+    </div>
     <div flex-gt-md="100" flex-md="100" flex-xs="100">
 
 
@@ -19,6 +19,22 @@
             <div layout="row" style="background:lightgrey">
                 <div style="font-size:16px;PADDING: 10px 0px 10px 28px;"><b > Allocation</b> </div>
             </div>
+            <div class="animate-switch-container"
+                 ng-switch on="selection">
+                <div class="animate-switch allocation_wizard" ng-switch-when="orders" ng-click="showWizard('orders')" >
+                    <img src="app/images/wizard/order.png" height="80px">
+                </div>
+                <div class="animate-switch allocation_wizard" ng-switch-when="truck" >
+                    <img src="app/images/wizard/truck.png" height="80px" ng-click="showWizard('orders')">
+                </div>
+                <div class="animate-switch allocation_wizard" ng-switch-when="trailer" >
+                    <img src="app/images/wizard/trailer.png" height="80px" ng-click="showWizard('truck')">
+                </div>
+                <div class="animate-switch allocation_wizard" ng-switch-when="summary"  >
+                    <img src="app/images/wizard/summary.png" height="80px" ng-click="showWizard('trailer')">
+                    
+                </div>
+            </div>
 
             <md-card-content>
 
@@ -27,7 +43,7 @@
                     <div class="animate-switch" ng-switch-when="orders" > <div grid-data id='test' grid-options="gridOptions" grid-actions="gridActions">
                         <div layout-gt-sm="row" layout-sm="column" >
 
-                            <div  layout="row" flex-gt-sm="25" flex-sm="100"  layout-align=" start">
+                            <div  layout="row" flex-gt-sm="25" flex-sm="100"  layout-align="start">
                                 <md-input-container md-no-float md-is-error="false" class="md-block flex-gt-xs flex-xs">
                                     <input ng-model="order"
                                            class="md-input"
@@ -86,12 +102,12 @@
                                         <th style="text-align:center">
                                             <span>Service</span>
                                         </th>
-                                        <th style="text-align:center">
-                                            <span>Tractor</span>
-                                        </th>
-                                        <th style="text-align:center">
-                                            <span>Trailer </span>
-                                        </th>
+                                        <!-- <th style="text-align:center">
+<span>Tractor</span>
+</th>
+<th style="text-align:center">
+<span>Trailer </span>
+</th>-->
                                         <th style="text-align:center">
                                             <span>Ref #</span>
                                         </th>
@@ -102,10 +118,13 @@
                                         <th style="text-align:center">
                                             <span>Order remark</span>
                                         </th>
+                                        <th style="text-align:center">
+                                            <span>Action</span>
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr grid-item  ng-click="showTrailers(item)"  ng-class="{selectedClass : item.order === selectedOrderId}">
+                                    <tr grid-item  ng-click=""  ng-class="{selectedClass : item.order === selectedOrderId}"  ng-click="selectOrder(item)">
 
                                         <td style="text-align:center">
                                             <span>{{item.status}}</span>
@@ -124,20 +143,20 @@
                                             <span>{{item.billToName}}</span>
                                         </td>
                                         <td style="text-align:center">
-                                            <span>{{item.origin}}</span>
+                                            <span>{{item.origin.name}}</span>
                                         </td>
                                         <td style="text-align:center">
-                                            <span>{{item.destination}}</span>
+                                            <span>{{item.destination.name}}</span>
                                         </td>
                                         <td style="text-align:center">
                                             <span>{{item.service}}</span>
                                         </td>
-                                        <td style="text-align:center">
-                                            <span>{{item.tracktor}}</span>
-                                        </td>
-                                        <td style="text-align:center">
-                                            <span>{{item.trailer}}</span>
-                                        </td>
+                                        <!-- <td style="text-align:center">
+<span>{{item.tracktor}}</span>
+</td>
+<td style="text-align:center">
+<span>{{item.trailer}}</span>
+</td>-->
                                         <td style="text-align:center">
                                             <span>{{item.ref}}</span>
                                         </td>
@@ -146,6 +165,9 @@
                                         </td>
                                         <td style="text-align:center">
                                             <span>{{item.orderremark}}</span>
+                                        </td> 
+                                        <td style="text-align:center">
+                                            <input type="button" ng-click="selectOrder(item)" value="Proceed">
                                         </td>
 
 
@@ -166,23 +188,64 @@
                     <div class="animate-switch" ng-switch-when="truck">
                         <div layout="row">
                             <div flex="20">
-                            <md-list flex>
-                                    <md-subheader class="md-no-sticky">Truck List</md-subheader>
+                                <div class="row">
+                                    Order #{{selectedOrder.order}}
+                                </div>
+                                <md-list flex>
+                                    <md-subheader class="md-no-sticky">{{gridOptions2.data.length}} Results found</md-subheader>
                                     <div style="height:400px;overflow:scroll">
-                                    <md-list-item class="md-3-line" ng-repeat="item in gridOptions2.data" ng-click="showPath(item)">
-                                        <img src="app/images/markers/available-truck.png" class="md-avatar" alt="{{item.TrailerID}}" />
-                                        <div class="md-list-item-text" layout="column">
-                                            <h3>{{ item.TrailerID }}</h3>
-                                            <h4>{{ item.TrailerName }}</h4>
-                                            <p>{{ item.LastGPSLocation }}</p>
+                                        <div layout="row" ng-repeat="item in gridOptions2.data">
+                                            <div flex="35">
+                                                <img src="app/images/markers/truck-blue.png" class="md-avatar" alt="{{item.TrailerID}}" />
+                                                <p>{{ item.distance }}</p>
+                                            </div>
+                                            <div flex="65">
+                                                <div  layout="column">
+                                                    <div class="truckHeader"> Truck #.{{ item.truckId }}</div>
+                                                    <div class="truckHeader">Status: {{ item.status }}</div>
+
+                                                    <p><a >Details</a> <button ng-click="selectTruck(item)">Proceed</button></p>
+                                                </div>
+                                            </div>
                                         </div>
-                                       
-                                    </md-list-item>
-                                         </div>
+                                        <!-- <md-list-item class="md-3-line" ng-repeat="item in gridOptions2.data" ng-click="showDirections(item)">
+<img src="app/images/markers/available-truck.png" class="md-avatar" alt="{{item.TrailerID}}" />
+
+
+</md-list-item>-->
+                                    </div>
                                 </md-list>
                             </div>
                             <div flex="80">
-                                <div id="truckMap" class="altura-mapa" ng-init="initialize()"  only-watched-property></div></div>
+                                <div  layout="column">
+                                    <div class="truckFilters">
+                                        <div layout-gt-sm="row">
+                                            <md-input-container class="md-block" flex-gt-sm>
+                                                <label>Type</label>
+                                                <input ng-model="filter.truckID">
+                                            </md-input-container>
+
+                                            <md-input-container class="md-block" flex-gt-sm>
+                                                <label>Status</label>
+                                                <md-select ng-model="filter.status">
+                                                    <md-option ng-repeat="status in statuses" value="{{status.value}}">
+                                                        {{status.label}}
+                                                    </md-option>
+                                                </md-select>
+                                            </md-input-container>
+                                            <md-input-container class="md-block" flex-gt-sm>
+                                                <label>Miles</label>
+                                                <md-select ng-model="filter.miles" ng-change="changeRadius()">
+                                                    <md-option ng-repeat="radius in distances" value="{{radius.value}}">
+                                                        {{radius.label}}
+                                                    </md-option>
+                                                </md-select>
+                                            </md-input-container>
+                                        </div>
+                                    </div>
+                                    <div id="truckMap" class="altura-mapa" ng-init="initialize()"  only-watched-property></div>
+                                </div>
+                            </div>
                         </div>
 
 
@@ -191,34 +254,116 @@
                         <div layout="row">
                             <div flex="20">
                                 <md-list flex>
-                                    <md-subheader class="md-no-sticky">Trailer list</md-subheader>
-                                    <div style="height:400px;overflow:scroll">
-                                    <md-list-item class="md-3-line" ng-repeat="item in gridOptions2.data" ng-click="showPath(item)">
-                                        <img src="app/images/markers/available-truck.png" class="md-avatar" alt="{{item.TrailerID}}" />
-                                        <div class="md-list-item-text" layout="column">
-                                            <h3>{{ item.TrailerID }}</h3>
-                                            <h4>{{ item.TrailerName }}</h4>
-                                            <p>{{ item.LastGPSLocation }}</p>
-                                        </div>
-                                       
-                                    </md-list-item>
-                                         </div>
-                                </md-list>
+                                    <div class="row">
+                                        Order #{{selectedOrder.order}}
                                     </div>
+                                    <div style="height:400px;overflow:scroll">
+                                        <div layout="row" ng-repeat="item in gridOptions3.data">
+                                            <div flex="35">
+                                                <img src="app/images/markers/trailer-blue.png" class="md-avatar" alt="{{item.TrailerID}}" />
+                                                <p>{{ item.distance }}</p>
+                                            </div>
+                                            <div flex="65">
+                                                <div  layout="column">
+                                                    <div class="truckHeader"> Trailer #.{{ item.TrailerID }}</div>
+                                                    <div class="truckHeader">Status: {{ item.trailerStatus }}</div>
 
-                                <div flex="80">
+                                                    <p><a >Details</a> <button ng-click="selectTrailer(item)">Proceed</button></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </md-list>
+                            </div>
+
+                            <div flex="80">
+                                <div  layout="column">
+                                    <div class="truckFilters">
+                                        <div layout-gt-sm="row">
+                                            <md-input-container class="md-block" flex-gt-sm>
+                                                <label>Type</label>
+                                                <input ng-model="filter.truckID">
+                                            </md-input-container>
+
+
+                                            <md-input-container class="md-block" flex-gt-sm>
+                                                <label>Miles</label>
+                                                <md-select ng-model="filter.miles">
+                                                    <md-option ng-repeat="radius in distances" value="{{radius.value}}">
+                                                        {{radius.label}}
+                                                    </md-option>
+                                                </md-select>
+                                            </md-input-container>
+                                        </div>
+                                    </div>
                                     <div id="trialerMap" class="altura-mapa" ng-init="trailerInitialize()"  only-watched-property></div></div>
                             </div>
-                            <div class="row" ng-show="isOrderClicked">
-                                <md-button  class="md-raised md-warn"  style="background-color:#00264B;float: right;" ng-click="allocate()">
+                            
+                        </div>
+                    </div>
+                    <div class="animate-switch"  ng-switch-when="summary">
+                        <div layout="row">
+                            <div flex="20">
+                                <md-list flex>
+                                    <div class="row">
+                                        Order #{{selectedOrder.order}}
+                                    </div>
+                                    <div style="height:400px;overflow:scroll">
+                                        <div layout="row" >
+                                            <div flex="35">
+                                                <img src="app/images/markers/available-truck.png" class="md-avatar" alt="{{selectedTrailer.TrailerID}}" />
+                                                <p>{{ selectedTruck.distance }}</p>
+                                            </div>
+                                            <div flex="65">
+                                                <div  layout="column">
+                                                    <div class="truckHeader"> Truck #.{{ selectedTruck.truckId }}</div>
+                                                    <div class="truckHeader">Status: {{ selectedTruck.status }}</div>
+
+                                                    <p><a >Details</a> </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div layout="row" >
+                                            <div flex="35">
+                                                <img src="app/images/markers/available-truck.png" class="md-avatar" alt="{{slectedTruck.TrailerID}}" />
+                                                <p>{{ selectedTrailer.distance }}</p>
+                                            </div>
+                                            <div flex="65">
+                                                <div  layout="column">
+                                                    <div class="truckHeader"> Trailer #.{{ selectedTrailer.TrailerID }}</div>
+                                                    <div class="truckHeader">Status: {{ selectedTrailer.trailerStatus }}</div>
+
+                                                    <p><a >Details</a> </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </md-list>
+                            </div>
+
+                            <div flex="80">
+                                <div  layout="column">
+                                    <div class="truckFilters">
+                                        <div class="row">
+                                            <md-button  class="md-raised md-warn"  style="background-color:#00264B;float: right;" ng-click="allocate()">
                                     Allocate
                                 </md-button>
-                            </div></div>
+                                            <md-button  class="md-raised md-warn"  style="background-color:#00264B;float: right;" ng-click="allocate()">
+                                    Cancel
+                                </md-button>
+                                            
+                                        </div>
+                                    </div>
+                                    <div id="summaryMap" class="altura-mapa" ng-init="summaryInitialize()"  only-watched-property></div></div>
+                            </div>
+                            
+                        </div>
                     </div>
-                    </md-card-content>
+                </div>
+            </md-card-content>
 
-                </md-card>
-            </div>
-        </md-content>
+        </md-card>
+    </div>
+</md-content>
 
 

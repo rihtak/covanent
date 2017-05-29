@@ -15,7 +15,8 @@
     "PriorEvent": "HPL",
     "NextEvent": "DRL",
     "LastGPSLocation": "Tripp County, South Dakota, USA",
-    "GPS Date": "05/22/2017 07:54:05"
+    "GPS Date": "05/22/2017 07:54:05",
+    "distance":"7.5 miles"
   },
   {
     "TrailerStatuVal": 0,
@@ -34,7 +35,8 @@
     "PriorEvent": "DRL",
     "NextEvent": "UNK",
     "LastGPSLocation": "Tennessee, United States",
-    "GPS Date": "05/22/2017 09:24:06"
+    "GPS Date": "05/22/2017 09:24:06",
+       "distance":"6.5 miles"
   },
   {
     "TrailerStatuVal": 0,
@@ -53,7 +55,8 @@
     "PriorEvent": "LLD",
     "NextEvent": "LUL",
     "LastGPSLocation": "Georgia, United States",
-    "GPS Date": "05/22/2017 08:34:07"
+    "GPS Date": "05/22/2017 08:34:07",
+       "distance":"8.5 miles"
   },
   {
     "TrailerStatuVal": 0,
@@ -72,7 +75,8 @@
     "PriorEvent": "LLD",
     "NextEvent": "LUL",
     "LastGPSLocation": "North Carolina, United States",
-    "GPS Date": "05/22/2017 05:54:08"
+    "GPS Date": "05/22/2017 05:54:08",
+       "distance":"9.5 miles"
   },
   {
     "TrailerStatuVal": 0,
@@ -91,7 +95,8 @@
     "PriorEvent": "EMT",
     "NextEvent": "UNK",
     "LastGPSLocation": "Rosebud County, Montana, USA",
-    "GPS Date": "05/22/2017 05:04:09"
+    "GPS Date": "05/22/2017 05:04:09",
+       "distance":"10.5 miles"
   },
   {
     "TrailerStatuVal": 0,
@@ -110,7 +115,8 @@
     "PriorEvent": "EBT",
     "NextEvent": "UNK",
     "LastGPSLocation": "Harney County, Oregon, USA",
-    "GPS Date": "05/22/2017 011:50:10"
+    "GPS Date": "05/22/2017 011:50:10",
+       "distance":"11.5 miles"
   },
   {
     "TrailerStatuVal": 0,
@@ -148,5 +154,6 @@
     "PriorEvent": "HPL",
     "NextEvent": "DRL",
     "LastGPSLocation": "Dorsey, Nebraska, USA",
-    "GPS Date": "05/22/2017 01:54:12"
+    "GPS Date": "05/22/2017 01:54:12",
+       "distance":"12.5 miles"
   }]

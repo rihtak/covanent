@@ -1,0 +1,5 @@
+[{"truckId":"1234567","status":"Available","Latitude": 35.190732,"Longitude": -86.513449,"StatuVal":0,"distance":"5.05 miles"},
+{"truckId":"1234568","status":"Available","Latitude": 35.290732,"Longitude": -86.513449,"StatuVal":0,"distance":"6.05 miles"},
+{"truckId":"1234569","status":"Available","Latitude": 35.390732,"Longitude": -86.513449,"StatuVal":0,"distance":"7.05 miles"},
+{"truckId":"1234570","status":"Available","Latitude": 35.490732,"Longitude": -86.513449,"StatuVal":0,"distance":"8.05 miles"},
+{"truckId":"1234571","status":"Available","Latitude": 35.590732,"Longitude": -86.513449,"StatuVal":0,"distance":"9.05 miles"}]

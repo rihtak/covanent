@@ -29,7 +29,44 @@ angular.module('myApp.allocation', ['ngRoute', 'dataGrid', 'pagination','ngAnima
         $scope.isOrderClicked = false;
         // $scope.selectedrow = {};
         // $scope.selectedtrailerow = {};
-        $scope.selection = "orders"
+
+        function showWizard(selection){
+            $scope.selection = selection;
+        }
+        //intiallaly show the orders
+        showWizard('orders');
+        $scope.filter= {};
+         $scope.filter.miles = 150;
+        $scope.changeRadius = function(){
+            orderCircle.setRadius(1609.34*$scope.filter.miles);
+        }
+        $scope.selectOrder= function(order){
+            $scope.selectedOrder = order;
+            //order selected next find the truck and show the resluts
+                
+            showWizard('truck');
+            myAppFactory.getAvailableTrucks().then(function(responseData) {
+                $scope.isAdhocReportLoading = false;
+                $scope.gridOptions2.data = JSON.parse(JSON.stringify(responseData.data));//responseData.data;
+                var position = new google.maps.LatLng(order.origin.Latitude, order.origin.Longitude)
+                orderMaker.setPosition(position);
+                 tkmapa.panTo(position);
+                tkmapa.setCenter(position);
+                orderCircle.bindTo('center', orderMaker, 'position');
+                orderCircle.setRadius(1609.34*$scope.filter.miles);
+                orderStartCircle.setCenter(position);
+
+            }).then(function(error) {
+                console.log(error)
+            })
+
+
+        };
+        $scope.statuses = [{"value":"0","label":"Available"},{"value":"1","label":"Planned"},{"value":"2","label":"Alloated"}];
+        $scope.distances = [{"value":150,"label":"150 miles"},{"value":175,"label":"175 miles"},{"value":200,"label":"200 miles"}];
+        var orderMaker,orderCircle,orderStartCircle = null;
+        var tkmapa = null;
+        
         $scope.initialize = function(){
 
             var mapConfig = {
@@ -44,12 +81,12 @@ angular.module('myApp.allocation', ['ngRoute', 'dataGrid', 'pagination','ngAnima
                 US_CENTER_LAT_LNG.lat,
                 US_CENTER_LAT_LNG.lng);
 
-            var tkmapa = new google.maps.Map(document.getElementById('truckMap'), mapConfig);
-            var marker = new google.maps.Marker({
+            tkmapa = new google.maps.Map(document.getElementById('truckMap'), mapConfig);
+            orderMaker = new google.maps.Marker({
                 map: tkmapa,
-                icon:new google.maps.MarkerImage(availableTruckImage, new google.maps.Size(40, 40)),
+                icon:new google.maps.MarkerImage(orderMarkerImage, new google.maps.Size(40, 40)),
                 position: new google.maps.LatLng(43.531702, -99.960714),
-                title: 'Some location'
+                title: 'Order'
             });
             var directionsService = new google.maps.DirectionsService;
             var directionsDisplay = new google.maps.DirectionsRenderer;
@@ -57,31 +94,30 @@ angular.module('myApp.allocation', ['ngRoute', 'dataGrid', 'pagination','ngAnima
             directionsDisplay.setOptions( { suppressMarkers: true } );
 
             // Add circle overlay and bind to marker
-            var circle = new google.maps.Circle({
+            orderCircle = new google.maps.Circle({
                 map: tkmapa,
-                radius: 16093*25,    // 10 miles in metres
+                radius: 1609.34*25,    // 10 miles in metres
                 fillColor: '#ffff00',
                 strokeColor:"#ffffff"
             });
-            circle.bindTo('center', marker, 'position');
-             var orderStartCircle = new google.maps.Circle({
-            strokeColor: '#FFFFFF',
-            strokeOpacity: 0.8,
-            strokeWeight: 2,
-            fillColor: '#FF0000',
-            
-            map: tkmapa,
-            center: new google.maps.LatLng('41.231702', '-99.860714'),
-            radius: 1500
-          });
-            calculateAndDisplayRoute(directionsService, directionsDisplay);
+            orderCircle.bindTo('center', orderMaker, 'position');
+            orderStartCircle = new google.maps.Circle({
+                strokeColor: '#FFFFFF',
+                strokeOpacity: 0.8,
+                strokeWeight: 2,
+                fillColor: '#FF0000',
+                map: tkmapa,
+               // center: new google.maps.LatLng('41.231702', '-99.860714'),
+                radius: 1500
+            });
+            //calculateAndDisplayRoute(directionsService, directionsDisplay);
         }
 
         function calculateAndDisplayRoute(directionsService, directionsDisplay) {
 
             var start = new google.maps.LatLng('41.231702', '-99.860714');
             var end = new google.maps.LatLng('32.638309', '-82.031027');
-           
+
             directionsService.route({
                 origin:start,
                 destination: end,
@@ -113,11 +149,50 @@ angular.module('myApp.allocation', ['ngRoute', 'dataGrid', 'pagination','ngAnima
                 US_CENTER_LAT_LNG.lng);
 
             var trmapa = new google.maps.Map(document.getElementById('trialerMap'), mapConfig);
+        } 
+        $scope.summaryInitialize = function(){
+
+            var mapConfig = {
+                center: US_CENTER_LAT_LNG,
+                zoom: DEFAULT_ZOOM_LEVEL,
+                minZoom: DEFAULT_ZOOM_LEVEL,
+                'mapTypeId': google.maps.MapTypeId.ROADMAP,
+                fullscreenControl: true,
+                mapTypeControl: false,
+            };
+            var clatLng = new google.maps.LatLng(
+                US_CENTER_LAT_LNG.lat,
+                US_CENTER_LAT_LNG.lng);
+
+            var srmapa = new google.maps.Map(document.getElementById('summaryMap'), mapConfig);
         }
         var imagePath = availableTruckImage;
         $scope.showPath = function(truck){
             console.log(truck);
             $scope.selection = "trailer";
+        }
+        $scope.selectTrailer = function(trailer){
+            $scope.selectedTrailer = trailer;
+            showWizard('summary');
+        }
+
+        $scope.showSummary = function(){
+
+            showWizard('summary');
+        }
+        $scope.selectTruck = function(truck){
+
+            $scope.selectedTruck = truck;
+            showWizard('trailer');
+            myAppFactory.getAvailableTrailers().then(function(responseData) {
+                $scope.isAdhocReportLoading = false;
+                $scope.gridOptions3.data = JSON.parse(JSON.stringify(responseData.data));//responseData.data;
+
+
+            }).then(function(error) {
+                console.log(error)
+            })
+            
         }
 
         $scope.showHistory = function(trailer){
@@ -127,7 +202,7 @@ angular.module('myApp.allocation', ['ngRoute', 'dataGrid', 'pagination','ngAnima
         $scope.showTrailers = function(item){
             console.log("asdf");
             $scope.isOrderClicked = true;
-            $scope.selection = "truck"
+            $scope.selection = "truck";
             $scope.selectedOrderId = item.order;
             myAppFactory.getAvailableTrailers().then(function(responseData) {
                 $scope.isAdhocReportLoading = false;
@@ -162,6 +237,10 @@ angular.module('myApp.allocation', ['ngRoute', 'dataGrid', 'pagination','ngAnima
             urlSync: false
         };
         $scope.gridOptions2 = {
+            data: [],
+            urlSync: false
+        };
+        $scope.gridOptions3 = {
             data: [],
             urlSync: false
         };
