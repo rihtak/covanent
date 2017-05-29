@@ -18,11 +18,11 @@
     padding-right: 0px;">
         <!-- <md-card-title>-->
         <div layout="row" style="background:lightgrey">
-            <div style="font-size:16px;PADDING: 10px 0px 10px 28px;"><b>Pool Variants</b> </div>
+            <div style="font-size:16px;PADDING: 10px 0px 10px 28px;"><b>Pool Variance Dashboard</b> </div>
         </div>
         <div layout="row" style="padding-left:26px">
-            
-            
+
+
         </div>
         <!--  </md-card-title>-->
         <md-card-content>
@@ -32,30 +32,28 @@
                     <div grid-data id='test' grid-options="gridOptions" grid-actions="gridActions">
                         <div layout-gt-sm="row" layout-sm="column">
 
-                            <div layout="row" >
-                                <md-input-container flex="30">
+                            <div layout="row">
+                                <md-input-container flex="20">
                                     <label>Search by State</label>
                                     <input ng-model="order" class="md-input" ng-change="gridActions.filter()" id="order" placeholder="Search By State" filter-by="state" filter-type="text" aria-invalid="false">
                                 </md-input-container>
-                                <md-input-container flex="30">
+                                <md-input-container flex="20">
                                     <label>Search by city</label>
                                     <input ng-model="code1" class="md-input" ng-change="gridActions.filter()" id="order" placeholder="Search by City" filter-by="city" filter-type="text" aria-invalid="false">
                                 </md-input-container>
                                 <md-input-container flex="20">
+                                    <label>Company/Customer</label>
+                                    <input ng-model="code2" class="md-input" ng-change="gridActions.filter()" id="order" placeholder="Company/Customer" filter-by="company" filter-type="text" aria-invalid="false">
+                                </md-input-container>
+                                <md-input-container flex="20">
                                     <label>Please choose view</label>
-                                    <md-select ng-model="yard" ng-change="gridActions.filter()">
-
-                                        <md-option value="pools having no variants" selected="selected">Pools Having No Variants</md-option>
-                                        <md-option value="pool have varuants">Pool Have Variants</md-option>
-                                        <md-option value="all variants">All Variants</md-option>
+                                    <md-select ng-model="viewFlag" ng-change="viewSelect()">
+                                        <md-option value="0" selected="selected">Pools Having No Variants</md-option>
+                                        <md-option value="1">Pool Have Variants</md-option>
+                                        <md-option value="-1">All Variants</md-option>
                                     </md-select>
                                 </md-input-container>
-                                <md-button flex="10" class="md-raised md-warn" style="background-color:#00264B;float: right;" ng-click="doReposition()">
-                                    Reposition
-                                </md-button>
-                                <md-button flex="10" class="md-raised md-warn" style="background-color:#00264B;float: right;" ng-click="doEdit()">
-                                    Edit
-                                </md-button>
+
 
                             </div>
 
@@ -63,7 +61,7 @@
                         </div>
                         <div style="overflow:scroll">
                             <div layout="row " class="tittle">
-                                <div class="title-txt">List of Orders</div>
+                                <div class="title-txt">Pool List</div>
 
 
                             </div>
@@ -90,6 +88,7 @@
                                         <th style="text-align:center">Total Req</th>
                                         <th style="text-align:center">Current</th>
                                         <th style="text-align:center">Variance</th>
+                                        <th style="text-align:center"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -125,6 +124,23 @@
                                         </td>
                                         <td style="text-align:center">
                                             <span>{{item.variance}}</span>
+                                        </td>
+                                        <td style="text-align:center">
+                                            <span>
+                                                <md-button aria-label="Menu" class="md-icon-button" ng-click="doEdit()">
+                            <md-icon class="material-icons md-toolbar_icon md-24" style="color:black">
+                                mode_edit
+                            </md-icon>
+                        </md-button>
+                                                <md-button aria-label="Menu" class="md-icon-button" ng-click="doReposition()">
+                            <md-icon class="material-icons md-toolbar_icon md-24" style="color:black">
+                                play_arrow
+                            </md-icon>
+
+                        </md-button>
+
+                                               
+                                </span>
                                         </td>
 
                                     </tr>

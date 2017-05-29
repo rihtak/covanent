@@ -37,6 +37,7 @@ angular.module('myApp.trailerPool', ['ngRoute','vsGoogleAutocomplete','dataGrid'
         }
         $scope.gridOptions={};
         
+        
         $scope.gridOptions.data = [{
             state: "AL",
             city: "Birmingham",
@@ -45,7 +46,7 @@ angular.module('myApp.trailerPool', ['ngRoute','vsGoogleAutocomplete','dataGrid'
             company: "Valspar",
             reqPool: "1",
             curr: "1",
-            variance: "0",
+            variance: 0,
             twm: "VALBIRG02",
             totReq:"1"
             
@@ -57,7 +58,7 @@ angular.module('myApp.trailerPool', ['ngRoute','vsGoogleAutocomplete','dataGrid'
             company: "Averitt",
             reqPool: "2",
             curr: "1",
-            variance: "1",
+            variance: 1,
             twm: "AVEBIR",
             totReq:"2"
             
@@ -69,7 +70,7 @@ angular.module('myApp.trailerPool', ['ngRoute','vsGoogleAutocomplete','dataGrid'
             company: "Serta",
             reqPool: "4",
             curr: "1",
-            variance: "3",
+            variance: 3,
             twm: "SERCUL02",
             totReq:"4"
             
@@ -81,7 +82,7 @@ angular.module('myApp.trailerPool', ['ngRoute','vsGoogleAutocomplete','dataGrid'
             company: "Walmart 6008",
             reqPool: "6",
             curr: "2",
-            variance: "4",
+            variance: 4,
             twm: "MCK",
             totReq:"6"
             
@@ -93,7 +94,7 @@ angular.module('myApp.trailerPool', ['ngRoute','vsGoogleAutocomplete','dataGrid'
             company: "Valspar",
             reqPool: "10",
             curr: "5",
-            variance: "5",
+            variance: 5,
             twm: "VALBIRG02",
             totReq:"10"
             
@@ -105,7 +106,7 @@ angular.module('myApp.trailerPool', ['ngRoute','vsGoogleAutocomplete','dataGrid'
             company: "Valspar",
             reqPool: "13",
             curr: "1",
-            variance: "12",
+            variance: 12,
             twm: "VALBIRG02",
             totReq:"13"
             
@@ -117,7 +118,7 @@ angular.module('myApp.trailerPool', ['ngRoute','vsGoogleAutocomplete','dataGrid'
             company: "Valspar",
             reqPool: "11",
             curr: "2",
-            variance: "9",
+            variance: 9,
             twm: "VALBIRG02",
             totReq:"11"
             
