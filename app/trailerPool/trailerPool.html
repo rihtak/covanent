@@ -1,0 +1,153 @@
+<md-content id="view2" layout="row" flex layout-wrap layout-padding>
+
+
+    <div layout="row">
+        <!-- <md-button  class="md-raised md-primary login-button" ng-click="doLogin()">Trailer Management</md-button>
+            <md-button  class="md-raised md-primary login-button" ng-click="doLogin()">Yard Management</md-button>-->
+        <div style="padding: 7px 20px 0px 20px;height:30px;border-right:2px solid #00264B;"><a href="#!/tracker" style="color:gray; text-decoration:none;font-size:18px">Home</a></div>
+        <div style="padding: 7px 20px 0px 20px;height:30px;border-right:2px solid #00264B"><a href="#!/allocation" style="color:gray; text-decoration:none;font-size:18px">Allocation</a></div>
+        <div style="padding: 7px 20px 0px 20px;height:30px;border-right:2px solid #00264B"><a href="#!/yard" style="color:gray;text-decoration:none;font-size:18px">Yard Management</a></div>
+        <div style="padding: 7px 20px 0px 20px;height:30px;border-right:2px solid #00264B;   background: #00264B"><a href="#" style="color:white;text-decoration:none;font-size:18px">Trailer Pool  Management</a></div>
+
+    </div>
+
+
+    <md-card flex="100" md-whiteframe="2" style="
+    padding-top: 0px;
+    padding-left: 0px;
+    padding-right: 0px;">
+        <!-- <md-card-title>-->
+        <div layout="row" style="background:lightgrey">
+            <div style="font-size:16px;PADDING: 10px 0px 10px 28px;"><b>Pool Variants</b> </div>
+        </div>
+        <div layout="row" style="padding-left:26px">
+            
+            
+        </div>
+        <!--  </md-card-title>-->
+        <md-card-content>
+
+            <div class="">
+                <div>
+                    <div grid-data id='test' grid-options="gridOptions" grid-actions="gridActions">
+                        <div layout-gt-sm="row" layout-sm="column">
+
+                            <div layout="row" >
+                                <md-input-container flex="30">
+                                    <label>Search by State</label>
+                                    <input ng-model="order" class="md-input" ng-change="gridActions.filter()" id="order" placeholder="Search By State" filter-by="state" filter-type="text" aria-invalid="false">
+                                </md-input-container>
+                                <md-input-container flex="30">
+                                    <label>Search by city</label>
+                                    <input ng-model="code1" class="md-input" ng-change="gridActions.filter()" id="order" placeholder="Search by City" filter-by="city" filter-type="text" aria-invalid="false">
+                                </md-input-container>
+                                <md-input-container flex="20">
+                                    <label>Please choose view</label>
+                                    <md-select ng-model="yard" ng-change="gridActions.filter()">
+
+                                        <md-option value="pools having no variants" selected="selected">Pools Having No Variants</md-option>
+                                        <md-option value="pool have varuants">Pool Have Varuants</md-option>
+                                        <md-option value="all variants">All Variants</md-option>
+                                    </md-select>
+                                </md-input-container>
+                                <md-button flex="10" class="md-raised md-warn" style="background-color:#00264B;float: right;" ng-click="doReposition()">
+                                    Reposition
+                                </md-button>
+                                <md-button flex="10" class="md-raised md-warn" style="background-color:#00264B;float: right;" ng-click="doEdit()">
+                                    Edit
+                                </md-button>
+
+                            </div>
+
+
+                        </div>
+                        <div style="overflow:scroll">
+                            <div layout="row " class="tittle">
+                                <div class="title-txt">List of Orders</div>
+
+
+                            </div>
+                            <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align:center">
+                                            <span>State</span>
+                                        </th>
+                                        <th style="text-align:center">
+                                            <span>City</span>
+                                        </th>
+                                        <th style="text-align:center">
+                                            <span>CSR</span>
+                                        </th>
+                                        <th style="text-align:center">
+                                            <span>Planner</span>
+                                        </th>
+                                        <th style="text-align:center">
+                                            <span>Company</span>
+                                        </th>
+                                        <th style="text-align:center">TMW</th>
+                                        <th style="text-align:center">Req Pool</th>
+                                        <th style="text-align:center">Total Req</th>
+                                        <th style="text-align:center">Current</th>
+                                        <th style="text-align:center">Variance</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr grid-item ng-click="showTrailers(item)">
+
+                                        <td style="text-align:center">
+                                            <span>{{item.state}}</span>
+                                        </td>
+                                        <td style="text-align:center">
+                                            <span>{{item.city}}</span>
+                                        </td>
+                                        <td style="text-align:center">
+                                            <span>{{item.csr}}</span>
+                                        </td>
+                                        <td style="text-align:center">
+                                            <span>{{item.planner}}</span>
+                                        </td>
+                                        <td style="text-align:center">
+
+                                            <span>{{item.company}}</span>
+                                        </td>
+                                        <td style="text-align:center">
+                                            <span>{{item.twm}}</span>
+                                        </td>
+                                        <td style="text-align:center">
+                                            <span>{{item.reqPool}}</span>
+                                        </td>
+                                        <td style="text-align:center">
+                                            <span>{{item.totReq}}</span>
+                                        </td>
+                                        <td style="text-align:center">
+                                            <span>{{item.curr}}</span>
+                                        </td>
+                                        <td style="text-align:center">
+                                            <span>{{item.variance}}</span>
+                                        </td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div layout="row" layout-align="center center" ng-if="gridOptions.data.length === 0" layout-padding layout-margin>
+                                <span ng-show="!isAdhocReportLoading">No data available</span>
+                                <md-progress-circular md-diameter="20" ng-show="isAdhocReportLoading"></md-progress-circular><span ng-show="isAdhocReportLoading">Loading ...</span>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </div>
+        </md-card-content>
+
+
+
+    </md-card>
+
+</md-content>
