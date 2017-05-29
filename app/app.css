@@ -675,3 +675,6 @@ footer a:focus {
 .selectedtClass{
     background-color: #D3D3D3;
 }
+body,h3,h4{
+    font-family: "Trebuchet MS" !important;
+}
