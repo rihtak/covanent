@@ -55,11 +55,11 @@ angular.module('myApp.trailerPool', ['ngRoute','vsGoogleAutocomplete','dataGrid'
             csr: "Kevin",
             planner: "DANNY",
             company: "Averitt",
-            reqPool: "1",
+            reqPool: "2",
             curr: "1",
-            variance: "0",
+            variance: "1",
             twm: "AVEBIR",
-            totReq:"1"
+            totReq:"2"
             
         },{
             state: "AL",
@@ -67,11 +67,11 @@ angular.module('myApp.trailerPool', ['ngRoute','vsGoogleAutocomplete','dataGrid'
             csr: "Sarah",
             planner: "DANNY",
             company: "Serta",
-            reqPool: "1",
+            reqPool: "4",
             curr: "1",
-            variance: "0",
+            variance: "3",
             twm: "SERCUL02",
-            totReq:"1"
+            totReq:"4"
             
         },{
             state: "AL",
@@ -79,11 +79,11 @@ angular.module('myApp.trailerPool', ['ngRoute','vsGoogleAutocomplete','dataGrid'
             csr: "David",
             planner: "Molly",
             company: "Walmart 6008",
-            reqPool: "1",
-            curr: "1",
-            variance: "0",
+            reqPool: "6",
+            curr: "2",
+            variance: "4",
             twm: "MCK",
-            totReq:"1"
+            totReq:"6"
             
         },{
             state: "AR",
@@ -91,11 +91,11 @@ angular.module('myApp.trailerPool', ['ngRoute','vsGoogleAutocomplete','dataGrid'
             csr: "Mike",
             planner: "Mike",
             company: "Valspar",
-            reqPool: "1",
-            curr: "1",
-            variance: "0",
+            reqPool: "10",
+            curr: "5",
+            variance: "5",
             twm: "VALBIRG02",
-            totReq:"1"
+            totReq:"10"
             
         },{
             state: "AZ",
@@ -103,11 +103,11 @@ angular.module('myApp.trailerPool', ['ngRoute','vsGoogleAutocomplete','dataGrid'
             csr: "Mike",
             planner: "Mike",
             company: "Valspar",
-            reqPool: "1",
+            reqPool: "13",
             curr: "1",
-            variance: "0",
+            variance: "12",
             twm: "VALBIRG02",
-            totReq:"1"
+            totReq:"13"
             
         },{
             state: "AL",
@@ -115,11 +115,11 @@ angular.module('myApp.trailerPool', ['ngRoute','vsGoogleAutocomplete','dataGrid'
             csr: "Mike",
             planner: "Mike",
             company: "Valspar",
-            reqPool: "1",
-            curr: "1",
-            variance: "0",
+            reqPool: "11",
+            curr: "2",
+            variance: "9",
             twm: "VALBIRG02",
-            totReq:"1"
+            totReq:"11"
             
         }, ];
         $rootScope.doReposition  = function(trailerID){
@@ -130,7 +130,7 @@ angular.module('myApp.trailerPool', ['ngRoute','vsGoogleAutocomplete','dataGrid'
             console.log(resultTrailer);
             $mdDialog.show({
                 controller: DialogController,
-                templateUrl: 'app/tracker/moreInfo.html',
+                templateUrl: 'app/trailerPool/repositionInfo.html',
                 parent: angular.element(document.body),
                 
                 animation:undefined,
@@ -153,6 +153,39 @@ angular.module('myApp.trailerPool', ['ngRoute','vsGoogleAutocomplete','dataGrid'
             }
 
         }
+        
+        $rootScope.doEdit  = function(trailerID){
+            $scope.showGraph = false;
+
+            console.log(trailerID);
+            var resultTrailer = _.find($scope.tractorData, function (x) { return x.TrailerID === trailerID; });
+            console.log(resultTrailer);
+            $mdDialog.show({
+                controller: DialogController,
+                templateUrl: 'app/trailerPool/EditInfo.html',
+                parent: angular.element(document.body),
+                
+                animation:undefined,
+                clickOutsideToClose:true,
+                locals: { machine: resultTrailer },
+                escapeToClose: true,
+                // onComplete:afterShowAnimation,
+                // fullscreen: true // Only for -xs, -sm breakpoints.
+            });
+
+            function afterShowAnimation(rootScope, element, options) {
+                // post-show code here: DOM element focus, etc.
+
+                myAppFactory.getMachineData(machine).then(function(response) {
+
+
+                })
+
+
+            }
+
+        }
+        
         $rootScope.isRecentAlertLoading = true;
         $rootScope.$on('triggerMachineDetail', function(event,machine){
             console.log("triggered",machine)
