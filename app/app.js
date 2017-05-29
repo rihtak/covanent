@@ -3,7 +3,7 @@ angular.module('myApp', [
     'ngRoute',
     'myApp.tracker',
     'myApp.allocation',
-     'myApp.yard',
+     'myApp.yard','myApp.trailerPool',
     'myApp.login',
     'myApp.version',
     'ngMaterial',

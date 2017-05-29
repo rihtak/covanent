@@ -1,24 +1,24 @@
+<md-content id="view2" layout="row" flex layout-wrap layout-padding>
 
-<md-content id="view2" layout="row" flex layout-wrap layout-padding >
-    
-        
-<div layout="row" >
-           <!-- <md-button  class="md-raised md-primary login-button" ng-click="doLogin()">Trailer Management</md-button>
+
+    <div layout="row">
+        <!-- <md-button  class="md-raised md-primary login-button" ng-click="doLogin()">Trailer Management</md-button>
             <md-button  class="md-raised md-primary login-button" ng-click="doLogin()">Yard Management</md-button>-->
-     <div style="padding: 7px 20px 0px 20px;height:30px;border-right:2px solid #00264B;     background: #00264B"><a href="#!/tracker" style="color:white; text-decoration:none;font-size:18px">Home</a></div>
+        <div style="padding: 7px 20px 0px 20px;height:30px;border-right:2px solid #00264B;"><a href="#!/tracker" style="color:white; text-decoration:none;font-size:18px">Home</a></div>
         <div style="padding: 7px 20px 0px 20px;height:30px;border-right:2px solid #00264B"><a href="#!/allocation" style="color:gray; text-decoration:none;font-size:18px">Allocation</a></div>
-        <div style="padding: 7px 20px 0px 20px;height:30px;"><a href="#!/yard"  style="color:gray;text-decoration:none;font-size:18px">Yard Management</a></div>
-         <div style="padding: 7px 20px 0px 20px;height:30px;"><a href="#!/trailerPool"  style="color:gray;text-decoration:none;font-size:18px">Trailer Pool  Management</a></div>
-        </div>
+        <div style="padding: 7px 20px 0px 20px;height:30px;border-right:2px solid #00264B"><a href="#!/yard" style="color:gray;text-decoration:none;font-size:18px">Yard Management</a></div>
+        <div style="ppadding: 7px 20px 0px 20px;height:30px;border-right:2px solid #00264B;background: #00264B"><a href="#!/trailerPool" style="color:gray;text-decoration:none;font-size:18px">Trailer Pool  Management</a></div>
 
-    
+    </div>
+
+
     <md-card flex="100" md-whiteframe="2" style="
     padding-top: 0px;
     padding-left: 0px;
     padding-right: 0px;">
         <!-- <md-card-title>-->
-         <div layout="row" style="background:lightgrey">
-            <div style="font-size:16px;PADDING: 10px 0px 10px 28px;"><b > Locate Trailer</b> </div>
+        <div layout="row" style="background:lightgrey">
+            <div style="font-size:16px;PADDING: 10px 0px 10px 28px;"><b> Locate Trailer</b> </div>
         </div>
         <div layout="row" style="padding-left:26px">
             <md-input-container flex="20">
@@ -29,19 +29,17 @@
             <md-input-container flex="30">
 
                 <label></label>
-                <input vs-google-autocomplete ng-model="address.name" placeholder="Choose State" vs-place="address.place" vs-place-id="address.components.placeId" vs-street-number="address.components.streetNumber" vs-street="address.components.street" vs-city="address.components.city" vs-state="address.components.state"
-                       vs-country-short="address.components.countryCode" vs-country="address.components.country" vs-post-code="address.components.postCode" vs-latitude="address.components.location.lat" vs-longitude="address.components.location.long" type="text" name="address"
-                       id="address1" class="form-control" placeholder="{{test}}" ng-change="findAddress()" vs-google-autocomplete="acOption">
+                <input vs-google-autocomplete ng-model="address.name" placeholder="Choose State" vs-place="address.place" vs-place-id="address.components.placeId" vs-street-number="address.components.streetNumber" vs-street="address.components.street" vs-city="address.components.city" vs-state="address.components.state" vs-country-short="address.components.countryCode" vs-country="address.components.country" vs-post-code="address.components.postCode" vs-latitude="address.components.location.lat" vs-longitude="address.components.location.long" type="text" name="address" id="address1" class="form-control" placeholder="{{test}}" ng-change="findAddress()" vs-google-autocomplete="acOption">
             </md-input-container>
 
-                <!--<button ng-click="showDetail($event)">history</button>-->
+            <!--<button ng-click="showDetail($event)">history</button>-->
             <!-- <md-input-container >
 
 <label>Seach Place</label>
 <input ng-model="view.addressInput" ng-model-options="{debounce: 1000}" ng-change="findAddress()" />
 </md-input-container>-->
-            
-           <!-- <md-input-container flex="20">
+
+            <!-- <md-input-container flex="20">
                 <label>Machine Ranges</label>
                 <md-select ng-model="machineRange" ng-change="filterMachines()">
 
@@ -49,8 +47,7 @@
                         {{machineRange.displayValue}}
                     </md-option>
                 </md-select>
- 
-</md-input-container>-->
+            </md-input-container>-->
             <!--<md-input-container flex="20">
 <md-button aria-label="Adhoc-Report" class="md-raised md-primary" ng-click="resetZoom()">
 Reset
@@ -86,11 +83,10 @@ class="md-18"
         </div>
         <!--  </md-card-title>-->
         <md-card-content flex>
-            <div id="map" class="altura-mapa" ng-init="initialize()"  fullscreen="isFullScreen" only-watched-property></div>
+            <div id="map" class="altura-mapa" ng-init="initialize()" fullscreen="isFullScreen" only-watched-property></div>
             <div id="marker-tooltip"></div>
         </md-card-content>
 
     </md-card>
 
 </md-content>
-
