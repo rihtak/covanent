@@ -53,6 +53,9 @@
                                         <md-option value="-1">All Variants</md-option>
                                     </md-select>
                                 </md-input-container>
+                                <md-button flex="10" class="md-raised md-warn" style="background-color:#00264B;float: right;" ng-click="doReposition()">
+                                    Add
+                                </md-button>
 
 
                             </div>
@@ -88,7 +91,7 @@
                                         <th style="text-align:center">Total Req</th>
                                         <th style="text-align:center">Current</th>
                                         <th style="text-align:center">Variance</th>
-                                        <th style="text-align:center"></th>
+                                        <th style="text-align:center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -132,7 +135,7 @@
                                 mode_edit
                             </md-icon>
                         </md-button>
-                                                <md-button aria-label="Menu" class="md-icon-button" ng-click="doReposition()">
+                                                <md-button aria-label="Menu" class="md-icon-button" ng-click="">
                             <md-icon class="material-icons md-toolbar_icon md-24" style="color:black">
                                 play_arrow
                             </md-icon>
