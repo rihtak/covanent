@@ -25,7 +25,7 @@
                     <img src="app/images/wizard/order.png" height="80px">
                 </div>
                 <div class="animate-switch allocation_wizard" ng-switch-when="truck" >
-                    <img src="app/images/wizard/truck.png" height="80px" ng-click="showWizard('orders')">
+                    <img src="app/images/wizard/truck.png" height="80px" ng-click='showWizard("orders")'>
                 </div>
                 <div class="animate-switch allocation_wizard" ng-switch-when="trailer" >
                     <img src="app/images/wizard/trailer.png" height="80px" ng-click="showWizard('truck')">
@@ -50,7 +50,7 @@
                                            ng-change="gridActions.filter()"
                                            id="order"
                                            placeholder="Search By State"
-                                           filter-by="order"
+                                           filter-by="orginName"
                                            filter-type="text"
                                            aria-invalid="false">
                                 </md-input-container>
@@ -60,7 +60,7 @@
                                            ng-change="gridActions.filter()"
                                            id="order"
                                            placeholder="Search by City"
-                                           filter-by="rowid"
+                                           filter-by="orginName"
                                            filter-type="text"
                                            aria-invalid="false">
                                 </md-input-container>

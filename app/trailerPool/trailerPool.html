@@ -32,7 +32,7 @@
                     <div grid-data id='test' grid-options="gridOptions" grid-actions="gridActions">
                         <div layout-gt-sm="row" layout-sm="column">
 
-                            <div layout="row">
+                            <div layout="row"  flex="100" >
                                 <md-input-container flex="20">
                                     <label>Search by State</label>
                                     <input ng-model="order" class="md-input" ng-change="gridActions.filter()" id="order" placeholder="Search By State" filter-by="state" filter-type="text" aria-invalid="false">
@@ -53,9 +53,11 @@
                                         <md-option value="-1">All Variants</md-option>
                                     </md-select>
                                 </md-input-container>
-                                <md-button flex="10" class="md-raised md-warn" style="background-color:#00264B;float: right;" ng-click="doReposition()">
+                                <div  layout="row" flex="40" layout-align="end center">
+                                <md-button  class="md-raised md-warn" style="background-color:#00264B;float: right;height:40px;margin-top:5px" ng-click="doReposition()">
                                     Add
                                 </md-button>
+                                    </div>
 
 
                             </div>
@@ -128,8 +130,8 @@
                                         <td style="text-align:center">
                                             <span>{{item.variance}}</span>
                                         </td>
-                                        <td style="text-align:center">
-                                            <span>
+                                        <td >
+                                         <div>
                                                 <md-button aria-label="Menu" class="md-icon-button" ng-click="doEdit()">
                             <md-icon class="material-icons md-toolbar_icon md-24" style="color:black">
                                 mode_edit
@@ -141,15 +143,16 @@
                             </md-icon>
 
                         </md-button>
+                                             </div>
 
                                                
-                                </span>
+                               
                                         </td>
 
                                     </tr>
                                 </tbody>
                             </table>
-                            <div layout="row" layout-align="center center" ng-if="gridOptions.data.length === 0" layout-padding layout-margin>
+                            <div layout="row"  ng-if="gridOptions.data.length === 0" layout-padding layout-margin>
                                 <span ng-show="!isAdhocReportLoading">No data available</span>
                                 <md-progress-circular md-diameter="20" ng-show="isAdhocReportLoading"></md-progress-circular><span ng-show="isAdhocReportLoading">Loading ...</span>
 
