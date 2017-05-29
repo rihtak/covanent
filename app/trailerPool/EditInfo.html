@@ -1,0 +1,81 @@
+<md-dialog aria-label="Detailed Infromation" class="fullscreen-dialog">
+    <form ng-cloak>
+
+
+        <md-dialog-content>
+            <div layout="row" style="background:lightgrey">
+                <Label style="font-size:25px;font-weight:bold;padding: 15px 15px 15px 15px;">Reposition </Label>
+
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon class="material-icons md-toolbar_icon md-24">
+                        close
+                    </md-icon>
+                </md-button>
+            </div>
+            <div class="md-dialog-content" style="padding:15px 15px 0px 15px">
+
+                <div layout="row" style="padding-bottom:15px;border-bottom:1px solid lightgrey">
+
+                    <ul style="list-style:none">
+                        <li>
+                            <md-input-container >
+                                    <label>Please choose view</label>
+                                    <md-select ng-model="aSel" >
+
+                                        <md-option value="pools having no variants" selected="selected">Select a company/customer</md-option>
+                                        <md-option value="pool have varuants">Valspar</md-option>
+                                        <md-option value="all variants">Averitt</md-option>
+                                        <md-option value="all variants">Walmart 6008</md-option>
+                                        <md-option value="all variants">Walmart 6901</md-option>
+                                        <md-option value="all variants">Walmart</md-option>
+                                        <md-option value="all variants">Walmart jewelery</md-option>
+                                        <md-option value="all variants">Gap Inc</md-option>
+                                    </md-select>
+                                </md-input-container>
+                        </li>
+                        <li>
+                            <md-input-container>
+                                <label>Required Count</label>
+                                <input class="md-input" placeholder="Required Count" type="text" aria-invalid="true">
+                            </md-input-container>
+                        </li>
+                        <li>
+                            <md-input-container>
+                                <label>CSR Name</label>
+                                <input class="md-input" placeholder="CSR Name" type="text" aria-invalid="false">
+                            </md-input-container>
+                        </li>
+                        <li>
+                            <md-input-container>
+                                <label>Planner Name</label>
+                                <input class="md-input" placeholder="Planner Name" type="text" aria-invalid="false">
+                            </md-input-container>
+                        </li>
+                        <li>
+                            <md-input-container>
+                                <label>Site Identification</label>
+                                <input class="md-input" placeholder="Site Identification" type="text" aria-invalid="false">
+                            </md-input-container>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+                <div layout="row">
+
+                    <md-button flex="10" class="md-raised md-warn" style="background-color:#00264B;float: right;">
+                        Ok
+                    </md-button>
+                    <md-button flex="10" class="md-raised md-warn" style="background-color:#00264B;float: right;" ng-click="cancel()">
+                        Cancel
+                    </md-button>
+                </div>
+
+            </div>
+        </md-dialog-content>
+
+
+    </form>
+</md-dialog>
