@@ -4,10 +4,10 @@
     <div layout="row">
         <!-- <md-button  class="md-raised md-primary login-button" ng-click="doLogin()">Trailer Management</md-button>
             <md-button  class="md-raised md-primary login-button" ng-click="doLogin()">Yard Management</md-button>-->
-        <div style="padding: 7px 20px 0px 20px;height:30px;border-right:2px solid #00264B;"><a href="#!/tracker" style="color:white; text-decoration:none;font-size:18px">Home</a></div>
+        <div style="padding: 7px 20px 0px 20px;height:30px;border-right:2px solid #00264B;"><a href="#!/tracker" style="color:gray; text-decoration:none;font-size:18px">Home</a></div>
         <div style="padding: 7px 20px 0px 20px;height:30px;border-right:2px solid #00264B"><a href="#!/allocation" style="color:gray; text-decoration:none;font-size:18px">Allocation</a></div>
         <div style="padding: 7px 20px 0px 20px;height:30px;border-right:2px solid #00264B"><a href="#!/yard" style="color:gray;text-decoration:none;font-size:18px">Yard Management</a></div>
-        <div style="ppadding: 7px 20px 0px 20px;height:30px;border-right:2px solid #00264B;background: #00264B"><a href="#!/trailerPool" style="color:gray;text-decoration:none;font-size:18px">Trailer Pool  Management</a></div>
+        <div style="padding: 7px 20px 0px 20px;height:30px;border-right:2px solid #00264B;   background: #00264B"><a href="#" style="color:white;text-decoration:none;font-size:18px">Trailer Pool  Management</a></div>
 
     </div>
 
@@ -18,74 +18,135 @@
     padding-right: 0px;">
         <!-- <md-card-title>-->
         <div layout="row" style="background:lightgrey">
-            <div style="font-size:16px;PADDING: 10px 0px 10px 28px;"><b> Locate Trailer</b> </div>
+            <div style="font-size:16px;PADDING: 10px 0px 10px 28px;"><b>Pool Variants</b> </div>
         </div>
         <div layout="row" style="padding-left:26px">
-            <md-input-container flex="20">
-
-                <label>Trailer Id</label>
-                <input type="text">
-            </md-input-container>
-            <md-input-container flex="30">
-
-                <label></label>
-                <input vs-google-autocomplete ng-model="address.name" placeholder="Choose State" vs-place="address.place" vs-place-id="address.components.placeId" vs-street-number="address.components.streetNumber" vs-street="address.components.street" vs-city="address.components.city" vs-state="address.components.state" vs-country-short="address.components.countryCode" vs-country="address.components.country" vs-post-code="address.components.postCode" vs-latitude="address.components.location.lat" vs-longitude="address.components.location.long" type="text" name="address" id="address1" class="form-control" placeholder="{{test}}" ng-change="findAddress()" vs-google-autocomplete="acOption">
-            </md-input-container>
-
-            <!--<button ng-click="showDetail($event)">history</button>-->
-            <!-- <md-input-container >
-
-<label>Seach Place</label>
-<input ng-model="view.addressInput" ng-model-options="{debounce: 1000}" ng-change="findAddress()" />
-</md-input-container>-->
-
-            <!-- <md-input-container flex="20">
-                <label>Machine Ranges</label>
-                <md-select ng-model="machineRange" ng-change="filterMachines()">
-
-                    <md-option ng-repeat="machineRange in MachineRanges" ng-value="machineRange" >
-                        {{machineRange.displayValue}}
-                    </md-option>
-                </md-select>
-            </md-input-container>-->
-            <!--<md-input-container flex="20">
-<md-button aria-label="Adhoc-Report" class="md-raised md-primary" ng-click="resetZoom()">
-Reset
-</md-button>
-</md-input-container>-->
-            <!--<md-input-container>
-<label>Search Machine</label>
-<input ng-model="view.machineInput" ng-model-options="{debounce: 1000}"  />
-</md-input-container>
--->
-            <!--<md-card >
-<div layout="row" layout-align="center center">
-<md-icon style="{color: #777}"
-aria-label="accessibility"
-class="material-icons step"
-class="md-18"
->accessibility
-</md-icon>Running
-<md-icon style="{color: #dddd}"
-aria-label="accessibility"
-class="material-icons step"
-class="md-18"
->accessibility
-</md-icon>idle
-<md-icon style="{color: #eeee}"
-aria-label="accessibility"
-class="material-icons step"
-class="md-18"
->accessibility
-</md-icon>Overheat
-</div>
-</md-card>-->
+            
+            
         </div>
         <!--  </md-card-title>-->
-        <md-card-content flex>
-            <div id="map" class="altura-mapa" ng-init="initialize()" fullscreen="isFullScreen" only-watched-property></div>
-            <div id="marker-tooltip"></div>
+        <md-card-content>
+
+            <div class="">
+                <div>
+                    <div grid-data id='test' grid-options="gridOptions" grid-actions="gridActions">
+                        <div layout-gt-sm="row" layout-sm="column">
+
+                            <div layout="row" >
+                                <md-input-container flex="30">
+                                    <label>Search by State</label>
+                                    <input ng-model="order" class="md-input" ng-change="gridActions.filter()" id="order" placeholder="Search By State" filter-by="state" filter-type="text" aria-invalid="false">
+                                </md-input-container>
+                                <md-input-container flex="30">
+                                    <label>Search by city</label>
+                                    <input ng-model="code1" class="md-input" ng-change="gridActions.filter()" id="order" placeholder="Search by City" filter-by="city" filter-type="text" aria-invalid="false">
+                                </md-input-container>
+                                <md-input-container flex="20">
+                                    <label>Please choose view</label>
+                                    <md-select ng-model="yard" ng-change="gridActions.filter()">
+
+                                        <md-option value="pools having no variants" selected="selected">Pools Having No Variants</md-option>
+                                        <md-option value="pool have varuants">Pool Have Varuants</md-option>
+                                        <md-option value="all variants">All Variants</md-option>
+                                    </md-select>
+                                </md-input-container>
+                                <md-button flex="10" class="md-raised md-warn" style="background-color:#00264B;float: right;" ng-click="doReposition()">
+                                    Reposition
+                                </md-button>
+                                <md-button flex="10" class="md-raised md-warn" style="background-color:#00264B;float: right;" ng-click="doEdit()">
+                                    Edit
+                                </md-button>
+
+                            </div>
+
+
+                        </div>
+                        <div style="overflow:scroll">
+                            <div layout="row " class="tittle">
+                                <div class="title-txt">List of Orders</div>
+
+
+                            </div>
+                            <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align:center">
+                                            <span>State</span>
+                                        </th>
+                                        <th style="text-align:center">
+                                            <span>City</span>
+                                        </th>
+                                        <th style="text-align:center">
+                                            <span>CSR</span>
+                                        </th>
+                                        <th style="text-align:center">
+                                            <span>Planner</span>
+                                        </th>
+                                        <th style="text-align:center">
+                                            <span>Company</span>
+                                        </th>
+                                        <th style="text-align:center">TMW</th>
+                                        <th style="text-align:center">Req Pool</th>
+                                        <th style="text-align:center">Total Req</th>
+                                        <th style="text-align:center">Current</th>
+                                        <th style="text-align:center">Variance</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr grid-item ng-click="showTrailers(item)">
+
+                                        <td style="text-align:center">
+                                            <span>{{item.state}}</span>
+                                        </td>
+                                        <td style="text-align:center">
+                                            <span>{{item.city}}</span>
+                                        </td>
+                                        <td style="text-align:center">
+                                            <span>{{item.csr}}</span>
+                                        </td>
+                                        <td style="text-align:center">
+                                            <span>{{item.planner}}</span>
+                                        </td>
+                                        <td style="text-align:center">
+
+                                            <span>{{item.company}}</span>
+                                        </td>
+                                        <td style="text-align:center">
+                                            <span>{{item.twm}}</span>
+                                        </td>
+                                        <td style="text-align:center">
+                                            <span>{{item.reqPool}}</span>
+                                        </td>
+                                        <td style="text-align:center">
+                                            <span>{{item.totReq}}</span>
+                                        </td>
+                                        <td style="text-align:center">
+                                            <span>{{item.curr}}</span>
+                                        </td>
+                                        <td style="text-align:center">
+                                            <span>{{item.variance}}</span>
+                                        </td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div layout="row" layout-align="center center" ng-if="gridOptions.data.length === 0" layout-padding layout-margin>
+                                <span ng-show="!isAdhocReportLoading">No data available</span>
+                                <md-progress-circular md-diameter="20" ng-show="isAdhocReportLoading"></md-progress-circular><span ng-show="isAdhocReportLoading">Loading ...</span>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </div>
         </md-card-content>
+
+
 
     </md-card>
 

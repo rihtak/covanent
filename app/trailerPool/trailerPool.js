@@ -1,6 +1,6 @@
 
 'use strict';
-angular.module('myApp.trailerPool', ['ngRoute','vsGoogleAutocomplete'])
+angular.module('myApp.trailerPool', ['ngRoute','vsGoogleAutocomplete','dataGrid', 'pagination'])
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/trailerPool', {
             //use  templateUrl: 'view2/view2.html', in local
@@ -17,7 +17,9 @@ angular.module('myApp.trailerPool', ['ngRoute','vsGoogleAutocomplete'])
                 $scope.machine.histories = response.data;
             }).then(function(response) {})
             console.log("machine",machine);
-           
+           $scope.selection = "trailer";
+
+             
 
             $scope.hide = function() {
                 $mdDialog.hide();
@@ -33,7 +35,94 @@ angular.module('myApp.trailerPool', ['ngRoute','vsGoogleAutocomplete'])
             };
 
         }
-        $rootScope.showDetail  = function(trailerID){
+        $scope.gridOptions={};
+        
+        $scope.gridOptions.data = [{
+            state: "AL",
+            city: "Birmingham",
+            csr: "Mike",
+            planner: "Mike",
+            company: "Valspar",
+            reqPool: "1",
+            curr: "1",
+            variance: "0",
+            twm: "VALBIRG02",
+            totReq:"1"
+            
+        },{
+            state: "AL",
+            city: "Birmingham",
+            csr: "Kevin",
+            planner: "DANNY",
+            company: "Averitt",
+            reqPool: "1",
+            curr: "1",
+            variance: "0",
+            twm: "AVEBIR",
+            totReq:"1"
+            
+        },{
+            state: "AL",
+            city: "Cullman",
+            csr: "Sarah",
+            planner: "DANNY",
+            company: "Serta",
+            reqPool: "1",
+            curr: "1",
+            variance: "0",
+            twm: "SERCUL02",
+            totReq:"1"
+            
+        },{
+            state: "AL",
+            city: "Gentry",
+            csr: "David",
+            planner: "Molly",
+            company: "Walmart 6008",
+            reqPool: "1",
+            curr: "1",
+            variance: "0",
+            twm: "MCK",
+            totReq:"1"
+            
+        },{
+            state: "AR",
+            city: "North Little Rock",
+            csr: "Mike",
+            planner: "Mike",
+            company: "Valspar",
+            reqPool: "1",
+            curr: "1",
+            variance: "0",
+            twm: "VALBIRG02",
+            totReq:"1"
+            
+        },{
+            state: "AZ",
+            city: "Phoenix",
+            csr: "Mike",
+            planner: "Mike",
+            company: "Valspar",
+            reqPool: "1",
+            curr: "1",
+            variance: "0",
+            twm: "VALBIRG02",
+            totReq:"1"
+            
+        },{
+            state: "AL",
+            city: "Birmingham",
+            csr: "Mike",
+            planner: "Mike",
+            company: "Valspar",
+            reqPool: "1",
+            curr: "1",
+            variance: "0",
+            twm: "VALBIRG02",
+            totReq:"1"
+            
+        }, ];
+        $rootScope.doReposition  = function(trailerID){
             $scope.showGraph = false;
 
             console.log(trailerID);
