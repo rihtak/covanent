@@ -32,32 +32,32 @@
                     <div grid-data id='test' grid-options="gridOptions" grid-actions="gridActions">
                         <div layout-gt-sm="row" layout-sm="column">
 
-                            <div layout="row"  flex="100" >
+                            <div layout="row" flex="100">
                                 <md-input-container flex="20">
-                                    <label>Search by State</label>
-                                    <input ng-model="order" class="md-input" ng-change="gridActions.filter()" id="order" placeholder="Search By State" filter-by="state" filter-type="text" aria-invalid="false">
+
+                                    <input ng-model="order" class="md-input" ng-change="gridActions.filter()" id="order" placeholder="Search By state" filter-by="state" filter-type="text" aria-invalid="false">
                                 </md-input-container>
                                 <md-input-container flex="20">
-                                    <label>Search by city</label>
-                                    <input ng-model="code1" class="md-input" ng-change="gridActions.filter()" id="order" placeholder="Search by City" filter-by="city" filter-type="text" aria-invalid="false">
+
+                                    <input ng-model="code1" class="md-input" ng-change="gridActions.filter()" id="order" placeholder="Search by city" filter-by="city" filter-type="text" aria-invalid="false">
                                 </md-input-container>
                                 <md-input-container flex="20">
-                                    <label>Company/Customer</label>
+
                                     <input ng-model="code2" class="md-input" ng-change="gridActions.filter()" id="order" placeholder="Company/Customer" filter-by="company" filter-type="text" aria-invalid="false">
                                 </md-input-container>
                                 <md-input-container flex="20">
-                                    <label>Please choose view</label>
-                                    <md-select ng-model="viewFlag" ng-change="viewSelect()">
-                                        <md-option value="0" selected="selected">Pools Having No Variants</md-option>
-                                        <md-option value="1">Pool Have Variants</md-option>
-                                        <md-option value="-1">All Variants</md-option>
+
+                                    <md-select ng-model="viewFlag" ng-change="viewSelect(viewFlag)">
+                                        <md-option value="0" selected="selected">Pools having no variance</md-option>
+                                        <md-option value="1">Pool have variance</md-option>
+                                        <md-option value="-1">All variance</md-option>
                                     </md-select>
                                 </md-input-container>
-                                <div  layout="row" flex="40" layout-align="end center">
-                                <md-button  class="md-raised md-warn" style="background-color:#00264B;float: right;height:40px;margin-top:5px" ng-click="doReposition()">
-                                    Add
-                                </md-button>
-                                    </div>
+                                <div layout="row" flex="40" layout-align="end center">
+                                    <md-button class="md-raised md-warn" style="background-color:#00264B;float: right;height:40px;margin-top:5px" ng-click="doReposition()">
+                                        Add
+                                    </md-button>
+                                </div>
 
 
                             </div>
@@ -90,14 +90,14 @@
                                         </th>
                                         <th style="text-align:center">TMW</th>
                                         <th style="text-align:center">Req Pool</th>
-                                        <th style="text-align:center">Total Req</th>
+
                                         <th style="text-align:center">Current</th>
                                         <th style="text-align:center">Variance</th>
                                         <th style="text-align:center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr grid-item ng-click="showTrailers(item)">
+                                    <tr grid-item ng-click="showTrailers(item)" ng-show="item.show">
 
                                         <td style="text-align:center">
                                             <span>{{item.state}}</span>
@@ -121,38 +121,40 @@
                                         <td style="text-align:center">
                                             <span>{{item.reqPool}}</span>
                                         </td>
-                                        <td style="text-align:center">
-                                            <span>{{item.totReq}}</span>
-                                        </td>
+
                                         <td style="text-align:center">
                                             <span>{{item.curr}}</span>
                                         </td>
                                         <td style="text-align:center">
                                             <span>{{item.variance}}</span>
                                         </td>
-                                        <td >
-                                         <div>
+                                        <td>
+                                            <div>
                                                 <md-button aria-label="Menu" class="md-icon-button" ng-click="doEdit()">
-                            <md-icon class="material-icons md-toolbar_icon md-24" style="color:black">
-                                mode_edit
-                            </md-icon>
-                        </md-button>
-                                                <md-button aria-label="Menu" class="md-icon-button" ng-click="">
-                            <md-icon class="material-icons md-toolbar_icon md-24" style="color:black">
-                                play_arrow
-                            </md-icon>
+                                                    <md-icon class="material-icons md-toolbar_icon md-24" style="color:black">
+                                                        mode_edit
+                                                    </md-icon>
+                                                    <md-tooltip md-direction="top">click to edit</md-tooltip>
+                                                </md-button>
 
-                        </md-button>
-                                             </div>
+                                                <a href="#!/allocation">
+                                                    <md-icon class="material-icons md-toolbar_icon md-24" style="color:black">
+                                                        play_arrow
+                                                    </md-icon>
+                                                    <md-tooltip md-direction="top">click to allocate</md-tooltip>
+                                                </a>
 
-                                               
-                               
+
+                                            </div>
+
+
+
                                         </td>
 
                                     </tr>
                                 </tbody>
                             </table>
-                            <div layout="row"  ng-if="gridOptions.data.length === 0" layout-padding layout-margin>
+                            <div layout="row" ng-if="gridOptions.data.length === 0" layout-padding layout-margin>
                                 <span ng-show="!isAdhocReportLoading">No data available</span>
                                 <md-progress-circular md-diameter="20" ng-show="isAdhocReportLoading"></md-progress-circular><span ng-show="isAdhocReportLoading">Loading ...</span>
 

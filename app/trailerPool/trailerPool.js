@@ -1,6 +1,5 @@
-
 'use strict';
-angular.module('myApp.trailerPool', ['ngRoute','vsGoogleAutocomplete','dataGrid', 'pagination'])
+angular.module('myApp.trailerPool', ['ngRoute', 'vsGoogleAutocomplete', 'dataGrid', 'pagination'])
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/trailerPool', {
             //use  templateUrl: 'view2/view2.html', in local
@@ -8,36 +7,66 @@ angular.module('myApp.trailerPool', ['ngRoute','vsGoogleAutocomplete','dataGrid'
             controller: 'trailerPoolCtrl'
         });
     }])
-   
-    .controller('trailerPoolCtrl', [ '$scope','$http','$mdToast','$interval','$rootScope','$mdDialog','myAppFactory', function ( $scope,$http,$mdToast,$interval,$rootScope,$mdDialog,myAppFactory) {
-        function DialogController($scope, $mdDialog,machine) {
+
+    .controller('trailerPoolCtrl', ['$scope', '$http', '$mdToast', '$interval', '$rootScope', '$mdDialog', 'myAppFactory', function ($scope, $http, $mdToast, $interval, $rootScope, $mdDialog, myAppFactory) {
+        function DialogController($scope, $mdDialog, machine) {
             $scope.machine = machine;
-            myAppFactory.getTrailerHistoryData().then(function(response) {
-                console.log("response",response.data);
+            myAppFactory.getTrailerHistoryData().then(function (response) {
+                console.log("response", response.data);
                 $scope.machine.histories = response.data;
-            }).then(function(response) {})
-            console.log("machine",machine);
-           $scope.selection = "trailer";
+            }).then(function (response) {})
+            console.log("machine", machine);
+            $scope.selection = "trailer";
 
-             
 
-            $scope.hide = function() {
+
+            $scope.hide = function () {
                 $mdDialog.hide();
             };
 
-            $scope.cancel = function() {
+            $scope.cancel = function () {
                 $mdDialog.cancel();
             };
 
-            $scope.answer = function(answer) {
+            $scope.answer = function (answer) {
                 $mdDialog.hide(answer);
 
             };
 
         }
-        $scope.gridOptions={};
-        
-        
+        $scope.gridOptions = {};
+
+        $scope.viewSelect = function (item) {
+            //alert(item + " " + $scope.viewFlag);
+            $scope.viewFlag = item;
+            if (item == 0) {
+                angular.forEach($scope.gridOptions.data, function (item) {
+                    if(item.variance==0){
+                        item.show=true;
+                    }else{
+                        item.show=false;
+                    }
+                });
+
+            } else if (item == 1) {
+                angular.forEach($scope.gridOptions.data, function (item) {
+                    if(item.variance>0){
+                        item.show=true;
+                    }else{
+                        item.show=false;
+                    }
+                });
+
+            } else if (item == -1) {
+                angular.forEach($scope.gridOptions.data, function (item) {
+                    
+                        item.show=true;
+                    
+                });
+
+            }
+
+        }
         $scope.gridOptions.data = [{
             state: "AL",
             city: "Birmingham",
@@ -48,9 +77,10 @@ angular.module('myApp.trailerPool', ['ngRoute','vsGoogleAutocomplete','dataGrid'
             curr: "1",
             variance: 0,
             twm: "VALBIRG02",
-            totReq:"1"
-            
-        },{
+            totReq: "1",
+            show: true
+
+        }, {
             state: "AL",
             city: "Birmingham",
             csr: "Kevin",
@@ -60,9 +90,9 @@ angular.module('myApp.trailerPool', ['ngRoute','vsGoogleAutocomplete','dataGrid'
             curr: "1",
             variance: 1,
             twm: "AVEBIR",
-            totReq:"2"
-            
-        },{
+            totReq: "2"
+
+        }, {
             state: "AL",
             city: "Cullman",
             csr: "Sarah",
@@ -72,9 +102,9 @@ angular.module('myApp.trailerPool', ['ngRoute','vsGoogleAutocomplete','dataGrid'
             curr: "1",
             variance: 3,
             twm: "SERCUL02",
-            totReq:"4"
-            
-        },{
+            totReq: "4"
+
+        }, {
             state: "AL",
             city: "Gentry",
             csr: "David",
@@ -84,9 +114,9 @@ angular.module('myApp.trailerPool', ['ngRoute','vsGoogleAutocomplete','dataGrid'
             curr: "2",
             variance: 4,
             twm: "MCK",
-            totReq:"6"
-            
-        },{
+            totReq: "6"
+
+        }, {
             state: "AR",
             city: "North Little Rock",
             csr: "Mike",
@@ -96,9 +126,9 @@ angular.module('myApp.trailerPool', ['ngRoute','vsGoogleAutocomplete','dataGrid'
             curr: "5",
             variance: 5,
             twm: "VALBIRG02",
-            totReq:"10"
-            
-        },{
+            totReq: "10"
+
+        }, {
             state: "AZ",
             city: "Phoenix",
             csr: "Mike",
@@ -108,9 +138,9 @@ angular.module('myApp.trailerPool', ['ngRoute','vsGoogleAutocomplete','dataGrid'
             curr: "1",
             variance: 12,
             twm: "VALBIRG02",
-            totReq:"13"
-            
-        },{
+            totReq: "13"
+
+        }, {
             state: "AL",
             city: "Birmingham",
             csr: "Mike",
@@ -120,23 +150,27 @@ angular.module('myApp.trailerPool', ['ngRoute','vsGoogleAutocomplete','dataGrid'
             curr: "2",
             variance: 9,
             twm: "VALBIRG02",
-            totReq:"11"
-            
+            totReq: "11"
+
         }, ];
-        $rootScope.doReposition  = function(trailerID){
+        $rootScope.doReposition = function (trailerID) {
             $scope.showGraph = false;
 
             console.log(trailerID);
-            var resultTrailer = _.find($scope.tractorData, function (x) { return x.TrailerID === trailerID; });
+            var resultTrailer = _.find($scope.tractorData, function (x) {
+                return x.TrailerID === trailerID;
+            });
             console.log(resultTrailer);
             $mdDialog.show({
                 controller: DialogController,
                 templateUrl: 'app/trailerPool/repositionInfo.html',
                 parent: angular.element(document.body),
-                
-                animation:undefined,
-                clickOutsideToClose:true,
-                locals: { machine: resultTrailer },
+
+                animation: undefined,
+                clickOutsideToClose: true,
+                locals: {
+                    machine: resultTrailer
+                },
                 escapeToClose: true,
                 // onComplete:afterShowAnimation,
                 // fullscreen: true // Only for -xs, -sm breakpoints.
@@ -145,7 +179,7 @@ angular.module('myApp.trailerPool', ['ngRoute','vsGoogleAutocomplete','dataGrid'
             function afterShowAnimation(rootScope, element, options) {
                 // post-show code here: DOM element focus, etc.
 
-                myAppFactory.getMachineData(machine).then(function(response) {
+                myAppFactory.getMachineData(machine).then(function (response) {
 
 
                 })
@@ -154,21 +188,25 @@ angular.module('myApp.trailerPool', ['ngRoute','vsGoogleAutocomplete','dataGrid'
             }
 
         }
-        
-        $rootScope.doEdit  = function(trailerID){
+
+        $rootScope.doEdit = function (trailerID) {
             $scope.showGraph = false;
 
             console.log(trailerID);
-            var resultTrailer = _.find($scope.tractorData, function (x) { return x.TrailerID === trailerID; });
+            var resultTrailer = _.find($scope.tractorData, function (x) {
+                return x.TrailerID === trailerID;
+            });
             console.log(resultTrailer);
             $mdDialog.show({
                 controller: DialogController,
                 templateUrl: 'app/trailerPool/EditInfo.html',
                 parent: angular.element(document.body),
-                
-                animation:undefined,
-                clickOutsideToClose:true,
-                locals: { machine: resultTrailer },
+
+                animation: undefined,
+                clickOutsideToClose: true,
+                locals: {
+                    machine: resultTrailer
+                },
                 escapeToClose: true,
                 // onComplete:afterShowAnimation,
                 // fullscreen: true // Only for -xs, -sm breakpoints.
@@ -177,7 +215,7 @@ angular.module('myApp.trailerPool', ['ngRoute','vsGoogleAutocomplete','dataGrid'
             function afterShowAnimation(rootScope, element, options) {
                 // post-show code here: DOM element focus, etc.
 
-                myAppFactory.getMachineData(machine).then(function(response) {
+                myAppFactory.getMachineData(machine).then(function (response) {
 
 
                 })
@@ -186,17 +224,17 @@ angular.module('myApp.trailerPool', ['ngRoute','vsGoogleAutocomplete','dataGrid'
             }
 
         }
-        
+
         $rootScope.isRecentAlertLoading = true;
-        $rootScope.$on('triggerMachineDetail', function(event,machine){
-            console.log("triggered",machine)
+        $rootScope.$on('triggerMachineDetail', function (event, machine) {
+            console.log("triggered", machine)
 
         });
         $rootScope.isRealTime = true;
-        $("#map").height($(window).height()-200);
-        $(window).bind("resize",function(){
+        $("#map").height($(window).height() - 200);
+        $(window).bind("resize", function () {
 
-            $("#map").height($(window).height()-200);
+            $("#map").height($(window).height() - 200);
         })
         //InitializeComponents();
         var mapa = null;
@@ -207,7 +245,7 @@ angular.module('myApp.trailerPool', ['ngRoute','vsGoogleAutocomplete','dataGrid'
             place: '',
             components: {
                 placeId: '',
-                streetNumber: '', 
+                streetNumber: '',
                 street: '',
                 city: '',
                 state: '',
@@ -222,28 +260,34 @@ angular.module('myApp.trailerPool', ['ngRoute','vsGoogleAutocomplete','dataGrid'
             }
         };
         resetValues();
-        $scope.$watch('address.place', function() {
-            console.log("name",$scope.address.name);
-            if($scope.address.place.geometry){
-                console.log("palce",$scope.address.place);
+        $scope.$watch('address.place', function () {
+            console.log("name", $scope.address.name);
+            if ($scope.address.place.geometry) {
+                console.log("palce", $scope.address.place);
 
                 if ($scope.address.place.geometry.viewport) {
                     mapa.fitBounds($scope.address.place.geometry.viewport);
-                }else{
+                } else {
                     mapa.setCenter($scope.address.place.geometry.location);
-                    mapa.setZoom(8);}
+                    mapa.setZoom(8);
+                }
             }
         });
-        $scope.acOption = {types: ['(cities)'],
-                           componentRestrictions: {country: "us"}}
+        $scope.acOption = {
+            types: ['(cities)'],
+            componentRestrictions: {
+                country: "us"
+            }
+        }
         $scope.view = {
             addressInput: '',
             places: [],
-            selectedPlace: ''}
+            selectedPlace: ''
+        }
         $scope.findAddress = findAddress;
         $scope.focusLocation = focusLocation;
-        $scope.resetZoom = function(){
-            $scope.address.name="";
+        $scope.resetZoom = function () {
+            $scope.address.name = "";
             resetValues();
             $scope.filterMachines();
             mapa.setZoom(DEFAULT_ZOOM_LEVEL);
@@ -251,10 +295,11 @@ angular.module('myApp.trailerPool', ['ngRoute','vsGoogleAutocomplete','dataGrid'
         }
 
         function findAddress() {
-            console.log("lat",$scope.address.components.location.lat)
+            console.log("lat", $scope.address.components.location.lat)
             if (geocoder !== undefined) {
-                geocoder.geocode(
-                    { address: $scope.view.addressInput },
+                geocoder.geocode({
+                        address: $scope.view.addressInput
+                    },
                     function (results, status) {
                         $scope.view.places = [];
                         $scope.view.selectedPlace = '';
@@ -266,7 +311,7 @@ angular.module('myApp.trailerPool', ['ngRoute','vsGoogleAutocomplete','dataGrid'
                                     $scope.view.selectedPlace = results[0].place_id;
                                     $scope.view.addressInput = results[0].formatted_address;
                                     focusLocation();
-                                } else showMessage( $scope.view.places.length + ' places found');
+                                } else showMessage($scope.view.places.length + ' places found');
                                 break;
                             case google.maps.GeocoderStatus.ZERO_RESULTS:
                                 showMessage('No results found');
@@ -287,22 +332,23 @@ angular.module('myApp.trailerPool', ['ngRoute','vsGoogleAutocomplete','dataGrid'
         //Posiciona en el centro de la vista del mapa la ubicacion seleccionada
         function focusLocation() {
             if ($scope.view.selectedPlace !== undefined & $scope.view.selectedPlace !== '') {
-                var location = _.result(_.find($scope.view.places, function (x) { return x.place_id === $scope.view.selectedPlace; }), 'geometry.location');
+                var location = _.result(_.find($scope.view.places, function (x) {
+                    return x.place_id === $scope.view.selectedPlace;
+                }), 'geometry.location');
                 if (location !== undefined) {
 
                     mapa.setCenter(location);
                     mapa.setZoom(8);
-                }
-                else {
+                } else {
                     showMessage('No se pudo mostrar la ubicación');
                 }
             }
         }
-        $scope.initialize = function(){
+        $scope.initialize = function () {
 
             InitializeComponents();
         }
-        $scope.filterMachines = function(){
+        $scope.filterMachines = function () {
             gmapService.data = filterData(machines);
             gmapService.placeMarkersOnMap(mapa);
         }
@@ -310,6 +356,7 @@ angular.module('myApp.trailerPool', ['ngRoute','vsGoogleAutocomplete','dataGrid'
             console.log(event);
             console.log(param);
         });
+
         function InitializeComponents() {
             var mapConfig = {
                 center: US_CENTER_LAT_LNG,
@@ -370,7 +417,7 @@ angular.module('myApp.trailerPool', ['ngRoute','vsGoogleAutocomplete','dataGrid'
             geocoder = new google.maps.Geocoder();
             /*d3 gmap lab*/
 
-            var myoverlay =new google.maps.OverlayView();
+            var myoverlay = new google.maps.OverlayView();
             /*// Add the container when the overlay is added to the map.
               myoverlay.onAdd = function() {
                 var layer = d3.select(this.getPanes().overlayLayer).append("div")
@@ -429,8 +476,8 @@ angular.module('myApp.trailerPool', ['ngRoute','vsGoogleAutocomplete','dataGrid'
                     }
                 };
             };*/
-            myoverlay.draw = function (     ) {
-                this.getPanes().markerLayer.id='markerLayer';
+            myoverlay.draw = function () {
+                this.getPanes().markerLayer.id = 'markerLayer';
             };
 
             myoverlay.setMap(mapa);
@@ -438,20 +485,21 @@ angular.module('myApp.trailerPool', ['ngRoute','vsGoogleAutocomplete','dataGrid'
             //  var markerCluster = new MarkerClusterer(mapa, markers);
             $rootScope.recentAlerts = [];
             update();
-            $rootScope.updatePromise =  $interval(function(){  
-                update(); }, REFRESHING_INTERVAL*60*1000);
+            $rootScope.updatePromise = $interval(function () {
+                update();
+            }, REFRESHING_INTERVAL * 60 * 1000);
 
-            $scope.$on('$destroy',function(){
+            $scope.$on('$destroy', function () {
                 console.log("destroyedd")
-                if( $rootScope.updatePromise)
-                    $interval.cancel( $rootScope.updatePromise);   
+                if ($rootScope.updatePromise)
+                    $interval.cancel($rootScope.updatePromise);
             });
 
-            Array.prototype.unique = function() {
+            Array.prototype.unique = function () {
                 var a = this.concat();
-                for(var i=0; i<a.length; ++i) {
-                    for(var j=i+1; j<a.length; ++j) {
-                        if(a[i].MachineId === a[j].MachineId)
+                for (var i = 0; i < a.length; ++i) {
+                    for (var j = i + 1; j < a.length; ++j) {
+                        if (a[i].MachineId === a[j].MachineId)
                             a.splice(j--, 1);
                     }
                 }
@@ -459,10 +507,14 @@ angular.module('myApp.trailerPool', ['ngRoute','vsGoogleAutocomplete','dataGrid'
                 return a;
             };
             $scope.tractorData = [];
-            function update(){
-                $.get({url:GET_TRACTOR_LOCATOR_URL,cache: false}).then(function(data) {
+
+            function update() {
+                $.get({
+                    url: GET_TRACTOR_LOCATOR_URL,
+                    cache: false
+                }).then(function (data) {
                     //var jsonData = JSON.parse(data);//makeAsJSON(data);
-                    console.log(new Date()+"--->machine Length->",data.length);
+                    console.log(new Date() + "--->machine Length->", data.length);
 
                     gmapService.data = data;
                     $scope.tractorData = data;
@@ -477,13 +529,13 @@ angular.module('myApp.trailerPool', ['ngRoute','vsGoogleAutocomplete','dataGrid'
                         })*/
                     /*Temp fix*/
 
-                   
+
                     $scope.$digest();
-                  
 
 
 
-                }); 
+
+                });
             }
 
             /*$http.get("app/data/output.json").then(function(response){
@@ -496,62 +548,65 @@ angular.module('myApp.trailerPool', ['ngRoute','vsGoogleAutocomplete','dataGrid'
 
         }
 
-        function filterData(data){
-            var machineStatus= $scope.machineStatus.value;
+        function filterData(data) {
+            var machineStatus = $scope.machineStatus.value;
             var machineRange = $scope.machineRange.value;
 
             var filteredData = null;
-            if(machineStatus >= 0 && machineRange == "")
-            {
-                filteredData = _.filter(data, function(obj) {
+            if (machineStatus >= 0 && machineRange == "") {
+                filteredData = _.filter(data, function (obj) {
 
-                    return obj.EngineOn == machineStatus ;
+                    return obj.EngineOn == machineStatus;
                 });
-            }
-            else if(machineStatus  >= 0 && machineRange != ""){
-                filteredData  = _.filter(data, function(obj) {
+            } else if (machineStatus >= 0 && machineRange != "") {
+                filteredData = _.filter(data, function (obj) {
                     var res = false;
-                    if((obj.EngineOn == machineStatus)  && ( obj.MachineId <= $scope.machineRange.max  &&  obj.MachineId >= $scope.machineRange.min))
+                    if ((obj.EngineOn == machineStatus) && (obj.MachineId <= $scope.machineRange.max && obj.MachineId >= $scope.machineRange.min))
                         res = true
-                        return res ;
+                    return res;
                 });
-            }
-            else if((machineStatus =="-1" || machineStatus =="") && machineRange != ""){
-                filteredData  = _.filter(data, function(obj) {
+            } else if ((machineStatus == "-1" || machineStatus == "") && machineRange != "") {
+                filteredData = _.filter(data, function (obj) {
                     var res = false;
-                    if(( obj.MachineId <= $scope.machineRange.max  &&  obj.MachineId >= $scope.machineRange.min))
+                    if ((obj.MachineId <= $scope.machineRange.max && obj.MachineId >= $scope.machineRange.min))
                         res = true
-                        return res ;
+                    return res;
                 });
-            }
-
-
-            else{
+            } else {
                 filteredData = data;
             }
 
-            console.log("Status",filteredData.length);
+            console.log("Status", filteredData.length);
             return filteredData;
         }
-        function getMarkerImage(engineState){
+
+        function getMarkerImage(engineState) {
             var imagePath = "";
-            if(engineState == ENGINE_ON){
-                imagePath= "images/markers/over_heat_idle.png";
+            if (engineState == ENGINE_ON) {
+                imagePath = "images/markers/over_heat_idle.png";
+            } else {
+                imagePath = "images/markers/over_heat_idle.png";
             }
-            else{
-                imagePath= "images/markers/over_heat_idle.png";
-            }
-            return  new google.maps.MarkerImage(imagePath,
-                                                new google.maps.Size(40, 40));
+            return new google.maps.MarkerImage(imagePath,
+                new google.maps.Size(40, 40));
         }
-        function calucateRange(machineLength,threshHold){
+
+        function calucateRange(machineLength, threshHold) {
             var machineStartingSerial = 1;
             var rangeArray = [];
 
-            rangeArray.push({"value":"","displayValue":"All" });
-            while(machineStartingSerial <= machineLength){
-                var ending_serial = parseInt(machineStartingSerial)+ parseInt(threshHold-1);
-                rangeArray.push({"value":ending_serial,"displayValue":machineStartingSerial + "--" + ending_serial,min:machineStartingSerial,max:ending_serial});
+            rangeArray.push({
+                "value": "",
+                "displayValue": "All"
+            });
+            while (machineStartingSerial <= machineLength) {
+                var ending_serial = parseInt(machineStartingSerial) + parseInt(threshHold - 1);
+                rangeArray.push({
+                    "value": ending_serial,
+                    "displayValue": machineStartingSerial + "--" + ending_serial,
+                    min: machineStartingSerial,
+                    max: ending_serial
+                });
                 machineStartingSerial += threshHold;
             }
             /*for(var i=machineStartingSerial;i<=machineLength;i+=threshHold){
@@ -559,14 +614,30 @@ angular.module('myApp.trailerPool', ['ngRoute','vsGoogleAutocomplete','dataGrid'
        }*/
             return rangeArray;
         }
-        function resetValues(){
-            $scope.machineStatus = {"name":"All","value":-1};
-            $scope.machineRange = {"value":""};
-            $scope.MachineStatuses = [{"name":"All","value":-1},{"name":"Idle","value":0},{"name":"Running","value":1}];
+
+        function resetValues() {
+            $scope.machineStatus = {
+                "name": "All",
+                "value": -1
+            };
+            $scope.machineRange = {
+                "value": ""
+            };
+            $scope.MachineStatuses = [{
+                "name": "All",
+                "value": -1
+            }, {
+                "name": "Idle",
+                "value": 0
+            }, {
+                "name": "Running",
+                "value": 1
+            }];
         }
 
-        $scope.MachineRanges = calucateRange(1000,10);
-        function update(){
+        $scope.MachineRanges = calucateRange(1000, 10);
+
+        function update() {
             console.log("Updating..");
             var url = "app/data/simulator.json";
             /* d3.json(url,function(error,data){
@@ -581,14 +652,14 @@ angular.module('myApp.trailerPool', ['ngRoute','vsGoogleAutocomplete','dataGrid'
                 console.log(new Date()+"--->machine Length->",data.length);
 
             })*/
-            $.get('data/StreamingData/part-00000', function(data) {
+            $.get('data/StreamingData/part-00000', function (data) {
 
                 var jsonData = makeAsJSON(data);
-                console.log(Date.now()+"--0->machine Length->",jsonData.length);
-                var threshold = parseInt(jsonData.length/10);
+                console.log(Date.now() + "--0->machine Length->", jsonData.length);
+                var threshold = parseInt(jsonData.length / 10);
 
-                $scope.MachineRanges = calucateRange(jsonData.length,threshold);
-                $scope.data = makeAsJSON(data);     
+                $scope.MachineRanges = calucateRange(jsonData.length, threshold);
+                $scope.data = makeAsJSON(data);
                 $scope.showMarkers();
 
             });
@@ -608,14 +679,16 @@ angular.module('myApp.trailerPool', ['ngRoute','vsGoogleAutocomplete','dataGrid'
         machineNRT.showMarkers();
     });*/
         }
+
         function replaceAll(str, find, replace) {
             return str.replace(new RegExp(find, 'g'), replace);
         }
-        function makeAsJSON(data){
-            var addedCommaData = replaceAll(data,"}","},");
+
+        function makeAsJSON(data) {
+            var addedCommaData = replaceAll(data, "}", "},");
             var part1 = addedCommaData.trim().substring(0, addedCommaData.length - 2);
             var result = "[" + part1 + "]";
-            var jssonArray = JSON.parse(result);              
+            var jssonArray = JSON.parse(result);
             return jssonArray;
 
 
@@ -636,4 +709,3 @@ angular.module('myApp.trailerPool', ['ngRoute','vsGoogleAutocomplete','dataGrid'
             console.log(message);
         }
     }]);
-
