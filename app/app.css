@@ -720,6 +720,7 @@ body,h3,h4{
 .ctg-table-action-icon-wrapper{
     background: #00264B;  
     cursor: pointer;
+    margin-left: 4px;
 }
 .ctg-span-condition{
     margin-left: 20px;

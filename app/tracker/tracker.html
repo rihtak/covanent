@@ -20,8 +20,20 @@
          <div layout="row" style="background:lightgrey">
             <div style="font-size:16px;PADDING: 10px 0px 10px 28px;"><b > Locate Trailer</b> </div>
         </div>
-        <div layout="row" style="padding-left:26px">
-            <md-input-container flex="20">
+        <div layout="row" style="padding-left:26px" class="ctg-filter">
+           
+                                <input type="text" class="ctg-textbox" placeholder="Trailer Id">
+                                <md-icon class="material-icons md-toolbar_icon ctg-textbox-filter-icon" >
+                                    search
+                                </md-icon>
+
+                                <span class="ctg-span-condition"></span>
+                                <input type="text"   ng-change="findAddress()" vs-google-autocomplete  ng-model="address.name" class="ctg-textbox" placeholder="Choose State">
+                                <md-icon class="material-icons md-toolbar_icon ctg-textbox-filter-icon" >
+                                    search
+                                </md-icon>
+                            
+           <!-- <md-input-container flex="20">
 
                 <label>Trailer Id</label>
                 <input type="text">
@@ -32,7 +44,7 @@
                 <input vs-google-autocomplete ng-model="address.name" placeholder="Choose State" vs-place="address.place" vs-place-id="address.components.placeId" vs-street-number="address.components.streetNumber" vs-street="address.components.street" vs-city="address.components.city" vs-state="address.components.state"
                        vs-country-short="address.components.countryCode" vs-country="address.components.country" vs-post-code="address.components.postCode" vs-latitude="address.components.location.lat" vs-longitude="address.components.location.long" type="text" name="address"
                        id="address1" class="form-control" placeholder="{{test}}" ng-change="findAddress()" vs-google-autocomplete="acOption">
-            </md-input-container>
+            </md-input-container>-->
 
                 <!--<button ng-click="showDetail($event)">history</button>-->
             <!-- <md-input-container >

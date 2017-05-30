@@ -230,11 +230,14 @@ angular.module('myApp.allocation', ['ngRoute', 'dataGrid', 'pagination','ngAnima
             item.selectedtClass="selectedtClass"
         }
 
-        $scope.allocate = function(){
-            // alert("Trailer id: "+$scope.selectedtrailerow.trailerId +" Allocated to order id: "+$scope.selectedrow.order);
-            $scope.showConfirm(this,"Trailer id: "+$scope.selectedtrailerow.TrailerID +" will map to Order id: "+$scope.selectedrow.order);
-            //  $scope.isOrderClicked = false;
-            // listTheOrders();
+        $scope.allocate = function(ev){
+          
+             var confirm = $mdDialog.alert()
+                .title('Your allocation done successfully.')             
+                .ariaLabel('Lucky day')
+                .targetEvent(ev)
+                .ok('Ok');
+            
 
         }
         $rootScope.isRealTime = false;

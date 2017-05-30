@@ -198,7 +198,7 @@
                                                     <div class="truckHeader">Status: {{ item.status }}</div>
 
                                                     <div layout="row " layout-align="start" class="ctg-action-list-item"><a >Details</a> 
-                                                        <div layout="row " flex="100" layout-align="end" >
+                                                        <div layout="row " flex="100" layout-align="start" >
                                                             <div class="ctg-table-action-icon-wrapper" ng-click="selectTruck(item)">
                                                                 <input type="button" class="ctg-action-button"  value="Proceed">
                                                                 <md-icon class="material-icons md-toolbar_icon ctg-table-action-icon" >
@@ -261,7 +261,10 @@
                             <div flex="20">
 
                                 <div class="row  ctg-list-header">
-                                    Order #{{selectedOrder.order}}
+                                    Order #{{selectedOrder.order}} 
+                                     <div class="row" style="font-size:10px">
+                                         Truck # {{selectedTruck.truckId}}
+                                    </div> 
                                 </div>
                                 <md-list flex>
                                     <md-subheader class="md-no-sticky list-result-count">{{gridOptions3.data.length}} Results found</md-subheader>
@@ -278,7 +281,7 @@
 
 
                                                     <div layout="row " layout-align="start" class="ctg-action-list-item"><a >Details</a> 
-                                                        <div layout="row " flex="100" layout-align="end" >
+                                                        <div layout="row " flex="100" layout-align="start" >
                                                             <div class="ctg-table-action-icon-wrapper" ng-click="selectTrailer(item)">
                                                                 <input type="button" class="ctg-action-button"  value="Proceed">
                                                                 <md-icon class="material-icons md-toolbar_icon ctg-table-action-icon" >
@@ -397,7 +400,7 @@
                                                 Cancel
                                             </md-button>-->
                                              <input type="button" class="ctg-action-button" value="CANCEL"  ng-click="cancleAllocation()">
-                                              <input type="button" class="ctg-action-button" value="ALLOCATE">
+                                              <input type="button" class="ctg-action-button" value="ALLOCATE" ng-click="allocate($event)">
                                           <!--  <md-button  class="md-raised md-warn"  style="background-color:#00264B;float: right;" ng-click="allocate()">
                                                 Allocate
                                             </md-button>-->
