@@ -1,6 +1,7 @@
 .altura-mapa {
     height: 400px;
     margin: 0px 10px 0px 10px;
+    display: none;
 }
 .info{
     height: 80px;

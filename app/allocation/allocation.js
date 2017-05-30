@@ -34,6 +34,13 @@ angular.module('myApp.allocation', ['ngRoute', 'dataGrid', 'pagination','ngAnima
             $scope.selection = selection;
         }
         //intiallaly show the orders
+        $scope.goToWizard = function(page){
+            $scope.selection = page;
+           
+        }
+        $scope.cancleAllocation = function(){
+            showWizard('orders');
+        }
         showWizard('orders');
         $scope.filter= {};
          $scope.filter.miles = 150;
