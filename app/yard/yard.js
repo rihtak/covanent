@@ -65,7 +65,7 @@ angular.module('myApp.yard', ['ngRoute', 'dataGrid', 'pagination'])
             // Appending dialog to document.body to cover sidenav in docs app
             var confirm = $mdDialog.confirm()
                 .title('Do you want to initiate yard inspection for this trailer?')
-                .textContent('Do you want to initiate yard inspection for this trailer?')
+                //.textContent('Do you want to initiate yard inspection for this trailer?')
                 .ariaLabel('Lucky day')
                 .targetEvent(ev)
                 .ok('Ok')
@@ -73,10 +73,29 @@ angular.module('myApp.yard', ['ngRoute', 'dataGrid', 'pagination'])
 
             $mdDialog.show(confirm).then(function () {
                 $scope.status = 'You decided to get rid of your debt.';
+                $scope.confirm();
             }, function () {
                 $scope.status = 'You decided to keep your debt.';
             });
         };
+        
+         $scope.confirm = function (ev) {
+            // Appending dialog to document.body to cover sidenav in docs app
+            var confirm = $mdDialog.alert()
+                .title('Yard inspection for this trailer initiated successfully')
+                //.textContent('Do you want to initiate yard inspection for this trailer?')
+                .ariaLabel('Lucky day')
+                .targetEvent(ev)
+                .ok('Ok');
+                //.cancel('Cancel');
+
+            $mdDialog.show(confirm).then(function () {
+                $scope.status = 'You decided to get rid of your debt.';
+            }, function () {
+                $scope.status = 'You decided to keep your debt.';
+            });
+        };
+
 
         $scope.gridOptions.data = [{
             trailerid: "45833",
