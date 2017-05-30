@@ -9,8 +9,10 @@ angular.module('myApp.trailerPool', ['ngRoute', 'vsGoogleAutocomplete', 'dataGri
     }])
 
     .controller('trailerPoolCtrl', ['$scope', '$http', '$mdToast', '$interval', '$rootScope', '$mdDialog', 'myAppFactory', function ($scope, $http, $mdToast, $interval, $rootScope, $mdDialog, myAppFactory) {
+         $scope.viewFlag = "0";
         function DialogController($scope, $mdDialog, machine) {
             $scope.machine = machine;
+           
             myAppFactory.getTrailerHistoryData().then(function (response) {
                 console.log("response", response.data);
                 $scope.machine.histories = response.data;
