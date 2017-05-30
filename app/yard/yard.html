@@ -25,17 +25,16 @@
                 <div grid-data id='test' grid-options="gridOptions" grid-actions="gridActions">
                     <div layout-gt-sm="row" layout-sm="column">
 
-                        <div layout="row" flex-gt-sm="25" flex-sm="100" layout-align=" start">
+                        <div layout="row" flex="100" layout-align=" start" class="ctg-filter" >
 
-                            <md-input-container flex="60">
-                                <label>Please choose yard</label>
-                                <md-select ng-model="yard" ng-change="gridActions.filter()">
+                           
+                                <select ng-model="yard" class="ctg-select" ng-change="gridActions.filter()">
 
-                                    <md-option value="Chattanooga West yard" selected="selected">Chattanooga West yard</md-option>
-                                    <md-option value="Atlanta">Atlanta</md-option>
-                                    <md-option value="Nashville">Nashville</md-option>
-                                </md-select>
-                            </md-input-container>
+                                    <option value="Chattanooga West yard" selected="selected">Chattanooga West yard</option>
+                                    <option value="Atlanta">Atlanta</option>
+                                    <option value="Nashville">Nashville</option>
+                                </select>
+                            
                         </div>
 
 
@@ -46,9 +45,9 @@
 
 
                         </div>
-                        <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+                        <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp ctg-table">
                             <thead>
-                                <tr>
+                                <tr class="ctg-table-header">
 
                                     <th style="text-align:center">
                                         <span>Trailer id</span>

@@ -29,6 +29,7 @@ angular.module('myApp.yard', ['ngRoute', 'dataGrid', 'pagination'])
 
 
     .controller('YardCtrl', ['$scope', '$timeout', 'Load_document', '$rootScope', 'myAppFactory', '$mdDialog', '$window', '$http', function ($scope, $timeout, Load_document, $rootScope, myAppFactory, $mdDialog, $window, $http, $element) {
+        $scope.yard = "Chattanooga West yard"
         $scope.isOrderClicked = false;
         // $scope.selectedrow = {};
         // $scope.selectedtrailerow = {};

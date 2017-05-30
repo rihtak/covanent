@@ -56,9 +56,19 @@
                                             </select>
                              
                                 <div layout="row" flex="40" layout-align="end center">
-                                    <md-button class="md-raised md-warn" style="background-color:#00264B;float: right;" ng-click="doReposition()">
+                                   <!-- <md-button class="md-raised md-warn" style="background-color:#00264B;float: right;" ng-click="doReposition()">
                                         Add
-                                    </md-button>
+                                    </md-button>-->
+                                    <div class="ctg-table-action-icon-wrapper" ng-click="doReposition()">
+                                                    <input type="button" class="ctg-action-button-add"  value="ADD">
+                                                    <md-icon class="material-icons md-toolbar_icon ctg-table-action-icon" style="    font-size: 22px" >
+                                                        add
+                                                    </md-icon>
+                                                </div>
+                                     <!--<input type="button" class="ctg-action-button" value="Add" ng-click="doReposition()">
+                                    <md-icon class="material-icons md-toolbar_icon ctg-textbox-filter-icon" >
+                                    add
+                                </md-icon>-->
                                 </div>
 
 
@@ -72,9 +82,9 @@
 
 
                             </div>
-                            <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+                            <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp ctg-table">
                                 <thead>
-                                    <tr>
+                                    <tr class="ctg-table-header">
                                         <th style="text-align:center">
                                             <span>State</span>
                                         </th>

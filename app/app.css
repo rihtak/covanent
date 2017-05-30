@@ -699,6 +699,7 @@ body,h3,h4{
 
 .ctg-textbox{
     border: none;
+    padding: 10px;
 }
 .ctg-textbox-filter-icon{
     color: black;
@@ -759,12 +760,20 @@ body,h3,h4{
     height: 25px;
     margin: 2px;
 }
+.ctg-action-button-add {
+    background: #00264B;
+    color: white;
+    border: none;
+    height: 25px;
+    margin-left: 2px;
+    padding: 5px;
+}
 .ctg-list-header {
     
     background:  #D1DEEF;
     color:black;
     font-weight: bold;
-    height: 30px;
+    height: 35px;
     padding: 5px;
     
 }
