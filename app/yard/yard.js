@@ -68,8 +68,8 @@ angular.module('myApp.yard', ['ngRoute', 'dataGrid', 'pagination'])
                 //.textContent('Do you want to initiate yard inspection for this trailer?')
                 .ariaLabel('Lucky day')
                 .targetEvent(ev)
-                .ok('Ok')
-                .cancel('Cancel');
+                .ok('Yes')
+                .cancel('No');
 
             $mdDialog.show(confirm).then(function () {
                 $scope.status = 'You decided to get rid of your debt.';
