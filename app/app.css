@@ -560,6 +560,15 @@ md-dialog.fullscreen-dialog {
     height: 80%;
     border-radius: 0;
 }
+
+md-dialog.halfscreen-dialog {
+    max-width: 25%;
+    max-height: 80%;
+    width: 25%;
+    height: 80%;
+    border-radius: 0;
+}
+
 md-dialog.fullscreen-dialog-login{
     max-width: 100%;
     max-height: 100%;
