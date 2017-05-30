@@ -32,29 +32,31 @@
                     <div grid-data id='test' grid-options="gridOptions" grid-actions="gridActions">
                         <div layout-gt-sm="row" layout-sm="column">
 
-                            <div layout="row" flex="100">
-                                <md-input-container flex="20">
-
-                                    <input ng-model="order" class="md-input" ng-change="gridActions.filter()" id="order" placeholder="Search By state" filter-by="state" filter-type="text" aria-invalid="false">
-                                </md-input-container>
-                                <md-input-container flex="20">
-
-                                    <input ng-model="code1" class="md-input" ng-change="gridActions.filter()" id="order" placeholder="Search by city" filter-by="city" filter-type="text" aria-invalid="false">
-                                </md-input-container>
-                                <md-input-container flex="20">
-
-                                    <input ng-model="code2" class="md-input" ng-change="gridActions.filter()" id="order" placeholder="Company/Customer" filter-by="company" filter-type="text" aria-invalid="false">
-                                </md-input-container>
-                                <md-input-container flex="20">
-
-                                    <md-select ng-model="viewFlag" ng-change="viewSelect(viewFlag)">
-                                        <md-option value="0" selected="selected">Pools having no variance</md-option>
-                                        <md-option value="1">Pool have variance</md-option>
-                                        <md-option value="-1">All variance</md-option>
-                                    </md-select>
-                                </md-input-container>
+                            <div layout="row" flex="100"  class="ctg-filter">
+                                <input  flex="20" ng-model="order" class="ctg-textbox" ng-change="gridActions.filter()" id="order" placeholder="Search By state" filter-by="state" filter-type="text" aria-invalid="false">
+                                <md-icon class="material-icons md-toolbar_icon ctg-textbox-filter-icon" >
+                                    search
+                                </md-icon>
+                                 <span class="ctg-span-condition"></span>
+                                <input ng-model="code1" class="ctg-textbox" ng-change="gridActions.filter()" id="order" placeholder="Search by city" filter-by="city" filter-type="text" aria-invalid="false">
+                                <md-icon class="material-icons md-toolbar_icon ctg-textbox-filter-icon" >
+                                    search
+                                </md-icon>
+                                <span class="ctg-span-condition"></span>
+                                <input ng-model="code2" class="ctg-textbox" ng-change="gridActions.filter()" id="order" placeholder="Company/Customer" filter-by="company" filter-type="text" aria-invalid="false">
+                                <md-icon class="material-icons md-toolbar_icon ctg-textbox-filter-icon" >
+                                    search
+                                </md-icon>
+                                 <span class="ctg-span-condition"></span>
+                                 <select flex="40" ng-model="viewFlag" class="ctg-select" ng-change="viewSelect(viewFlag)">
+                                                <option   value="0"  selected="selected">Pools having no variance</option>
+                                                <option  value="1">Pool have variance</option>
+                                                <option value="-1">All variance</option>
+                                                
+                                            </select>
+                             
                                 <div layout="row" flex="40" layout-align="end center">
-                                    <md-button class="md-raised md-warn" style="background-color:#00264B;float: right;height:40px;margin-top:5px" ng-click="doReposition()">
+                                    <md-button class="md-raised md-warn" style="background-color:#00264B;float: right;" ng-click="doReposition()">
                                         Add
                                     </md-button>
                                 </div>
