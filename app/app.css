@@ -800,3 +800,9 @@ body,h3,h4{
 #truckMap{
     
 }
+.md-button{
+    cursor: pointer;
+}
+a{
+    cursor: pointer;
+}

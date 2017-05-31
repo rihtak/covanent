@@ -22,25 +22,45 @@
                         <li>
                             <md-input-container>
                                 
-                                <input class="md-input" placeholder="Required Count" type="text" aria-invalid="true">
+                                <input class="md-input" placeholder="Customer/Comapany" type="text" aria-invalid="true">
                             </md-input-container>
                         </li>
                         <li>
                             <md-input-container>
                                 
-                                <input class="md-input" placeholder="CSR Name" type="text" aria-invalid="false">
+                                <input class="md-input" placeholder="CSR name" type="text" aria-invalid="false">
+                            </md-input-container>
+                        </li>
+                         <li>
+                            <md-input-container>
+                                
+                                <input class="md-input" placeholder="Planner name" type="text" aria-invalid="false">
+                            </md-input-container>
+                        </li>
+                         <li>
+                            <md-input-container>
+                                
+                                <input class="md-input" placeholder="TMW" type="text" aria-invalid="true">
                             </md-input-container>
                         </li>
                         <li>
                             <md-input-container>
                                 
-                                <input class="md-input" placeholder="Planner Name" type="text" aria-invalid="false">
+                                <input class="md-input" placeholder="Required pool" type="text" aria-invalid="true">
                             </md-input-container>
                         </li>
                         <li>
                             <md-input-container>
                                 
-                                <input class="md-input" placeholder="Site Identification" type="text" aria-invalid="false">
+                                <input class="md-input" placeholder="Current"  type="text" aria-invalid="true">
+                            </md-input-container>
+                        </li>
+                        
+                       
+                        <li>
+                            <md-input-container>
+                                
+                                <input class="md-input" placeholder="Variance" readonly type="text" aria-invalid="true">
                             </md-input-container>
                         </li>
 
@@ -50,7 +70,7 @@
 
                 <div layout="row"  layout-align="center center">
 
-                    <md-button flex="10" class="md-raised md-warn" style="background-color:#00264B;float: right;">
+                    <md-button flex="10" class="md-raised md-warn" style="background-color:#00264B;float: right;" ng-click="answer()">
                         Ok
                     </md-button>
                     <md-button flex="10" class="md-raised md-warn" style="background-color:#00264B;float: right;" ng-click="cancel()">

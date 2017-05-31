@@ -10,8 +10,8 @@ angular.module('myApp.trailerPool', ['ngRoute', 'vsGoogleAutocomplete', 'dataGri
 
     .controller('trailerPoolCtrl', ['$scope', '$http', '$mdToast', '$interval', '$rootScope', '$mdDialog', 'myAppFactory', function ($scope, $http, $mdToast, $interval, $rootScope, $mdDialog, myAppFactory) {
         $scope.viewFlag = "1";
-
-        function DialogController($scope, $mdDialog, machine) {
+        $scope.okMessage = "Message";
+        function DialogController($scope, $mdDialog, machine,message) {
             $scope.machine = machine;
 
             myAppFactory.getTrailerHistoryData().then(function (response) {
@@ -32,13 +32,20 @@ angular.module('myApp.trailerPool', ['ngRoute', 'vsGoogleAutocomplete', 'dataGri
             };
 
             $scope.answer = function (answer) {
-                $mdDialog.hide(answer);
+
+                var confirm = $mdDialog.alert()
+                .title(message)             
+                .ariaLabel('Lucky day')
+                // .targetEvent(ev)
+                .ok('Ok');
+                $mdDialog.show(confirm);
+
 
             };
 
         }
         $scope.gridOptions = {};
-        
+
         $scope.gridOptions2 = {
             data: [],
             urlSync: false
@@ -47,11 +54,11 @@ angular.module('myApp.trailerPool', ['ngRoute', 'vsGoogleAutocomplete', 'dataGri
             data: [],
             urlSync: false
         };
-        
+
         $scope.selection = "truck";
         $scope.toShowVariance = true;
         $scope.toShowRelocate = function (item) {
-            
+
             $scope.toShowVariance = false;
             $scope.selectedPool=item;
             $scope.selectOrder();
@@ -81,9 +88,9 @@ angular.module('myApp.trailerPool', ['ngRoute', 'vsGoogleAutocomplete', 'dataGri
 
             } else if (item == "-1") {
                 angular.forEach($scope.gridOptions.data, function (data) {
-                    
-                        data.show=true;
-                    
+
+                    data.show=true;
+
                 });
 
             }
@@ -117,7 +124,7 @@ angular.module('myApp.trailerPool', ['ngRoute', 'vsGoogleAutocomplete', 'dataGri
             "orderremark": "all set",
             "details": "more info"
         };
-        
+
         $scope.selectTruck = function(truck){
 
             $scope.selectedTruck = truck;
@@ -131,23 +138,25 @@ angular.module('myApp.trailerPool', ['ngRoute', 'vsGoogleAutocomplete', 'dataGri
             }).then(function(error) {
                 console.log(error)
             })
-            
+
         };
-        
+
         $scope.selectTrailer = function(trailer){
             $scope.selectedTrailer = trailer;
             $scope.selection="summary";
             //showWizard('summary');
         };
         $scope.allocate = function(ev){
-          
-             var confirm = $mdDialog.alert()
-                .title('Trailer reposition initiated successfully.')             
-                .ariaLabel('Lucky day')
-                .targetEvent(ev)
-                .ok('Ok');
-            $mdDialog.show(confirm);
-            
+
+            var confirm = $mdDialog.alert()
+            .title('Trailer reposition initiated successfully.')             
+            .ariaLabel('Lucky day')
+            .targetEvent(ev)
+            .ok('Ok');
+            $mdDialog.show(confirm).then(function(){
+                $scope.toShowVariance = true;
+            });
+
 
         };
         $scope.cancleAllocation = function(){
@@ -181,7 +190,7 @@ angular.module('myApp.trailerPool', ['ngRoute', 'vsGoogleAutocomplete', 'dataGri
 
         };
 
-       
+
         $scope.gridOptions.data = [{
             state: "AL",
             city: "Birmingham",
@@ -268,10 +277,10 @@ angular.module('myApp.trailerPool', ['ngRoute', 'vsGoogleAutocomplete', 'dataGri
             totReq: "11"
 
         }, ];
-         $scope.viewSelect($scope.viewFlag);
+        $scope.viewSelect($scope.viewFlag);
         $rootScope.doReposition = function (trailerID) {
             $scope.showGraph = false;
-
+           
             console.log(trailerID);
             var resultTrailer = _.find($scope.tractorData, function (x) {
                 return x.TrailerID === trailerID;
@@ -285,7 +294,8 @@ angular.module('myApp.trailerPool', ['ngRoute', 'vsGoogleAutocomplete', 'dataGri
                 animation: undefined,
                 clickOutsideToClose: true,
                 locals: {
-                    machine: resultTrailer
+                    machine: resultTrailer,
+                    message:"Pool added successfully!"
                 },
                 escapeToClose: true,
                 // onComplete:afterShowAnimation,
@@ -307,7 +317,7 @@ angular.module('myApp.trailerPool', ['ngRoute', 'vsGoogleAutocomplete', 'dataGri
 
         $rootScope.doEdit = function (trailerID) {
             $scope.showGraph = false;
-
+           
             console.log(trailerID);
             var resultTrailer = _.find($scope.tractorData, function (x) {
                 return x.TrailerID === trailerID;
@@ -321,7 +331,8 @@ angular.module('myApp.trailerPool', ['ngRoute', 'vsGoogleAutocomplete', 'dataGri
                 animation: undefined,
                 clickOutsideToClose: true,
                 locals: {
-                    machine: resultTrailer
+                    machine: resultTrailer,
+                    message:"Attribute edited successfully!"
                 },
                 escapeToClose: true,
                 // onComplete:afterShowAnimation,
@@ -414,34 +425,34 @@ angular.module('myApp.trailerPool', ['ngRoute', 'vsGoogleAutocomplete', 'dataGri
             console.log("lat", $scope.address.components.location.lat)
             if (geocoder !== undefined) {
                 geocoder.geocode({
-                        address: $scope.view.addressInput
-                    },
-                    function (results, status) {
-                        $scope.view.places = [];
-                        $scope.view.selectedPlace = '';
-                        switch (status) {
-                            case google.maps.GeocoderStatus.OK:
-                                console.log(results);
-                                $scope.view.places = results;
-                                if (results.length < 2) {
-                                    $scope.view.selectedPlace = results[0].place_id;
-                                    $scope.view.addressInput = results[0].formatted_address;
-                                    focusLocation();
-                                } else showMessage($scope.view.places.length + ' places found');
-                                break;
-                            case google.maps.GeocoderStatus.ZERO_RESULTS:
-                                showMessage('No results found');
-                                break;
-                            case google.maps.GeocoderStatus.REQUEST_DENIED:
-                                showMessage('The search request has been denied');
-                                break;
-                            case google.maps.GeocoderStatus.INVALID_REQUEST:
-                                showMessage('Invalid request');
-                                break;
-                        }
-                        $scope.$apply();
+                    address: $scope.view.addressInput
+                },
+                                 function (results, status) {
+                    $scope.view.places = [];
+                    $scope.view.selectedPlace = '';
+                    switch (status) {
+                        case google.maps.GeocoderStatus.OK:
+                            console.log(results);
+                            $scope.view.places = results;
+                            if (results.length < 2) {
+                                $scope.view.selectedPlace = results[0].place_id;
+                                $scope.view.addressInput = results[0].formatted_address;
+                                focusLocation();
+                            } else showMessage($scope.view.places.length + ' places found');
+                            break;
+                        case google.maps.GeocoderStatus.ZERO_RESULTS:
+                            showMessage('No results found');
+                            break;
+                        case google.maps.GeocoderStatus.REQUEST_DENIED:
+                            showMessage('The search request has been denied');
+                            break;
+                        case google.maps.GeocoderStatus.INVALID_REQUEST:
+                            showMessage('Invalid request');
+                            break;
                     }
-                );
+                    $scope.$apply();
+                }
+                                );
             }
         }
 
@@ -679,14 +690,14 @@ angular.module('myApp.trailerPool', ['ngRoute', 'vsGoogleAutocomplete', 'dataGri
                     var res = false;
                     if ((obj.EngineOn == machineStatus) && (obj.MachineId <= $scope.machineRange.max && obj.MachineId >= $scope.machineRange.min))
                         res = true
-                    return res;
+                        return res;
                 });
             } else if ((machineStatus == "-1" || machineStatus == "") && machineRange != "") {
                 filteredData = _.filter(data, function (obj) {
                     var res = false;
                     if ((obj.MachineId <= $scope.machineRange.max && obj.MachineId >= $scope.machineRange.min))
                         res = true
-                    return res;
+                        return res;
                 });
             } else {
                 filteredData = data;
@@ -704,7 +715,7 @@ angular.module('myApp.trailerPool', ['ngRoute', 'vsGoogleAutocomplete', 'dataGri
                 imagePath = "images/markers/over_heat_idle.png";
             }
             return new google.maps.MarkerImage(imagePath,
-                new google.maps.Size(40, 40));
+                                               new google.maps.Size(40, 40));
         }
 
         function calucateRange(machineLength, threshHold) {
