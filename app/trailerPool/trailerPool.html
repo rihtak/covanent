@@ -24,13 +24,13 @@
             <div class="animate-switch-container" ng-if="!toShowVariance" ng-switch on="selection">
                 
                 <div class="animate-switch allocation_wizard" ng-switch-when="truck">
-                    <img src="app/images/wizard/truck.png" height="80px" ng-click='goToWizard("orders")'>
+                    <img src="app/images/wizard/Ptruck.png" height="80px" ng-click='goToWizard("orders")'>
                 </div>
                 <div class="animate-switch allocation_wizard" ng-switch-when="trailer">
-                    <img src="app/images/wizard/trailer.png" height="80px" ng-click='goToWizard("truck")'>
+                    <img src="app/images/wizard/Ptrailer.png" height="80px" ng-click='goToWizard("truck")'>
                 </div>
                 <div class="animate-switch allocation_wizard" ng-switch-when="summary">
-                    <img src="app/images/wizard/summary.png" height="80px" ng-click='goToWizard("trailer")'>
+                    <img src="app/images/wizard/Psummary.png" height="80px" ng-click='goToWizard("trailer")'>
 
                 </div>
 
@@ -438,7 +438,7 @@
                                                 Cancel
                                             </md-button>-->
                                              <input type="button" class="ctg-action-button" value="CANCEL"  ng-click="cancleAllocation()">
-                                              <input type="button" class="ctg-action-button" value="ALLOCATE" ng-click="allocate($event)">
+                                              <input type="button" class="ctg-action-button" value="REPOSITION" ng-click="allocate($event)">
                                           <!--  <md-button  class="md-raised md-warn"  style="background-color:#00264B;float: right;" ng-click="allocate()">
                                                 Allocate
                                             </md-button>-->

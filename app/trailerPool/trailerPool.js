@@ -58,12 +58,12 @@ angular.module('myApp.trailerPool', ['ngRoute', 'vsGoogleAutocomplete', 'dataGri
         }
 
         $scope.viewSelect = function (item) {
-            alert(item + " " + $scope.viewFlag);
+            //alert(item + " " + $scope.viewFlag);
             console.log($scope.gridOptions.data)
             $scope.viewFlag = item;
             if (item =="0") {
                 angular.forEach($scope.gridOptions.data, function (data) {
-                    if(dta.variance==0){
+                    if(data.variance==0){
                         data.show=true;
                     }else{
                         data.show=false;
@@ -142,7 +142,7 @@ angular.module('myApp.trailerPool', ['ngRoute', 'vsGoogleAutocomplete', 'dataGri
         $scope.allocate = function(ev){
           
              var confirm = $mdDialog.alert()
-                .title('Your allocation done successfully.')             
+                .title('Trailer reposition initiated successfully.')             
                 .ariaLabel('Lucky day')
                 .targetEvent(ev)
                 .ok('Ok');
@@ -152,6 +152,7 @@ angular.module('myApp.trailerPool', ['ngRoute', 'vsGoogleAutocomplete', 'dataGri
         };
         $scope.cancleAllocation = function(){
             $scope.selection="truck";
+            $scope.toShowVariance=true;
         };
 
 
