@@ -33,7 +33,7 @@
                         <div layout-gt-sm="row" layout-sm="column">
 
                             <div layout="row" flex="100"  class="ctg-filter">
-                                <input  flex="20" ng-model="order" class="ctg-textbox" ng-change="gridActions.filter()" id="order" placeholder="Search By state" filter-by="state" filter-type="text" aria-invalid="false">
+                                <input  flex="20" ng-model="order" class="ctg-textbox" ng-change="gridActions.filter()" id="order" placeholder="Search by state" filter-by="state" filter-type="text" aria-invalid="false">
                                 <md-icon class="material-icons md-toolbar_icon ctg-textbox-filter-icon" >
                                     search
                                 </md-icon>
@@ -49,7 +49,7 @@
                                 </md-icon>
                                  <span class="ctg-span-condition"></span>
                                  <select flex="40" ng-model="viewFlag" class="ctg-select" ng-change="viewSelect(viewFlag)">
-                                                <option   value="0"  selected="selected">Pools having no variance</option>
+                                                <option   value="0" >Pools having no variance</option>
                                                 <option  value="1">Pools having variance</option>
                                                 <option value="-1">All pools</option>
                                                 
@@ -149,11 +149,11 @@
                                                     <md-tooltip md-direction="top">click to edit</md-tooltip>
                                                 </md-button>
 
-                                                <a href="#!/allocation">
+                                                <a href>
                                                     <md-icon class="material-icons md-toolbar_icon md-24" style="color:black">
                                                         play_arrow
                                                     </md-icon>
-                                                    <md-tooltip md-direction="top">click to allocate</md-tooltip>
+                                                    <md-tooltip md-direction="top">click to reposition</md-tooltip>
                                                 </a>
 
 
