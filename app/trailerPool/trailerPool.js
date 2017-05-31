@@ -59,31 +59,31 @@ angular.module('myApp.trailerPool', ['ngRoute', 'vsGoogleAutocomplete', 'dataGri
 
         $scope.viewSelect = function (item) {
             alert(item + " " + $scope.viewFlag);
+            console.log($scope.gridOptions.data)
             $scope.viewFlag = item;
-            if (item == 0) {
-
-                angular.forEach($scope.gridOptions.data, function (item) {
-                    if (item.variance == 0) {
-                        item.show = true;
-                    } else {
-                        item.show = false;
+            if (item =="0") {
+                angular.forEach($scope.gridOptions.data, function (data) {
+                    if(dta.variance==0){
+                        data.show=true;
+                    }else{
+                        data.show=false;
                     }
                 });
 
-            } else if (item == 1) {
-                angular.forEach($scope.gridOptions.data, function (item) {
-                    if (item.variance > 0) {
-                        item.show = true;
-                    } else {
-                        item.show = false;
+            } else if (item == "1") {
+                angular.forEach($scope.gridOptions.data, function (data) {
+                    if(data.variance>0){
+                        data.show=true;
+                    }else{
+                        data.show=false;
                     }
                 });
 
-            } else if (item == -1) {
-                angular.forEach($scope.gridOptions.data, function (item) {
-
-                    item.show = true;
-
+            } else if (item == "-1") {
+                angular.forEach($scope.gridOptions.data, function (data) {
+                    
+                        data.show=true;
+                    
                 });
 
             }
@@ -180,6 +180,7 @@ angular.module('myApp.trailerPool', ['ngRoute', 'vsGoogleAutocomplete', 'dataGri
 
         };
 
+       
         $scope.gridOptions.data = [{
             state: "AL",
             city: "Birmingham",
@@ -266,6 +267,7 @@ angular.module('myApp.trailerPool', ['ngRoute', 'vsGoogleAutocomplete', 'dataGri
             totReq: "11"
 
         }, ];
+         $scope.viewSelect($scope.viewFlag);
         $rootScope.doReposition = function (trailerID) {
             $scope.showGraph = false;
 

@@ -237,6 +237,7 @@ angular.module('myApp.allocation', ['ngRoute', 'dataGrid', 'pagination','ngAnima
                 .ariaLabel('Lucky day')
                 .targetEvent(ev)
                 .ok('Ok');
+            $mdDialog.show(confirm);
             
 
         }
