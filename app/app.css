@@ -781,6 +781,7 @@ body,h3,h4{
     width: 150px;
     border: none;
     padding: 5px;
+    color: black;
 }
 .list-result-count{
     background: #CACACA !important;
