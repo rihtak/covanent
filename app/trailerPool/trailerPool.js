@@ -9,10 +9,11 @@ angular.module('myApp.trailerPool', ['ngRoute', 'vsGoogleAutocomplete', 'dataGri
     }])
 
     .controller('trailerPoolCtrl', ['$scope', '$http', '$mdToast', '$interval', '$rootScope', '$mdDialog', 'myAppFactory', function ($scope, $http, $mdToast, $interval, $rootScope, $mdDialog, myAppFactory) {
-         $scope.viewFlag = "0";
+        $scope.viewFlag = "1";
+
         function DialogController($scope, $mdDialog, machine) {
             $scope.machine = machine;
-           
+
             myAppFactory.getTrailerHistoryData().then(function (response) {
                 console.log("response", response.data);
                 $scope.machine.histories = response.data;
@@ -37,38 +38,148 @@ angular.module('myApp.trailerPool', ['ngRoute', 'vsGoogleAutocomplete', 'dataGri
 
         }
         $scope.gridOptions = {};
+        
+        $scope.gridOptions2 = {
+            data: [],
+            urlSync: false
+        };
+        $scope.gridOptions3 = {
+            data: [],
+            urlSync: false
+        };
+        
+        $scope.selection = "truck";
+        $scope.toShowVariance = true;
+        $scope.toShowRelocate = function (item) {
+            
+            $scope.toShowVariance = false;
+            $scope.selectedPool=item;
+            $scope.selectOrder();
+        }
 
         $scope.viewSelect = function (item) {
-            //alert(item + " " + $scope.viewFlag);
+            alert(item + " " + $scope.viewFlag);
             $scope.viewFlag = item;
             if (item == 0) {
+
                 angular.forEach($scope.gridOptions.data, function (item) {
-                    if(item.variance==0){
-                        item.show=true;
-                    }else{
-                        item.show=false;
+                    if (item.variance == 0) {
+                        item.show = true;
+                    } else {
+                        item.show = false;
                     }
                 });
 
             } else if (item == 1) {
                 angular.forEach($scope.gridOptions.data, function (item) {
-                    if(item.variance>0){
-                        item.show=true;
-                    }else{
-                        item.show=false;
+                    if (item.variance > 0) {
+                        item.show = true;
+                    } else {
+                        item.show = false;
                     }
                 });
 
             } else if (item == -1) {
                 angular.forEach($scope.gridOptions.data, function (item) {
-                    
-                        item.show=true;
-                    
+
+                    item.show = true;
+
                 });
 
             }
 
-        }
+        };
+
+        $scope.viewSelect("1");
+
+        $scope.order2 = {
+            "isChecked": true,
+            "status": "Available",
+            "order": "2343443",
+            "orderDateTime": "05-20-2017 08:30",
+            "orginName": "Chattanooga ",
+            "billToName": "Walmart",
+            "origin": {
+                "name": "Atlanta,GA",
+                "Latitude": 33.7489954,
+                "Longitude": -84.3879824
+            },
+            "destination": {
+                "name": "Buford,GA",
+                "Latitude": 34.1206564,
+                "Longitude": -84.0043513
+            },
+            "service": "SOLO",
+            "tracktor": "",
+            "trailer": "",
+            "ref": "2342345",
+            "reftype": "SID",
+            "orderremark": "all set",
+            "details": "more info"
+        };
+        
+        $scope.selectTruck = function(truck){
+
+            $scope.selectedTruck = truck;
+            $scope.selection = "trailer";
+            //showWizard('trailer');
+            myAppFactory.getAvailableTrailers().then(function(responseData) {
+                $scope.isAdhocReportLoading = false;
+                $scope.gridOptions3.data = JSON.parse(JSON.stringify(responseData.data));//responseData.data;
+
+
+            }).then(function(error) {
+                console.log(error)
+            })
+            
+        };
+        
+        $scope.selectTrailer = function(trailer){
+            $scope.selectedTrailer = trailer;
+            $scope.selection="summary";
+            //showWizard('summary');
+        };
+        $scope.allocate = function(ev){
+          
+             var confirm = $mdDialog.alert()
+                .title('Your allocation done successfully.')             
+                .ariaLabel('Lucky day')
+                .targetEvent(ev)
+                .ok('Ok');
+            $mdDialog.show(confirm);
+            
+
+        };
+        $scope.cancleAllocation = function(){
+            $scope.selection="truck";
+        };
+
+
+        $scope.selectOrder = function (order) {
+            order = $scope.order2;
+            $scope.selectedOrder = order;
+
+            //order selected next find the truck and show the resluts
+
+            //showWizard('truck');
+            myAppFactory.getAvailableTrucks().then(function (responseData) {
+                $scope.isAdhocReportLoading = false;
+                $scope.gridOptions2.data = JSON.parse(JSON.stringify(responseData.data)); //responseData.data;
+                var position = new google.maps.LatLng(order.origin.Latitude, order.origin.Longitude)
+                orderMaker.setPosition(position);
+                tkmapa.panTo(position);
+                tkmapa.setCenter(position);
+                orderCircle.bindTo('center', orderMaker, 'position');
+                orderCircle.setRadius(1609.34 * $scope.filter.miles);
+                orderStartCircle.setCenter(position);
+
+            }).then(function (error) {
+                console.log(error)
+            })
+
+
+        };
+
         $scope.gridOptions.data = [{
             state: "AL",
             city: "Birmingham",
